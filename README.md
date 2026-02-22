@@ -238,6 +238,31 @@ azonmate/
 
 ---
 
+## 🐛 Bug Reports & Feature Requests
+
+<table>
+<tr>
+<td>
+
+**Found a bug?** &nbsp;·&nbsp; **Have a feature idea?** &nbsp;·&nbsp; **Something not working right?**
+
+<br />
+
+| Channel | How |
+|:---|:---|
+| 📧 **Email** | Send details to **[numanrki@gmail.com](mailto:numanrki@gmail.com)** — include your WP version, PHP version, and steps to reproduce. |
+| 🐛 **GitHub Issues** | [Open an issue](https://github.com/numanrki/azonmate/issues/new) — great for tracking bugs publicly so others can benefit too. |
+
+<br />
+
+> **Are you a developer?** Pull requests are welcome! Fork the repo, make your changes, and submit a PR. Whether it's a one-line fix or a whole new feature — every contribution helps the community. See the [open issues](https://github.com/numanrki/azonmate/issues) for ideas on where to start.
+
+</td>
+</tr>
+</table>
+
+---
+
 ## 📄 License
 
 <table>
