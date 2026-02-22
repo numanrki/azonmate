@@ -26,11 +26,17 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 
 <div class="wrap azonmate-showcase-builder">
 	<?php azonmate_render_admin_header(); ?>
-	<h1>
-		<span class="dashicons dashicons-layout" style="margin-right:8px;"></span>
-		<?php esc_html_e( 'Showcase Builder', 'azonmate' ); ?>
-	</h1>
-	<p class="description"><?php esc_html_e( 'Pick a design, select your products, copy the shortcode — done.', 'azonmate' ); ?></p>
+
+	<!-- Page Hero Header -->
+	<div class="azonmate-page-hero">
+		<div class="azonmate-page-hero__icon">
+			<span class="dashicons dashicons-layout"></span>
+		</div>
+		<div class="azonmate-page-hero__content">
+			<h1><?php esc_html_e( 'Showcase Builder', 'azonmate' ); ?></h1>
+			<p><?php esc_html_e( 'Pick a design, select your products, copy the shortcode — done. No coding required.', 'azonmate' ); ?></p>
+		</div>
+	</div>
 
 	<!-- ================================================================
 	     STEP 1 – Pick a Design

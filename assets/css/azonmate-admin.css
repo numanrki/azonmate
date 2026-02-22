@@ -196,6 +196,109 @@
 }
 
 /* ==========================================================================
+   Page Hero Header (shared across all AzonMate admin pages)
+   ========================================================================== */
+
+.azonmate-page-hero {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 12px;
+	padding: 22px 26px;
+	margin-bottom: 24px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.azonmate-page-hero__icon {
+	flex: 0 0 52px;
+	height: 52px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 12px;
+	background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+}
+
+.azonmate-page-hero__icon .dashicons {
+	font-size: 26px;
+	width: 26px;
+	height: 26px;
+	color: #e65100;
+}
+
+.azonmate-page-hero__content {
+	flex: 1;
+	min-width: 0;
+}
+
+.azonmate-page-hero__content h1 {
+	margin: 0 0 4px;
+	font-size: 20px;
+	font-weight: 700;
+	color: #1d2327;
+	line-height: 1.3;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.azonmate-page-hero__content p {
+	margin: 0;
+	font-size: 13px;
+	color: #646970;
+	line-height: 1.5;
+}
+
+.azonmate-page-hero__action {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	background: linear-gradient(135deg, #ff9900, #e68a00);
+	color: #fff !important;
+	font-size: 13px;
+	font-weight: 600;
+	padding: 6px 16px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	text-decoration: none;
+	transition: transform 0.15s, box-shadow 0.15s;
+	box-shadow: 0 2px 6px rgba(255, 153, 0, 0.25);
+	white-space: nowrap;
+}
+
+.azonmate-page-hero__action:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(255, 153, 0, 0.35);
+}
+
+.azonmate-page-hero__action .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	line-height: 1;
+}
+
+@media (max-width: 600px) {
+	.azonmate-page-hero {
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 16px;
+		gap: 12px;
+	}
+
+	.azonmate-page-hero__content h1 {
+		font-size: 17px;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+	}
+}
+
+/* ==========================================================================
    Settings Page – Tabs
    ========================================================================== */
 
@@ -203,32 +306,77 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0;
-	border-bottom: 2px solid #c3c4c7;
-	margin-bottom: 1.5rem;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 10px;
+	padding: 4px;
+	margin-bottom: 24px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .azonmate-settings-tabs .nav-tab {
-	padding: 0.6rem 1.2rem;
-	font-size: 14px;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 16px;
+	font-size: 13px;
 	font-weight: 500;
 	text-decoration: none;
 	color: #50575e;
 	background: transparent;
 	border: none;
-	border-bottom: 2px solid transparent;
-	margin-bottom: -2px;
+	border-radius: 8px;
 	cursor: pointer;
-	transition: color 0.15s, border-color 0.15s;
+	transition: all 0.15s ease;
+}
+
+.azonmate-settings-tabs .nav-tab .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	opacity: 0.6;
+	transition: opacity 0.15s;
 }
 
 .azonmate-settings-tabs .nav-tab:hover {
-	color: var(--azonmate-admin-primary);
+	color: #1d2327;
+	background: #f6f7f7;
+}
+
+.azonmate-settings-tabs .nav-tab:hover .dashicons {
+	opacity: 0.9;
 }
 
 .azonmate-settings-tabs .nav-tab-active {
-	color: var(--azonmate-admin-primary);
-	border-bottom-color: var(--azonmate-admin-primary);
+	color: #fff;
+	background: linear-gradient(135deg, #ff9900, #e68a00);
 	font-weight: 600;
+	box-shadow: 0 2px 6px rgba(255, 153, 0, 0.3);
+}
+
+.azonmate-settings-tabs .nav-tab-active .dashicons {
+	opacity: 1;
+	color: #fff;
+}
+
+.azonmate-settings-tabs .nav-tab-active:hover {
+	color: #fff;
+	background: linear-gradient(135deg, #e68a00, #cc7a00);
+}
+
+@media (max-width: 782px) {
+	.azonmate-settings-tabs {
+		gap: 2px;
+	}
+
+	.azonmate-settings-tabs .nav-tab {
+		font-size: 12px;
+		padding: 6px 10px;
+	}
+
+	.azonmate-settings-tabs .nav-tab .dashicons {
+		display: none;
+	}
 }
 
 /* ==========================================================================
@@ -243,19 +391,128 @@
 	display: block;
 }
 
+.azonmate-settings-section form,
+.azonmate-settings-section > h3,
+.azonmate-settings-section > p,
+.azonmate-settings-section > button,
+.azonmate-settings-section > table,
+.azonmate-settings-section > hr {
+	/* Wrap form content in a card-like container */
+}
+
+.azonmate-settings-section form {
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 12px;
+	padding: 8px 24px 24px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	margin-bottom: 20px;
+}
+
+.azonmate-settings-section .form-table {
+	margin-top: 0;
+}
+
 .azonmate-settings-section .form-table th {
 	width: 220px;
-	padding-top: 20px;
+	padding: 18px 10px 18px 0;
+	font-weight: 600;
+	font-size: 13px;
+	color: #1d2327;
 }
 
 .azonmate-settings-section .form-table td {
-	padding-top: 15px;
+	padding: 18px 10px;
+}
+
+.azonmate-settings-section .form-table tr {
+	border-bottom: 1px solid #f3f3f3;
+}
+
+.azonmate-settings-section .form-table tr:last-child {
+	border-bottom: none;
+}
+
+.azonmate-settings-section .form-table input[type="text"],
+.azonmate-settings-section .form-table input[type="password"],
+.azonmate-settings-section .form-table input[type="number"],
+.azonmate-settings-section .form-table select {
+	border-radius: 6px;
+	border: 1px solid #c3c4c7;
+	transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.azonmate-settings-section .form-table input[type="text"]:focus,
+.azonmate-settings-section .form-table input[type="password"]:focus,
+.azonmate-settings-section .form-table input[type="number"]:focus,
+.azonmate-settings-section .form-table select:focus {
+	border-color: var(--azonmate-admin-primary);
+	box-shadow: 0 0 0 1px var(--azonmate-admin-primary);
+	outline: none;
+}
+
+.azonmate-settings-section .form-table textarea {
+	border-radius: 8px;
+	border: 1px solid #c3c4c7;
+	transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.azonmate-settings-section .form-table textarea:focus {
+	border-color: var(--azonmate-admin-primary);
+	box-shadow: 0 0 0 1px var(--azonmate-admin-primary);
+	outline: none;
 }
 
 .azonmate-settings-section .description {
 	color: #646970;
 	font-style: italic;
 	margin-top: 4px;
+	font-size: 12px;
+}
+
+.azonmate-settings-section h3 {
+	font-size: 15px;
+	font-weight: 600;
+	color: #1d2327;
+	margin: 1.5em 0 0.5em;
+}
+
+.azonmate-settings-section hr {
+	border: none;
+	border-top: 1px solid #f0f0f1;
+	margin: 20px 0;
+}
+
+.azonmate-settings-section .submit .button-primary {
+	background: linear-gradient(135deg, #ff9900, #e68a00);
+	border: none;
+	border-radius: 8px;
+	padding: 6px 24px;
+	font-weight: 600;
+	font-size: 13px;
+	text-shadow: none;
+	box-shadow: 0 2px 6px rgba(255, 153, 0, 0.25);
+	transition: transform 0.15s, box-shadow 0.15s;
+	height: auto;
+	line-height: 1.6;
+}
+
+.azonmate-settings-section .submit .button-primary:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(255, 153, 0, 0.35);
+	background: linear-gradient(135deg, #e68a00, #cc7a00);
+}
+
+/* Cards for non-form sections (e.g. cache clear, tracking stats) */
+.azonmate-settings-section > .widefat {
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+@media (max-width: 782px) {
+	.azonmate-settings-section form {
+		padding: 8px 16px 16px;
+	}
 }
 
 /* ==========================================================================
@@ -264,28 +521,34 @@
 
 .azonmate-test-connection {
 	margin-top: 1rem;
+	padding: 16px 24px;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 12px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .azonmate-test-connection .button {
 	margin-right: 10px;
+	border-radius: 6px;
 }
 
 .azonmate-test-result {
 	display: inline-block;
-	padding: 4px 12px;
-	border-radius: 4px;
+	padding: 6px 14px;
+	border-radius: 6px;
 	font-size: 13px;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .azonmate-test-result.success {
-	background: #d4edda;
+	background: linear-gradient(135deg, #d4edda, #c3e6cb);
 	color: #155724;
 	border: 1px solid #c3e6cb;
 }
 
 .azonmate-test-result.error {
-	background: #f8d7da;
+	background: linear-gradient(135deg, #f8d7da, #f5c6cb);
 	color: #721c24;
 	border: 1px solid #f5c6cb;
 }

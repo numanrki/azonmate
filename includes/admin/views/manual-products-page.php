@@ -20,17 +20,23 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 
 <div class="wrap azonmate-products-page">
 	<?php azonmate_render_admin_header(); ?>
-	<h1>
-		<span class="dashicons dashicons-cart" style="margin-right: 8px;"></span>
-		<?php esc_html_e( 'AzonMate Products', 'azonmate' ); ?>
-		<button type="button" id="azonmate-add-product-btn" class="page-title-action">
-			<?php esc_html_e( 'Add New Product', 'azonmate' ); ?>
-		</button>
-	</h1>
 
-	<p class="description" style="margin-bottom: 20px;">
-		<?php esc_html_e( 'Manually create product cards without requiring Amazon API access. Add your affiliate products here and use them in posts with shortcodes or Gutenberg blocks.', 'azonmate' ); ?>
-	</p>
+	<!-- Page Hero Header -->
+	<div class="azonmate-page-hero">
+		<div class="azonmate-page-hero__icon">
+			<span class="dashicons dashicons-cart"></span>
+		</div>
+		<div class="azonmate-page-hero__content">
+			<h1>
+				<?php esc_html_e( 'Products', 'azonmate' ); ?>
+				<button type="button" id="azonmate-add-product-btn" class="azonmate-page-hero__action">
+					<span class="dashicons dashicons-plus-alt2"></span>
+					<?php esc_html_e( 'Add New Product', 'azonmate' ); ?>
+				</button>
+			</h1>
+			<p><?php esc_html_e( 'Manually create product cards without requiring Amazon API access. Add your affiliate products here and use them in posts with shortcodes or Gutenberg blocks.', 'azonmate' ); ?></p>
+		</div>
+	</div>
 
 	<!-- Products List -->
 	<div id="azonmate-products-list">

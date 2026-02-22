@@ -5,6 +5,22 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.3] - 2026-02-23
+
+### Added
+- **AJAX tab switching** on Settings page — tabs now switch instantly via JavaScript with no page reload. Hash-based URL state (`#api`, `#display`, etc.) so bookmarks and browser history work correctly.
+- **Tab state preservation** after form save — `initTabFormPreserve()` injects the active tab hash into `_wp_http_referer` so WordPress redirects back to the correct tab after saving options.
+- **Page Hero headers** on all 4 admin pages (Settings, Products, Showcase Builder, Analytics) — consistent gradient icon circle, title, and subtitle with responsive layout.
+- **Modern pill-style tab navigation** — white card container with rounded corners, gradient orange active state, dashicon support, smooth hover transitions.
+- **Card-wrapped form sections** — settings forms now rendered inside rounded cards with subtle shadows, improved input field styling, and branded orange gradient submit buttons.
+- **Enhanced test connection & cache clear panels** — wrapped in styled card containers.
+
+### Changed
+- Settings page no longer uses server-side `$active_tab` conditional rendering; all 6 tab sections are always rendered and shown/hidden via CSS + JS.
+- Tabs array now includes icon metadata for each tab.
+- Removed old underline-style tab CSS; replaced with pill/chip-style design.
+- Version bumped to 1.3.3.
+
 ## [1.3.2] - 2026-02-23
 
 ### Added

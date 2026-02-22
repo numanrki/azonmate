@@ -47,27 +47,27 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 <div class="wrap azonmate-dash">
 	<?php azonmate_render_admin_header(); ?>
 
-	<!-- Dashboard Header -->
-	<div class="azonmate-dash__header">
-		<div class="azonmate-dash__header-left">
-			<h1 class="azonmate-dash__title">
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -4px; margin-right: 6px; color: #ff9900;">
-					<line x1="18" y1="20" x2="18" y2="10"></line>
-					<line x1="12" y1="20" x2="12" y2="4"></line>
-					<line x1="6" y1="20" x2="6" y2="14"></line>
-				</svg>
-				<?php esc_html_e( 'Analytics Dashboard', 'azonmate' ); ?>
-			</h1>
-			<p class="azonmate-dash__subtitle">
+	<!-- Page Hero Header -->
+	<div class="azonmate-page-hero">
+		<div class="azonmate-page-hero__icon">
+			<span class="dashicons dashicons-chart-bar"></span>
+		</div>
+		<div class="azonmate-page-hero__content">
+			<h1><?php esc_html_e( 'Analytics Dashboard', 'azonmate' ); ?></h1>
+			<p>
 				<?php
 				printf(
 					/* translators: %d: Number of days */
-					esc_html__( 'Overview for the last %d days', 'azonmate' ),
+					esc_html__( 'Click performance overview for the last %d days.', 'azonmate' ),
 					$days
 				);
 				?>
 			</p>
 		</div>
+	</div>
+
+	<!-- Dashboard Controls -->
+	<div class="azonmate-dash__header">
 		<div class="azonmate-dash__header-right">
 			<div class="azonmate-dash__range-pills">
 				<?php foreach ( $allowed_days as $d ) : ?>

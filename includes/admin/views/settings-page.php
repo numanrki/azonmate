@@ -11,14 +11,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'api';
 $tabs = array(
-	'api'      => __( 'API Configuration', 'azonmate' ),
-	'display'  => __( 'Display Settings', 'azonmate' ),
-	'cache'    => __( 'Cache Settings', 'azonmate' ),
-	'geo'      => __( 'Geo-Targeting', 'azonmate' ),
-	'tracking' => __( 'Tracking', 'azonmate' ),
-	'advanced' => __( 'Advanced', 'azonmate' ),
+	'api'      => array( 'label' => __( 'API Configuration', 'azonmate' ),  'icon' => 'dashicons-cloud' ),
+	'display'  => array( 'label' => __( 'Display Settings', 'azonmate' ),   'icon' => 'dashicons-admin-appearance' ),
+	'cache'    => array( 'label' => __( 'Cache Settings', 'azonmate' ),     'icon' => 'dashicons-performance' ),
+	'geo'      => array( 'label' => __( 'Geo-Targeting', 'azonmate' ),      'icon' => 'dashicons-admin-site-alt3' ),
+	'tracking' => array( 'label' => __( 'Tracking', 'azonmate' ),           'icon' => 'dashicons-chart-line' ),
+	'advanced' => array( 'label' => __( 'Advanced', 'azonmate' ),           'icon' => 'dashicons-admin-tools' ),
 );
 
 $marketplaces = \AzonMate\API\Marketplace::get_all_options();
@@ -31,25 +30,32 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 
 <div class="wrap azonmate-settings">
 	<?php azonmate_render_admin_header(); ?>
-	<h1>
-		<span class="dashicons dashicons-amazon" style="margin-right: 8px;"></span>
-		<?php esc_html_e( 'AzonMate Settings', 'azonmate' ); ?>
-		<span class="azonmate-version"><?php echo esc_html( 'v' . AZON_MATE_VERSION ); ?></span>
-	</h1>
 
-	<!-- Tabs Navigation -->
-	<nav class="nav-tab-wrapper">
-		<?php foreach ( $tabs as $tab_key => $tab_label ) : ?>
-			<a href="<?php echo esc_url( add_query_arg( 'tab', $tab_key, admin_url( 'admin.php?page=azonmate' ) ) ); ?>"
-			   class="nav-tab <?php echo $active_tab === $tab_key ? 'nav-tab-active' : ''; ?>">
-				<?php echo esc_html( $tab_label ); ?>
+	<!-- Page Hero Header -->
+	<div class="azonmate-page-hero">
+		<div class="azonmate-page-hero__icon">
+			<span class="dashicons dashicons-admin-generic"></span>
+		</div>
+		<div class="azonmate-page-hero__content">
+			<h1><?php esc_html_e( 'Settings', 'azonmate' ); ?></h1>
+			<p><?php esc_html_e( 'Configure your Amazon API credentials, display preferences, caching, geo-targeting, and more.', 'azonmate' ); ?></p>
+		</div>
+	</div>
+
+	<!-- Tabs Navigation (AJAX — no page reload) -->
+	<div class="azonmate-settings-tabs">
+		<?php foreach ( $tabs as $tab_key => $tab_data ) : ?>
+			<a href="#<?php echo esc_attr( $tab_key ); ?>" data-tab="<?php echo esc_attr( $tab_key ); ?>"
+			   class="nav-tab<?php echo 'api' === $tab_key ? ' nav-tab-active' : ''; ?>">
+				<span class="dashicons <?php echo esc_attr( $tab_data['icon'] ); ?>"></span>
+				<?php echo esc_html( $tab_data['label'] ); ?>
 			</a>
 		<?php endforeach; ?>
-	</nav>
+	</div>
 
 	<div class="azonmate-settings-content">
 
-		<?php if ( 'api' === $active_tab ) : ?>
+		<div id="azonmate-tab-api" class="azonmate-settings-section active">
 			<!-- API Configuration Tab -->
 			<form method="post" action="options.php">
 				<?php settings_fields( 'azon_mate_api_settings' ); ?>
@@ -125,7 +131,9 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 				<span id="azonmate-test-result" class="azonmate-test-result"></span>
 			</form>
 
-		<?php elseif ( 'display' === $active_tab ) : ?>
+		</div>
+
+		<div id="azonmate-tab-display" class="azonmate-settings-section">
 			<!-- Display Settings Tab -->
 			<form method="post" action="options.php">
 				<?php settings_fields( 'azon_mate_display_settings' ); ?>
@@ -244,7 +252,9 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 				<?php submit_button(); ?>
 			</form>
 
-		<?php elseif ( 'cache' === $active_tab ) : ?>
+		</div>
+
+		<div id="azonmate-tab-cache" class="azonmate-settings-section">
 			<!-- Cache Settings Tab -->
 			<form method="post" action="options.php">
 				<?php settings_fields( 'azon_mate_cache_settings' ); ?>
@@ -297,7 +307,9 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 			</button>
 			<span id="azonmate-cache-result" class="azonmate-test-result"></span>
 
-		<?php elseif ( 'geo' === $active_tab ) : ?>
+		</div>
+
+		<div id="azonmate-tab-geo" class="azonmate-settings-section">
 			<!-- Geo-Targeting Tab -->
 			<form method="post" action="options.php">
 				<?php settings_fields( 'azon_mate_geo_settings' ); ?>
@@ -367,7 +379,9 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 				<?php submit_button(); ?>
 			</form>
 
-		<?php elseif ( 'tracking' === $active_tab ) : ?>
+		</div>
+
+		<div id="azonmate-tab-tracking" class="azonmate-settings-section">
 			<!-- Tracking Tab -->
 			<form method="post" action="options.php">
 				<?php settings_fields( 'azon_mate_tracking_settings' ); ?>
@@ -417,7 +431,9 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 				</a>
 			</p>
 
-		<?php elseif ( 'advanced' === $active_tab ) : ?>
+		</div>
+
+		<div id="azonmate-tab-advanced" class="azonmate-settings-section">
 			<!-- Advanced Tab -->
 			<form method="post" action="options.php">
 				<?php settings_fields( 'azon_mate_advanced_settings' ); ?>
@@ -505,7 +521,7 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 				<?php submit_button(); ?>
 			</form>
 
-		<?php endif; ?>
+		</div>
 
 	</div>
 	<?php azonmate_render_admin_footer(); ?>

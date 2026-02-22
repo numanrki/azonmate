@@ -22,6 +22,7 @@
 		initTestConnection();
 		initClearCache();
 		initPasswordToggle();
+		initTabFormPreserve();
 	});
 
 	/* ======================================================================
@@ -147,6 +148,24 @@
 			$(this).find('.dashicons')
 				.toggleClass('dashicons-visibility')
 				.toggleClass('dashicons-hidden');
+		});
+	}
+
+	/* ======================================================================
+	   Preserve Active Tab on Form Submit
+	   ====================================================================== */
+
+	function initTabFormPreserve() {
+		$('.azonmate-settings-section form').on('submit', function () {
+			var $active = $('.azonmate-settings-tabs .nav-tab-active');
+			if ($active.length) {
+				var tab = $active.data('tab');
+				var $referer = $(this).find('input[name="_wp_http_referer"]');
+				if ($referer.length && tab) {
+					var url = $referer.val().split('#')[0];
+					$referer.val(url + '#' + tab);
+				}
+			}
 		});
 	}
 
