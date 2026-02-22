@@ -5,6 +5,19 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2026-02-22
+
+### Added
+- **Amazon Affiliate Disclosure** — "As an Amazon Associate, I earn from qualifying purchases." shown once per showcase block, inside the product cards container.
+- New **Display Setting** toggle to enable/disable the disclosure (enabled by default, as required by the Amazon Associates program).
+- `azon_mate_render_disclosure()` helper function in template-functions.php.
+- Disclosure integrated into all 8 showcase templates: grid, list, masonry, table, hero, compact, split, deal.
+
+### Changed
+- **Analytics Dashboard completely redesigned** — modern card-based UI with gradient stat cards, visual bar chart, progress-bar performance indicators, rank badges, and responsive two-column layout replaces the old WordPress `widefat` tables.
+- Added two new stats to analytics: **Daily Average** and **Peak Day Clicks**.
+- Version bumped to 1.3.1.
+
 ## [1.3.0] - 2026-02-22
 
 ### Added

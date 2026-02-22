@@ -1077,6 +1077,21 @@
 }
 
 /* ==========================================================================
+   Showcase – Affiliate Disclosure
+   ========================================================================== */
+
+.azonmate-showcase .azonmate-showcase__disclosure {
+	margin: 14px 0 0;
+	padding: 8px 12px;
+	font-size: 11px;
+	line-height: 1.5;
+	color: #888;
+	text-align: center;
+	border-top: 1px solid var(--azonmate-border, #e0e0e0);
+	font-style: italic;
+}
+
+/* ==========================================================================
    Showcase – Print Styles
    ========================================================================== */
 

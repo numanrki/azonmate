@@ -186,4 +186,8 @@ if ( empty( $products ) ) {
 			</tbody>
 		</table>
 	</div>
+
+	<?php if ( function_exists( 'azon_mate_render_disclosure' ) ) {
+		echo azon_mate_render_disclosure(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	} ?>
 </div>

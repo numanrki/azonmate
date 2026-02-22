@@ -104,4 +104,8 @@ $final_btn_text = ! empty( $btn_text ) ? $btn_text : ( ! empty( $button_text ) ?
 			</div>
 		<?php endif; ?>
 	</div>
+
+	<?php if ( function_exists( 'azon_mate_render_disclosure' ) ) {
+		echo azon_mate_render_disclosure(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	} ?>
 </div>

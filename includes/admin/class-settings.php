@@ -108,6 +108,7 @@ class Settings {
 			'azon_mate_buy_button_color' => 'sanitize_hex_color',
 			'azon_mate_open_new_tab'     => 'absint',
 			'azon_mate_nofollow_links'   => 'absint',
+			'azon_mate_show_disclosure'  => 'absint',
 			'azon_mate_custom_css'       => array( $this, 'sanitize_custom_css' ),
 		);
 

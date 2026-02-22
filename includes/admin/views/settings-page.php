@@ -212,6 +212,19 @@ $current_marketplace = get_option( 'azon_mate_marketplace', 'US' );
 						</td>
 					</tr>
 					<tr>
+						<th scope="row"><?php esc_html_e( 'Affiliate Disclosure', 'azonmate' ); ?></th>
+						<td>
+							<fieldset>
+								<label>
+									<input type="checkbox" name="azon_mate_show_disclosure" value="1"
+										<?php checked( get_option( 'azon_mate_show_disclosure', '1' ), '1' ); ?> />
+									<?php esc_html_e( 'Show "As an Amazon Associate, I earn from qualifying purchases." in showcase blocks', 'azonmate' ); ?>
+								</label>
+							</fieldset>
+							<p class="description"><?php esc_html_e( 'Required by the Amazon Associates program. Displays once per showcase.', 'azonmate' ); ?></p>
+						</td>
+					</tr>
+					<tr>
 						<th scope="row">
 							<label for="azon_mate_custom_css"><?php esc_html_e( 'Custom CSS', 'azonmate' ); ?></label>
 						</th>

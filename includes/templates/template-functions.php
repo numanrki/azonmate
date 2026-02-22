@@ -159,3 +159,24 @@ function azon_mate_render_savings_badge( $savings_percentage ) {
 		absint( $savings_percentage )
 	);
 }
+
+/**
+ * Render the Amazon affiliate disclosure notice.
+ *
+ * Outputs once per showcase block when enabled in settings.
+ *
+ * @since 1.3.1
+ *
+ * @return string HTML output or empty string.
+ */
+function azon_mate_render_disclosure() {
+	$show = get_option( 'azon_mate_show_disclosure', '1' );
+
+	if ( '1' !== (string) $show ) {
+		return '';
+	}
+
+	return '<p class="azonmate-showcase__disclosure">'
+		. esc_html__( 'As an Amazon Associate, I earn from qualifying purchases.', 'azonmate' )
+		. '</p>';
+}

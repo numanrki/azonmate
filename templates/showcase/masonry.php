@@ -142,4 +142,8 @@ $cols = ( ! empty( $columns ) && $columns > 0 ) ? absint( $columns ) : 3;
 			</div>
 		<?php endforeach; ?>
 	</div>
+
+	<?php if ( function_exists( 'azon_mate_render_disclosure' ) ) {
+		echo azon_mate_render_disclosure(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	} ?>
 </div>
