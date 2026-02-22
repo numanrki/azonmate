@@ -5,7 +5,26 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2024-01-01
+## [1.3.0] - 2026-02-22
+
+### Added
+- 4 new **single-product showcase layouts**: Hero Card, Compact, Split, Deal Card.
+- **Visual Showcase Builder** — point-and-click shortcode generator with live WYSIWYG preview. Admin preview now uses the exact same CSS as the frontend.
+- **Manual Products** CRUD system — add products without an API connection.
+- Fully scoped showcase CSS — every rule namespaced under `.azonmate-showcase` to eliminate theme/plugin conflicts.
+- Theme reset block inside the showcase container (neutralises h2, h3, a, ul, table, img defaults).
+
+### Fixed
+- **Critical:** Buy-button class mismatch (`azonmate-buy-button` → `azonmate-buy-btn`) that caused all CTA buttons to receive zero styling on the frontend.
+- Missing `$showcase_builder` property declaration in the Plugin class (PHP 8.2 deprecation warning).
+- Inconsistent responsive breakpoints across layouts — now standardised at 960 px (tablet) and 600 px (mobile).
+
+### Changed
+- Showcase Builder admin page now loads `azonmate-public.css` + `azonmate-showcase.css` for true WYSIWYG rendering.
+- Template renderer `valid_layouts` array expanded to include: hero, compact, split, deal.
+- Version bumped to 1.3.0 across all version locations.
+
+## [1.0.0] - 2026-01-01
 
 ### Added
 - Initial release of AzonMate – Amazon Affiliate Product Engine.

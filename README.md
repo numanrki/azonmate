@@ -1,282 +1,288 @@
 <p align="center">
-  <img src="assets/images/icon.svg" width="80" alt="AzonMate Logo" />
+  <img src="assets/images/icon.svg" width="90" alt="AzonMate" />
 </p>
 
 <h1 align="center">AzonMate</h1>
 
 <p align="center">
-  <strong>Amazon Affiliate Product Engine for WordPress</strong><br />
-  Search, display & monetize Amazon products directly from your WordPress posts.
+  <strong>The Amazon Affiliate Product Engine for WordPress</strong>
 </p>
 
 <p align="center">
-  <a href="#features">Features</a> •
-  <a href="#showcase-layouts">Showcase Layouts</a> •
-  <a href="#shortcodes">Shortcodes</a> •
-  <a href="#installation">Installation</a> •
-  <a href="#configuration">Configuration</a> •
-  <a href="#changelog">Changelog</a> •
-  <a href="#license">License</a>
+  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-1.3.0-ff9900?style=for-the-badge" alt="v1.3.0" /></a>&nbsp;
+  <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress 6.0+" />&nbsp;
+  <img src="https://img.shields.io/badge/PHP-7.4%2B-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 7.4+" />&nbsp;
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Free_for_Personal_Use-22c55e?style=for-the-badge" alt="Free for Personal Use" /></a>
 </p>
 
+<br />
+
+<!-- ╔══════════════════════════════════════════════════════════════╗ -->
+<!-- ║  NOTICE                                                      ║ -->
+<!-- ╚══════════════════════════════════════════════════════════════╝ -->
+
+> [!NOTE]
+> **AzonMate is free, open-source, and community-driven.**
+>
+> Most Amazon affiliate plugins charge **$49 – $199/year**. AzonMate gives you the same power — 8 stunning layouts, Gutenberg blocks, geo-targeting, analytics — for **$0**. No premium tier, no upsells, no nag banners.
+>
+> Our goal is simple: **build the best free Amazon affiliate toolkit on the planet**, together. Star the repo, share it with fellow affiliate marketers, submit ideas or pull requests — every contribution makes AzonMate better for everyone.
+>
+> If you find AzonMate useful, the best way to support it is to **give it a** ⭐ **on GitHub** and tell your friends.
+
+<br />
+
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.3.0-ff9900?style=flat-square" alt="Version 1.3.0" />
-  <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=flat-square&logo=wordpress" alt="WordPress 6.0+" />
-  <img src="https://img.shields.io/badge/PHP-7.4%2B-777bb4?style=flat-square&logo=php" alt="PHP 7.4+" />
-  <img src="https://img.shields.io/badge/license-Personal%20Use-blue?style=flat-square" alt="License: Free for Personal Use" />
+  <a href="#-quick-start">Quick Start</a>&nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="#-features">Features</a>&nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="#-showcase-layouts">Layouts</a>&nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="#-shortcodes">Shortcodes</a>&nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="#-configuration">Configuration</a>&nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="#-changelog">Changelog</a>&nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="#-license">License</a>
 </p>
 
 ---
 
-## What is AzonMate?
+## 🚀 Quick Start
 
-AzonMate is a powerful WordPress plugin that connects to the **Amazon Product Advertising API 5.0** to let you search, cache, and beautifully display Amazon products inside any post, page, or widget. It handles affiliate link management, geo-targeting, click tracking, and analytics — all from one plugin.
+1. **Download** the latest `.zip` from the [Releases page](https://github.com/numanrki/azonmate/releases/latest) — or click the green **Code** button above → **Download ZIP**.
+2. In WordPress go to **Plugins → Add New → Upload Plugin** and upload the zip.
+3. Click **Install Now**, then **Activate**.
+4. Head to **AzonMate → Settings**, enter your Amazon PA-API 5.0 credentials, hit **Test Connection** — done.
 
-Whether you run a product review blog, a niche affiliate site, or an online magazine with deal roundups, AzonMate gives you **8 showcase layouts**, **7 shortcodes**, **Gutenberg blocks**, and a visual **Showcase Builder** to create stunning product displays without writing a single line of code.
+That's it. Start dropping shortcodes or using the visual Showcase Builder.
 
 ---
 
-## Features
+## ✨ Features
 
-### 🔗 Amazon PA-API 5.0 Integration
-- Full AWS Signature v4 authentication
-- Support for **10 Amazon marketplaces**: US, UK, DE, FR, IN, CA, JP, IT, ES, AU
-- Real-time product search from the WordPress admin
-- Automatic price, rating, and availability syncing
+<table>
+<tr>
+<td width="50%" valign="top">
 
-### 🎨 8 Showcase Layouts
-Beautiful, theme-proof product displays that look identical in the admin preview and on your live site:
+### Amazon PA-API 5.0
+- AWS Signature v4 authentication
+- **10 marketplaces** — US, UK, DE, FR, IN, CA, JP, IT, ES, AU
+- Real-time product search inside the editor
+- Live price, rating & availability sync
+
+### 8 Showcase Layouts
+Theme-proof product displays — admin preview = live post:
 
 | Multi-Product | Single-Product |
-|---|---|
-| **Grid Cards** — Responsive card grid with badges & CTA | **Hero Card** — Large featured product spotlight |
-| **Row List** — Horizontal rows with image, details & price | **Compact** — Slim inline card for mid-article placement |
-| **Masonry** — Pinterest-style staggered collage | **Split** — 50/50 image + details panels |
-| **Comparison Table** — Side-by-side columns | **Deal Card** — Price-drop focused with savings emphasis |
+|:---|:---|
+| Grid Cards | Hero Card |
+| Row List | Compact |
+| Masonry | Split |
+| Comparison Table | Deal Card |
 
-### 📦 7 Shortcodes
-| Shortcode | Purpose |
-|---|---|
-| `[azonmate box="ASIN"]` | Product box (default, horizontal, compact) |
-| `[azonmate link="ASIN"]text[/azonmate]` | Inline text link |
-| `[azonmate image="ASIN"]` | Linked product image |
-| `[azonmate field="price" asin="ASIN"]` | Individual data field |
-| `[azonmate list="ASIN1,ASIN2"]` | Product list (vertical/grid) |
-| `[azonmate table="ASIN1,ASIN2"]` | Comparison table |
-| `[azonmate showcase="ASIN" layout="hero"]` | Showcase (8 layouts) |
+### 7 Shortcodes
+`box` · `link` · `image` · `field` · `list` · `table` · `showcase`
 
-### 🧱 Gutenberg Blocks
-Native block editor support for:
-- Product Box
-- Product List
-- Comparison Table
-- Bestseller / New Releases
-- Text Link
+### Gutenberg Blocks
+Product Box · Product List · Comparison Table · Bestseller · Text Link
 
-### 🛠️ Visual Showcase Builder
-A point-and-click admin page to build showcase shortcodes:
-1. **Pick a Design** — Choose from 8 layouts across two categories
-2. **Select Products** — Click to pick from your product library
-3. **Optional Extras** — Set heading, button text, columns
-4. **Copy Shortcode** — One-click copy with live WYSIWYG preview
+</td>
+<td width="50%" valign="top">
 
-The builder preview uses the **exact same CSS** as the frontend, so what you see is what your visitors get.
+### Visual Showcase Builder
+Point-and-click shortcode generator with live WYSIWYG preview — no code required.
 
-### ⚡ Smart Caching
-- Database-backed product cache with configurable TTL
-- WP-Cron scheduled refresh to keep prices & availability current
-- Automatic stale data cleanup
+### Smart Caching
+Database-backed cache with configurable TTL + WP-Cron auto-refresh.
 
-### 🌍 Geo-Targeting
-- Detects visitor country via CloudFlare headers or ip-api.com fallback
-- Automatically swaps affiliate tags per marketplace
-- Redirects to the correct Amazon store for each visitor
+### Geo-Targeting
+Auto-detect visitor country → swap affiliate tag → redirect to correct Amazon store.
 
-### 📊 Click Tracking & Analytics
-- Privacy-safe IP hashing (SHA-256 with daily rotating salt)
-- Per-product and per-post click statistics
-- Admin dashboard widget for quick stats
-- CSV export for reporting
+### Click Tracking & Analytics
+Privacy-safe tracking with SHA-256 hashed IPs, per-product stats, dashboard widget, CSV export.
 
-### 🔒 Security
-- AES-256-CBC encryption for API credentials
-- AJAX nonce verification on all endpoints
-- Capability checks (`manage_options`) for admin actions
-- Rate limiting on search requests (5 per 10 seconds)
+### Security First
+AES-256-CBC key encryption · nonce-verified AJAX · capability checks · rate limiting.
 
-### 🎨 Theming & Customization
-- CSS Custom Properties for easy color/spacing overrides
-- BEM naming convention throughout all CSS
-- Dark mode support via `prefers-color-scheme`
-- Template override system: copy any template to your theme to customize
-- Fully scoped CSS — no conflicts with your theme or other plugins
+### Theme-Proof CSS
+Fully scoped BEM classes · CSS Custom Properties · dark mode · template overrides.
 
-### ✋ Manual Products
-- Add products manually without an API connection
-- Full CRUD interface in the admin panel
-- Works with all shortcodes and showcase layouts
+### Manual Products
+Add products manually without an API key — full CRUD admin interface.
+
+</td>
+</tr>
+</table>
 
 ---
 
-## Showcase Layouts
+## 🎨 Showcase Layouts
 
-### Multi-Product Layouts
+### Multi-Product
 
-**Grid Cards** — Responsive cards that adapt to 1–4 columns. Includes product badge, savings percentage, brand, title, rating, price, description, and a prominent buy button.
+| Layout | Description |
+|:---|:---|
+| **Grid Cards** | Responsive 1–4 column card grid with badges, savings %, ratings, and a prominent CTA button. |
+| **Row List** | Full-width horizontal rows — thumbnail left, details center, price + button right. Highlighted rows for badged products. |
+| **Masonry** | Pinterest-style CSS-column layout. Products flow dynamically for a magazine feel. |
+| **Comparison Table** | Data-rich column-per-product table — image, title, rating, price, buy button. Highlight the recommended pick. |
 
-**Row List** — Full-width horizontal rows with a thumbnail on the left, product details in the center, and price + CTA on the right. Highlighted rows for badged products.
+### Single-Product
 
-**Masonry** — Pinterest-style staggered layout using CSS columns. Automatically flows products into the available space for a dynamic, magazine-like feel.
-
-**Comparison Table** — Data-rich table with columns per product. Rows for image, title, rating, price, and buy button. Highlighted columns for recommended products.
-
-### Single-Product Layouts
-
-**Hero Card** — A large featured card with an image panel (42% width) and a body section. Ideal for top-of-page featured product spotlights.
-
-**Compact** — A slim inline card that sits naturally between paragraphs. Thumbnail, title, rating & price in one row with a CTA button.
-
-**Split** — A clean 50/50 grid with the product image on one side and full details (features, description, price, CTA) on the other.
-
-**Deal Card** — Designed for price-drop promotions. Features an orange accent strip, savings percentage badge, and prominent "Save X%" callout.
+| Layout | Description |
+|:---|:---|
+| **Hero Card** | Large spotlight card with 42% image panel + full body. Perfect for "top pick" callouts. |
+| **Compact** | Slim inline card that sits between paragraphs — thumbnail, title, price, CTA in one row. |
+| **Split** | Clean 50/50 grid — image on one side, details + features + CTA on the other. |
+| **Deal Card** | Price-drop focused design with orange accent, savings % badge, and "Save X%" callout. |
 
 ---
 
-## Installation
+## 📦 Shortcodes
 
-### From GitHub (Manual)
-
-1. Download or clone this repository:
-   ```bash
-   git clone https://github.com/flavor-developer/azonmate.git
-   ```
-2. Copy (or symlink) the `azonmate` folder into `wp-content/plugins/`.
-3. Activate the plugin from **Plugins → Installed Plugins** in your WordPress admin.
-
-### From ZIP
-
-1. Go to **Plugins → Add New → Upload Plugin** in WordPress.
-2. Upload the ZIP archive.
-3. Click **Activate**.
-
----
-
-## Configuration
-
-1. Navigate to **AzonMate → Settings** in the WordPress admin.
-2. Enter your **Amazon PA-API 5.0** credentials:
-   - Access Key
-   - Secret Key
-   - Partner Tag
-   - Marketplace
-3. Click **Test Connection** to verify.
-4. Configure caching, geo-targeting, and tracking preferences in the remaining tabs.
-
----
-
-## Usage
-
-### Shortcode Examples
-
-```
-[azonmate box="B0DCCNPFVC"]
-[azonmate showcase="B0DCCNPFVC" layout="hero"]
-[azonmate showcase="B0DCCNPFVC,B09V3KXJPB,B0BSHF7WHW" layout="grid" columns="3" heading="Our Top Picks"]
-[azonmate table="B0DCCNPFVC,B09V3KXJPB" highlight="1"]
-[azonmate link="B0DCCNPFVC"]Check this out[/azonmate]
+```text
+[azonmate box="ASIN"]                                          → Product box
+[azonmate link="ASIN"]anchor text[/azonmate]                   → Inline text link
+[azonmate image="ASIN"]                                        → Product image link
+[azonmate field="price" asin="ASIN"]                           → Single data field
+[azonmate list="ASIN1,ASIN2" layout="grid"]                    → Product list
+[azonmate table="ASIN1,ASIN2" highlight="1"]                   → Comparison table
+[azonmate showcase="ASIN1,ASIN2" layout="grid" columns="3"]    → Showcase (8 layouts)
 ```
 
-### Showcase Builder
-
-Go to **AzonMate → Showcase** in the admin to use the visual builder — no shortcode syntax to memorize.
+> **Tip:** Use the **Showcase Builder** (`AzonMate → Showcase` in the admin) to generate shortcodes visually — no syntax to memorize.
 
 ---
 
-## Requirements
+## ⚙️ Configuration
 
-| Requirement | Version |
-|---|---|
-| WordPress | 6.0 or higher |
-| PHP | 7.4 or higher |
+| Setting | Where |
+|:---|:---|
+| API credentials (Access Key, Secret Key, Partner Tag, Marketplace) | **AzonMate → Settings → API** |
+| Cache TTL & auto-refresh schedule | **AzonMate → Settings → Cache** |
+| Geo-targeting regions & fallback tags | **AzonMate → Settings → Geo** |
+| Click tracking & analytics options | **AzonMate → Settings → Tracking** |
+| Manual products CRUD | **AzonMate → Products** |
+| Visual showcase builder | **AzonMate → Showcase** |
+
+---
+
+## 📋 Requirements
+
+| | Minimum |
+|:---|:---|
+| WordPress | 6.0 |
+| PHP | 7.4 |
 | Amazon PA-API | 5.0 credentials |
 
 ---
 
-## File Structure
+## 📂 Project Structure
 
 ```
 azonmate/
-├── azonmate.php              # Main plugin entry point
-├── uninstall.php             # Clean uninstall handler
+├── azonmate.php                    → Main plugin bootstrap
+├── uninstall.php                   → Clean uninstall handler
 ├── assets/
-│   ├── css/                  # Admin, public, editor, showcase styles
-│   ├── js/                   # Admin, public, click-tracker, search modal
-│   └── images/               # Icons & SVGs
+│   ├── css/                        → Admin, public, editor, showcase styles
+│   ├── js/                         → Admin, public, click tracker, search modal
+│   └── images/                     → Icons & SVG assets
 ├── includes/
-│   ├── admin/                # Settings, analytics, showcase builder, manual products
-│   ├── api/                  # Amazon API client & request signer
-│   ├── blocks/               # Gutenberg block registrar & source
-│   ├── cache/                # Cache manager & cron refresh
-│   ├── geo/                  # Geo-targeting & link rewriter
-│   ├── models/               # Product data model
-│   ├── shortcodes/           # All 7 shortcode handlers
-│   ├── templates/            # Template renderer & helper functions
-│   └── tracking/             # Click tracker
-├── templates/                # Frontend display templates (overridable)
-│   ├── bestseller/
-│   ├── comparison-table/
-│   ├── image-link/
-│   ├── product-box/
-│   ├── product-list/
-│   ├── showcase/             # 8 showcase layout templates
-│   └── text-link/
-└── languages/                # Translation .pot file
+│   ├── admin/                      → Settings, analytics, showcase builder, manual products
+│   ├── api/                        → Amazon API client & AWS v4 request signer
+│   ├── blocks/src/                 → Gutenberg block source (JSX)
+│   ├── cache/                      → Cache manager & cron refresh
+│   ├── geo/                        → Geo-targeting & link rewriter
+│   ├── models/                     → Product data model
+│   ├── shortcodes/                 → 7 shortcode handlers + abstract base
+│   ├── templates/                  → Template renderer & helper functions
+│   └── tracking/                   → Click tracker
+├── templates/                      → Frontend templates (theme-overridable)
+│   ├── showcase/                   → 8 showcase layout templates
+│   ├── product-box/                → Box templates (default, horizontal, compact)
+│   ├── comparison-table/           → Table template
+│   ├── product-list/               → List templates (default, grid)
+│   ├── bestseller/                 → Bestseller template
+│   ├── image-link/                 → Image link template
+│   └── text-link/                  → Text link template
+└── languages/                      → Translation .pot file
 ```
 
 ---
 
-## Changelog
+## 📝 Changelog
 
-See [CHANGELOG.md](CHANGELOG.md) for the full version history.
+> Full history in [CHANGELOG.md](CHANGELOG.md).
 
-### Latest — v1.3.0
+### v1.3.0 — 2026-02-22
 - **New:** 4 single-product showcase layouts — Hero, Compact, Split, Deal
 - **New:** Visual Showcase Builder with WYSIWYG preview (admin preview = live post)
+- **New:** Manual products CRUD system
 - **Fixed:** Critical buy-button class mismatch causing unstyled CTA buttons
 - **Improved:** All showcase CSS fully scoped to prevent theme/plugin conflicts
 - **Improved:** Consistent responsive breakpoints (960px / 600px) across all layouts
 
----
-
-## Download & Install
-
-1. **Download** the latest release ZIP from the [Releases page](https://github.com/numanrki/azonmate/releases) or click **Code → Download ZIP** above.
-2. In your WordPress admin go to **Plugins → Add New → Upload Plugin**.
-3. Upload the ZIP file and click **Install Now**.
-4. Click **Activate** — done!
+### v1.0.0 — 2026-01-01
+- Initial release — PA-API 5.0, 7 shortcodes, Gutenberg blocks, caching, geo-targeting, analytics
 
 ---
 
-## Author
+## 👤 Author
 
-Created & maintained by **Numan** ([@numanrki](https://github.com/numanrki)).
+<table>
+<tr>
+<td>
+  <strong>Numan</strong><br />
+  <a href="https://github.com/numanrki">GitHub @numanrki</a><br />
+  <a href="mailto:numanrki@gmail.com">numanrki@gmail.com</a>
+</td>
+</tr>
+</table>
 
 ---
 
-## License
+## 📄 License
 
-AzonMate is released under the **AzonMate Free Use License v1.0** — see [LICENSE](LICENSE) for full terms.
+<table>
+<tr>
+<td>
 
-**TL;DR:**
-- **Free** to download, install & use on your own sites
-- **Free** to share — you can give copies to others or offer it for free download
-- **Free** to modify for your own needs
-- **No selling** — you cannot resell, sublicense, or include it in paid products/bundles
-- **Keep credits** — copyright notice must stay intact
+### AzonMate Free Use License v1.0
+
+<br />
+
+**✅ You CAN:**
+
+| | |
+|:---|:---|
+| ✅ | **Download & install** on any number of your own WordPress sites |
+| ✅ | **Use for any purpose** — personal blogs, business sites, client sites |
+| ✅ | **Modify** the source code for your own needs |
+| ✅ | **Share & redistribute** — give copies to others, post it on your blog, offer it for free download |
+
+<br />
+
+**❌ You CANNOT:**
+
+| | |
+|:---|:---|
+| ❌ | **Sell** — no reselling, renting, or charging any fee for AzonMate |
+| ❌ | **Sublicense** — you can't relicense it under different terms |
+| ❌ | **Bundle in paid products** — don't include it in paid themes, plugins, or SaaS offerings |
+| ❌ | **Remove credits** — the copyright notice and author attribution must stay |
+
+<br />
+
+> Full legal text → **[LICENSE](LICENSE)**
+
+</td>
+</tr>
+</table>
 
 ---
 
 <p align="center">
-  Built with ☕ by <strong><a href="https://github.com/numanrki">Numan</a></strong> for the Amazon affiliate community.<br />
-  <strong><a href="https://azonmate.com">azonmate.com</a></strong>
+  <sub>Built with ☕ by <a href="https://github.com/numanrki"><strong>Numan</strong></a> — for the Amazon affiliate community.</sub><br />
+  <sub>Questions? Reach out at <a href="mailto:numanrki@gmail.com">numanrki@gmail.com</a></sub>
+</p>
+
+<p align="center">
+  <sub>If AzonMate saves you time or money, consider giving it a ⭐ — it helps others find it too.</sub>
 </p>
