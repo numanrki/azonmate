@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-1.3.1-ff9900?style=for-the-badge" alt="v1.3.1" /></a>&nbsp;
+  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-1.3.2-ff9900?style=for-the-badge" alt="v1.3.2" /></a>&nbsp;
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress 6.0+" />&nbsp;
   <img src="https://img.shields.io/badge/PHP-7.4%2B-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 7.4+" />&nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Free_for_Personal_Use-22c55e?style=for-the-badge" alt="Free for Personal Use" /></a>
@@ -210,6 +210,10 @@ azonmate/
 ## 📝 Changelog
 
 > Full history in [CHANGELOG.md](CHANGELOG.md).
+
+### v1.3.2 — 2026-02-23
+- **New:** Branded admin bar on every plugin page — GitHub icon + repo link, author credit, version badge, "Star on GitHub" CTA
+- **New:** Admin footer bar with GitHub, bug report, and releases links
 
 ### v1.3.1 — 2026-02-22
 - **New:** Amazon affiliate disclosure integrated into all 8 showcase layouts (once per block)

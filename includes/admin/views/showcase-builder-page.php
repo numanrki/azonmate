@@ -18,9 +18,14 @@ $product_list = array();
 foreach ( $products as $p ) {
 	$product_list[] = $p->to_array();
 }
+
+if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
+	require_once __DIR__ . '/partials/admin-bar.php';
+}
 ?>
 
 <div class="wrap azonmate-showcase-builder">
+	<?php azonmate_render_admin_header(); ?>
 	<h1>
 		<span class="dashicons dashicons-layout" style="margin-right:8px;"></span>
 		<?php esc_html_e( 'Showcase Builder', 'azonmate' ); ?>
@@ -184,6 +189,7 @@ foreach ( $products as $p ) {
 			<div class="azm-sb-preview" id="azm-sb-preview"></div>
 		</div>
 	</div>
+	<?php azonmate_render_admin_footer(); ?>
 </div>
 
 <!-- ====================================================================

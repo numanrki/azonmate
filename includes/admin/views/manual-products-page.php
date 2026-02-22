@@ -12,9 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $marketplace = get_option( 'azon_mate_marketplace', 'US' );
 $marketplaces = \AzonMate\API\Marketplace::get_all_options();
+
+if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
+	require_once __DIR__ . '/partials/admin-bar.php';
+}
 ?>
 
 <div class="wrap azonmate-products-page">
+	<?php azonmate_render_admin_header(); ?>
 	<h1>
 		<span class="dashicons dashicons-cart" style="margin-right: 8px;"></span>
 		<?php esc_html_e( 'AzonMate Products', 'azonmate' ); ?>
@@ -214,6 +219,7 @@ $marketplaces = \AzonMate\API\Marketplace::get_all_options();
 			</div>
 		</div>
 	</div>
+	<?php azonmate_render_admin_footer(); ?>
 </div>
 
 <style>

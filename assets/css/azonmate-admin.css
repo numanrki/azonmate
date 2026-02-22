@@ -20,6 +20,182 @@
 }
 
 /* ==========================================================================
+   Admin Bar (Header + Footer on every AzonMate page)
+   ========================================================================== */
+
+/* ---- Top Bar ---- */
+.azonmate-admin-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 8px;
+	background: linear-gradient(135deg, #1d2327 0%, #2c3338 100%);
+	color: #ccc;
+	padding: 10px 18px;
+	border-radius: 10px;
+	margin: -5px 0 18px;
+	font-size: 13px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.azonmate-admin-bar__left {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.azonmate-admin-bar__brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: #fff;
+	font-size: 14px;
+}
+
+.azonmate-admin-bar__brand strong {
+	letter-spacing: 0.3px;
+}
+
+.azonmate-admin-bar__logo {
+	flex-shrink: 0;
+}
+
+.azonmate-admin-bar__sep {
+	display: inline-block;
+	width: 1px;
+	height: 16px;
+	background: rgba(255, 255, 255, 0.15);
+}
+
+.azonmate-admin-bar__version {
+	background: rgba(255, 153, 0, 0.15);
+	color: #ff9900;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 2px 8px;
+	border-radius: 20px;
+	letter-spacing: 0.3px;
+}
+
+.azonmate-admin-bar__author {
+	color: #999;
+	font-size: 12px;
+}
+
+.azonmate-admin-bar__author a {
+	color: #ccc;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.azonmate-admin-bar__author a:hover {
+	color: #ff9900;
+}
+
+.azonmate-admin-bar__right {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.azonmate-admin-bar__gh-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	color: #ccc;
+	text-decoration: none;
+	font-size: 12px;
+	padding: 4px 10px;
+	border-radius: 6px;
+	transition: color 0.15s, background 0.15s;
+}
+
+.azonmate-admin-bar__gh-link:hover {
+	color: #fff;
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.azonmate-admin-bar__gh-icon {
+	flex-shrink: 0;
+}
+
+.azonmate-admin-bar__star-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	background: linear-gradient(135deg, #ff9900, #e68a00);
+	color: #fff;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 5px 14px;
+	border-radius: 6px;
+	text-decoration: none;
+	transition: transform 0.15s, box-shadow 0.15s;
+	box-shadow: 0 2px 6px rgba(255, 153, 0, 0.25);
+}
+
+.azonmate-admin-bar__star-btn:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(255, 153, 0, 0.35);
+	color: #fff;
+}
+
+.azonmate-admin-bar__star-btn svg {
+	flex-shrink: 0;
+}
+
+/* ---- Footer Bar ---- */
+.azonmate-admin-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 24px;
+	padding: 12px 18px;
+	border-top: 1px solid #e0e0e0;
+	font-size: 12px;
+	color: #999;
+}
+
+.azonmate-admin-footer__left {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.azonmate-admin-footer__right {
+	display: flex;
+	align-items: center;
+	gap: 0;
+}
+
+.azonmate-admin-footer a {
+	color: #646970;
+	text-decoration: none;
+	transition: color 0.15s;
+}
+
+.azonmate-admin-footer a:hover {
+	color: #ff9900;
+}
+
+@media (max-width: 600px) {
+	.azonmate-admin-bar {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+	}
+
+	.azonmate-admin-footer {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 6px;
+	}
+}
+
+/* ==========================================================================
    Settings Page – Tabs
    ========================================================================== */
 

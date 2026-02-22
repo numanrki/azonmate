@@ -23,9 +23,14 @@ $tabs = array(
 
 $marketplaces = \AzonMate\API\Marketplace::get_all_options();
 $current_marketplace = get_option( 'azon_mate_marketplace', 'US' );
+
+if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
+	require_once __DIR__ . '/partials/admin-bar.php';
+}
 ?>
 
 <div class="wrap azonmate-settings">
+	<?php azonmate_render_admin_header(); ?>
 	<h1>
 		<span class="dashicons dashicons-amazon" style="margin-right: 8px;"></span>
 		<?php esc_html_e( 'AzonMate Settings', 'azonmate' ); ?>
@@ -503,4 +508,5 @@ $current_marketplace = get_option( 'azon_mate_marketplace', 'US' );
 		<?php endif; ?>
 
 	</div>
+	<?php azonmate_render_admin_footer(); ?>
 </div>

@@ -38,9 +38,14 @@ foreach ( $clicks_per_day as $row ) {
 
 // Max clicks for chart scale.
 $max_clicks = max( $peak_clicks, 1 );
+
+if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
+	require_once __DIR__ . '/partials/admin-bar.php';
+}
 ?>
 
 <div class="wrap azonmate-dash">
+	<?php azonmate_render_admin_header(); ?>
 
 	<!-- Dashboard Header -->
 	<div class="azonmate-dash__header">
@@ -342,4 +347,5 @@ $max_clicks = max( $peak_clicks, 1 );
 		</div>
 
 	</div>
+	<?php azonmate_render_admin_footer(); ?>
 </div>
