@@ -265,23 +265,14 @@ Created & maintained by **Numan** ([@numanrki](https://github.com/numanrki)).
 
 ## License
 
-```
-Copyright (C) 2026 Numan / AzonMate. All rights reserved.
+AzonMate is released under the **AzonMate Free Use License v1.0** — see [LICENSE](LICENSE) for full terms.
 
-This software is provided FREE for PERSONAL, non-commercial use only.
-
-You MAY:
-  - Download and install AzonMate on your own WordPress site(s)
-  - Modify the code for your own personal use
-
-You MAY NOT:
-  - Redistribute, resell, sublicense, or share this software
-  - Include it in any product, theme, plugin bundle, or SaaS offering
-  - Remove or alter this copyright notice
-
-THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
-USE AT YOUR OWN RISK.
-```
+**TL;DR:**
+- **Free** to download, install & use on your own sites
+- **Free** to share — you can give copies to others or offer it for free download
+- **Free** to modify for your own needs
+- **No selling** — you cannot resell, sublicense, or include it in paid products/bundles
+- **Keep credits** — copyright notice must stay intact
 
 ---
 
