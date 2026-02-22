@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "azonmate/text-link",
+	"version": "1.0.0",
+	"title": "AzonMate Text Link",
+	"category": "inline",
+	"icon": "admin-links",
+	"description": "Insert an inline Amazon affiliate text link.",
+	"keywords": ["amazon", "link", "affiliate"],
+	"supports": {
+		"html": false
+	},
+	"textdomain": "azonmate",
+	"attributes": {
+		"asin": {
+			"type": "string",
+			"default": ""
+		},
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"text": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

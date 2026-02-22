@@ -1,0 +1,424 @@
+/**
+ * AzonMate – Admin Styles
+ *
+ * Styles for the settings page, analytics, search modal, and admin UI.
+ *
+ * @package AzonMate
+ * @since   1.0.0
+ */
+
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+
+:root {
+	--azonmate-admin-primary: #ff9900;
+	--azonmate-admin-primary-hover: #e68a00;
+	--azonmate-admin-success: #28a745;
+	--azonmate-admin-danger: #dc3545;
+	--azonmate-admin-info: #17a2b8;
+}
+
+/* ==========================================================================
+   Settings Page – Tabs
+   ========================================================================== */
+
+.azonmate-settings-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0;
+	border-bottom: 2px solid #c3c4c7;
+	margin-bottom: 1.5rem;
+}
+
+.azonmate-settings-tabs .nav-tab {
+	padding: 0.6rem 1.2rem;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+	color: #50575e;
+	background: transparent;
+	border: none;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -2px;
+	cursor: pointer;
+	transition: color 0.15s, border-color 0.15s;
+}
+
+.azonmate-settings-tabs .nav-tab:hover {
+	color: var(--azonmate-admin-primary);
+}
+
+.azonmate-settings-tabs .nav-tab-active {
+	color: var(--azonmate-admin-primary);
+	border-bottom-color: var(--azonmate-admin-primary);
+	font-weight: 600;
+}
+
+/* ==========================================================================
+   Settings Page – Sections
+   ========================================================================== */
+
+.azonmate-settings-section {
+	display: none;
+}
+
+.azonmate-settings-section.active {
+	display: block;
+}
+
+.azonmate-settings-section .form-table th {
+	width: 220px;
+	padding-top: 20px;
+}
+
+.azonmate-settings-section .form-table td {
+	padding-top: 15px;
+}
+
+.azonmate-settings-section .description {
+	color: #646970;
+	font-style: italic;
+	margin-top: 4px;
+}
+
+/* ==========================================================================
+   Connection Test
+   ========================================================================== */
+
+.azonmate-test-connection {
+	margin-top: 1rem;
+}
+
+.azonmate-test-connection .button {
+	margin-right: 10px;
+}
+
+.azonmate-test-result {
+	display: inline-block;
+	padding: 4px 12px;
+	border-radius: 4px;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.azonmate-test-result.success {
+	background: #d4edda;
+	color: #155724;
+	border: 1px solid #c3e6cb;
+}
+
+.azonmate-test-result.error {
+	background: #f8d7da;
+	color: #721c24;
+	border: 1px solid #f5c6cb;
+}
+
+/* ==========================================================================
+   Search Modal
+   ========================================================================== */
+
+.azonmate-search-modal-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 160000;
+	justify-content: center;
+	align-items: center;
+}
+
+.azonmate-search-modal-overlay.active {
+	display: flex;
+}
+
+.azonmate-search-modal {
+	background: #fff;
+	border-radius: 8px;
+	width: 90%;
+	max-width: 720px;
+	max-height: 85vh;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+}
+
+.azonmate-search-modal__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1rem 1.5rem;
+	border-bottom: 1px solid #ddd;
+	background: #f9f9f9;
+}
+
+.azonmate-search-modal__header h2 {
+	margin: 0;
+	font-size: 16px;
+}
+
+.azonmate-search-modal__close {
+	background: none;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+	color: #666;
+	padding: 0;
+	line-height: 1;
+}
+
+.azonmate-search-modal__close:hover {
+	color: #000;
+}
+
+.azonmate-search-modal__body {
+	padding: 1.5rem;
+	overflow-y: auto;
+	flex: 1;
+}
+
+.azonmate-search-modal__form {
+	display: flex;
+	gap: 0.5rem;
+	margin-bottom: 1rem;
+}
+
+.azonmate-search-modal__form input[type="text"] {
+	flex: 1;
+	padding: 8px 12px;
+	border: 1px solid #8c8f94;
+	border-radius: 4px;
+}
+
+.azonmate-search-modal__form select {
+	padding: 8px;
+	border: 1px solid #8c8f94;
+	border-radius: 4px;
+}
+
+.azonmate-search-modal__form button {
+	white-space: nowrap;
+}
+
+/* Search Results */
+.azonmate-search-results {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.azonmate-search-result {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.75rem;
+	padding: 0.75rem;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.azonmate-search-result:hover {
+	border-color: var(--azonmate-admin-primary);
+	box-shadow: 0 2px 8px rgba(255, 153, 0, 0.15);
+}
+
+.azonmate-search-result__image {
+	flex: 0 0 60px;
+}
+
+.azonmate-search-result__image img {
+	width: 60px;
+	height: 60px;
+	object-fit: contain;
+}
+
+.azonmate-search-result__info {
+	flex: 1;
+	min-width: 0;
+}
+
+.azonmate-search-result__title {
+	font-weight: 600;
+	font-size: 13px;
+	margin-bottom: 4px;
+	line-height: 1.3;
+}
+
+.azonmate-search-result__meta {
+	font-size: 12px;
+	color: #666;
+	display: flex;
+	gap: 0.75rem;
+}
+
+.azonmate-search-result__actions {
+	flex: 0 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.azonmate-search-result__actions .button {
+	font-size: 12px;
+}
+
+/* Loading Spinner */
+.azonmate-search-loading {
+	text-align: center;
+	padding: 2rem;
+	color: #666;
+}
+
+.azonmate-search-loading .spinner {
+	visibility: visible;
+	float: none;
+}
+
+/* ==========================================================================
+   Analytics Page
+   ========================================================================== */
+
+.azonmate-analytics-wrap {
+	max-width: 1200px;
+}
+
+.azonmate-analytics-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.azonmate-stat-card {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 8px;
+	padding: 1.25rem;
+	text-align: center;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.azonmate-stat-card__value {
+	font-size: 2rem;
+	font-weight: 700;
+	color: var(--azonmate-admin-primary);
+	line-height: 1.2;
+}
+
+.azonmate-stat-card__label {
+	font-size: 13px;
+	color: #646970;
+	margin-top: 4px;
+}
+
+/* Chart Container */
+.azonmate-chart-container {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 8px;
+	padding: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.azonmate-chart-container h3 {
+	margin-top: 0;
+	font-size: 15px;
+}
+
+/* Top Products / Posts Tables */
+.azonmate-analytics-table {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 8px;
+	padding: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.azonmate-analytics-table h3 {
+	margin-top: 0;
+	font-size: 15px;
+}
+
+.azonmate-analytics-table table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.azonmate-analytics-table th {
+	text-align: left;
+	padding: 8px;
+	border-bottom: 2px solid #c3c4c7;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.azonmate-analytics-table td {
+	padding: 8px;
+	border-bottom: 1px solid #f0f0f1;
+	font-size: 13px;
+}
+
+.azonmate-analytics-table tr:hover td {
+	background: #f9f9f9;
+}
+
+/* ==========================================================================
+   Dashboard Widget
+   ========================================================================== */
+
+.azonmate-dashboard-widget .azonmate-dash-stats {
+	display: flex;
+	justify-content: space-between;
+	gap: 0.5rem;
+	margin-bottom: 1rem;
+}
+
+.azonmate-dashboard-widget .azonmate-dash-stat {
+	text-align: center;
+	flex: 1;
+}
+
+.azonmate-dashboard-widget .azonmate-dash-stat__value {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: var(--azonmate-admin-primary);
+}
+
+.azonmate-dashboard-widget .azonmate-dash-stat__label {
+	font-size: 12px;
+	color: #646970;
+}
+
+/* ==========================================================================
+   Notices
+   ========================================================================== */
+
+.azonmate-notice {
+	padding: 0.75rem 1rem;
+	border-radius: 4px;
+	margin-bottom: 1rem;
+	font-size: 13px;
+}
+
+.azonmate-notice--success {
+	background: #d4edda;
+	color: #155724;
+	border: 1px solid #c3e6cb;
+}
+
+.azonmate-notice--error {
+	background: #f8d7da;
+	color: #721c24;
+	border: 1px solid #f5c6cb;
+}
+
+.azonmate-notice--info {
+	background: #d1ecf1;
+	color: #0c5460;
+	border: 1px solid #bee5eb;
+}

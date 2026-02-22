@@ -1,0 +1,794 @@
+/**
+ * AzonMate – Public Frontend Styles
+ *
+ * BEM naming: .azonmate-{block}__{element}--{modifier}
+ * Mobile-first, responsive, dark mode support via CSS variables.
+ *
+ * @package AzonMate
+ * @since   1.0.0
+ */
+
+/* ==========================================================================
+   CSS Custom Properties (Theming)
+   ========================================================================== */
+
+:root {
+	--azonmate-primary: #ff9900;
+	--azonmate-primary-hover: #e68a00;
+	--azonmate-button-bg: #ff9900;
+	--azonmate-button-text: #000;
+	--azonmate-button-hover-bg: #e68a00;
+	--azonmate-star-color: #ffa41c;
+	--azonmate-border-radius: 8px;
+	--azonmate-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	--azonmate-bg: #fff;
+	--azonmate-bg-alt: #f9f9f9;
+	--azonmate-text: #333;
+	--azonmate-text-light: #666;
+	--azonmate-border: #e0e0e0;
+	--azonmate-link: #007185;
+	--azonmate-savings: #cc0c39;
+	--azonmate-prime: #00a8e1;
+	--azonmate-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--azonmate-bg: #1a1a1a;
+		--azonmate-bg-alt: #222;
+		--azonmate-text: #e0e0e0;
+		--azonmate-text-light: #aaa;
+		--azonmate-border: #444;
+		--azonmate-link: #4db8d5;
+		--azonmate-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+	}
+}
+
+/* ==========================================================================
+   Product Box
+   ========================================================================== */
+
+.azonmate-product-box {
+	position: relative;
+	background: var(--azonmate-bg);
+	border: 1px solid var(--azonmate-border);
+	border-radius: var(--azonmate-border-radius);
+	box-shadow: var(--azonmate-shadow);
+	font-family: var(--azonmate-font);
+	color: var(--azonmate-text);
+	overflow: hidden;
+	margin: 1.5em 0;
+	transition: box-shadow 0.2s ease;
+}
+
+.azonmate-product-box:hover {
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Default (vertical) layout */
+.azonmate-product-box--default {
+	max-width: 400px;
+	text-align: center;
+	padding: 1.5rem;
+}
+
+.azonmate-product-box--default .azonmate-product-box__image-wrap {
+	margin-bottom: 1rem;
+}
+
+.azonmate-product-box--default .azonmate-product-box__image {
+	max-height: 200px;
+	width: auto;
+	object-fit: contain;
+}
+
+.azonmate-product-box--default .azonmate-product-box__image--small {
+	max-height: 120px;
+}
+
+.azonmate-product-box--default .azonmate-product-box__image--large {
+	max-height: 300px;
+}
+
+/* Horizontal layout */
+.azonmate-product-box--horizontal {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	padding: 1.25rem;
+}
+
+.azonmate-product-box--horizontal .azonmate-product-box__image-wrap {
+	flex: 0 0 160px;
+	text-align: center;
+	position: relative;
+	padding-right: 1rem;
+}
+
+.azonmate-product-box--horizontal .azonmate-product-box__image {
+	max-width: 140px;
+	max-height: 180px;
+	object-fit: contain;
+}
+
+.azonmate-product-box--horizontal .azonmate-product-box__body {
+	flex: 1 1 200px;
+	min-width: 0;
+}
+
+.azonmate-product-box--horizontal .azonmate-product-box__sidebar {
+	flex: 0 0 160px;
+	text-align: right;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 0.5rem;
+}
+
+@media (max-width: 600px) {
+	.azonmate-product-box--horizontal {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.azonmate-product-box--horizontal .azonmate-product-box__image-wrap {
+		flex: 0 0 auto;
+		padding-right: 0;
+		margin-bottom: 1rem;
+	}
+
+	.azonmate-product-box--horizontal .azonmate-product-box__sidebar {
+		flex: 0 0 auto;
+		align-items: center;
+		text-align: center;
+		margin-top: 1rem;
+	}
+}
+
+/* Compact layout */
+.azonmate-product-box--compact {
+	display: flex;
+	align-items: center;
+	padding: 0.75rem 1rem;
+	gap: 0.75rem;
+	max-width: 500px;
+}
+
+.azonmate-product-box--compact .azonmate-product-box__image-wrap {
+	flex: 0 0 60px;
+}
+
+.azonmate-product-box--compact .azonmate-product-box__image--small {
+	max-width: 50px;
+	max-height: 50px;
+	object-fit: contain;
+}
+
+.azonmate-product-box--compact .azonmate-product-box__content {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.azonmate-product-box--compact .azonmate-product-box__title {
+	font-size: 0.9rem;
+	margin: 0;
+}
+
+.azonmate-product-box--compact .azonmate-product-box__meta {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+	margin-top: 0.25rem;
+}
+
+/* Shared elements */
+.azonmate-product-box__badge {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+}
+
+.azonmate-product-box__savings {
+	display: inline-block;
+	background: var(--azonmate-savings);
+	color: #fff;
+	font-size: 0.75rem;
+	font-weight: 700;
+	padding: 0.25em 0.6em;
+	border-radius: 0 0 var(--azonmate-border-radius) 0;
+}
+
+.azonmate-product-box__title {
+	font-size: 1.1rem;
+	line-height: 1.4;
+	margin: 0 0 0.5rem;
+}
+
+.azonmate-product-box__title a {
+	color: var(--azonmate-text);
+	text-decoration: none;
+}
+
+.azonmate-product-box__title a:hover {
+	color: var(--azonmate-link);
+}
+
+.azonmate-product-box__rating {
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+	margin-bottom: 0.5rem;
+	justify-content: inherit;
+}
+
+.azonmate-product-box__review-count {
+	font-size: 0.8rem;
+	color: var(--azonmate-text-light);
+}
+
+.azonmate-product-box__price-wrap {
+	display: flex;
+	align-items: baseline;
+	gap: 0.5rem;
+	margin-bottom: 0.5rem;
+	justify-content: inherit;
+}
+
+.azonmate-product-box__price {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--azonmate-text);
+}
+
+.azonmate-product-box__list-price {
+	font-size: 0.85rem;
+	color: var(--azonmate-text-light);
+}
+
+.azonmate-product-box__prime {
+	margin-bottom: 0.5rem;
+}
+
+.azonmate-product-box__features {
+	text-align: left;
+	list-style: disc;
+	padding-left: 1.2rem;
+	margin: 0.5rem 0;
+	font-size: 0.875rem;
+	color: var(--azonmate-text-light);
+	line-height: 1.6;
+}
+
+.azonmate-product-box__actions {
+	margin-top: 1rem;
+}
+
+/* ==========================================================================
+   Buy Button (shared)
+   ========================================================================== */
+
+.azonmate-buy-btn {
+	display: inline-block;
+	background: var(--azonmate-button-bg);
+	color: var(--azonmate-button-text);
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-decoration: none;
+	padding: 0.6em 1.5em;
+	border-radius: var(--azonmate-border-radius);
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.2s ease, transform 0.15s ease;
+	line-height: 1.4;
+}
+
+.azonmate-buy-btn:hover,
+.azonmate-buy-btn:focus {
+	background: var(--azonmate-button-hover-bg);
+	color: var(--azonmate-button-text);
+	text-decoration: none;
+	transform: translateY(-1px);
+}
+
+.azonmate-buy-btn:active {
+	transform: translateY(0);
+}
+
+/* ==========================================================================
+   Star Rating (shared)
+   ========================================================================== */
+
+.azonmate-stars {
+	display: inline-flex;
+	align-items: center;
+	gap: 1px;
+}
+
+.azonmate-star {
+	width: 14px;
+	height: 14px;
+	color: var(--azonmate-star-color);
+	fill: currentColor;
+}
+
+.azonmate-star--empty {
+	color: #ddd;
+}
+
+.azonmate-star--half {
+	position: relative;
+}
+
+/* ==========================================================================
+   Prime Badge (shared)
+   ========================================================================== */
+
+.azonmate-prime-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	font-size: 0.8rem;
+	color: var(--azonmate-prime);
+	font-weight: 600;
+}
+
+.azonmate-prime-badge svg {
+	width: 14px;
+	height: 14px;
+}
+
+/* ==========================================================================
+   Savings Badge (shared)
+   ========================================================================== */
+
+.azonmate-savings-badge {
+	display: inline-block;
+	background: var(--azonmate-savings);
+	color: #fff;
+	font-size: 0.75rem;
+	font-weight: 700;
+	padding: 0.15em 0.5em;
+	border-radius: 3px;
+}
+
+/* ==========================================================================
+   Text Link
+   ========================================================================== */
+
+.azonmate-text-link {
+	color: var(--azonmate-link);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.azonmate-text-link:hover {
+	color: var(--azonmate-primary);
+}
+
+/* ==========================================================================
+   Image Link
+   ========================================================================== */
+
+.azonmate-image-link {
+	display: inline-block;
+	line-height: 0;
+	transition: opacity 0.2s ease;
+}
+
+.azonmate-image-link:hover {
+	opacity: 0.85;
+}
+
+.azonmate-image-link__img {
+	max-width: 100%;
+	height: auto;
+	border-radius: var(--azonmate-border-radius);
+}
+
+.azonmate-image-link--small .azonmate-image-link__img {
+	max-width: 100px;
+}
+
+.azonmate-image-link--medium .azonmate-image-link__img {
+	max-width: 200px;
+}
+
+.azonmate-image-link--large .azonmate-image-link__img {
+	max-width: 400px;
+}
+
+/* ==========================================================================
+   Product List (vertical)
+   ========================================================================== */
+
+.azonmate-product-list {
+	font-family: var(--azonmate-font);
+	color: var(--azonmate-text);
+	margin: 1.5em 0;
+}
+
+.azonmate-product-list--default .azonmate-product-list__item {
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+	padding: 1rem;
+	background: var(--azonmate-bg);
+	border: 1px solid var(--azonmate-border);
+	border-radius: var(--azonmate-border-radius);
+	margin-bottom: 0.75rem;
+	transition: box-shadow 0.2s ease;
+}
+
+.azonmate-product-list--default .azonmate-product-list__item:hover {
+	box-shadow: var(--azonmate-shadow);
+}
+
+.azonmate-product-list__rank {
+	flex: 0 0 30px;
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--azonmate-primary);
+	line-height: 1;
+	padding-top: 0.5rem;
+}
+
+.azonmate-product-list__image-wrap {
+	flex: 0 0 80px;
+}
+
+.azonmate-product-list__image {
+	max-width: 80px;
+	max-height: 100px;
+	object-fit: contain;
+}
+
+.azonmate-product-list__details {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.azonmate-product-list__title {
+	font-size: 1rem;
+	margin: 0 0 0.35rem;
+	line-height: 1.4;
+}
+
+.azonmate-product-list__title a {
+	color: var(--azonmate-text);
+	text-decoration: none;
+}
+
+.azonmate-product-list__title a:hover {
+	color: var(--azonmate-link);
+}
+
+.azonmate-product-list__rating {
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+}
+
+.azonmate-product-list__review-count {
+	font-size: 0.8rem;
+	color: var(--azonmate-text-light);
+}
+
+.azonmate-product-list__price-col {
+	flex: 0 0 140px;
+	text-align: right;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 0.25rem;
+}
+
+.azonmate-product-list__price {
+	font-size: 1.1rem;
+	font-weight: 700;
+}
+
+.azonmate-product-list__list-price {
+	font-size: 0.8rem;
+	color: var(--azonmate-text-light);
+}
+
+@media (max-width: 600px) {
+	.azonmate-product-list--default .azonmate-product-list__item {
+		flex-wrap: wrap;
+	}
+
+	.azonmate-product-list__price-col {
+		flex: 0 0 100%;
+		text-align: left;
+		align-items: flex-start;
+		margin-top: 0.5rem;
+		flex-direction: row;
+		gap: 0.75rem;
+	}
+}
+
+/* ==========================================================================
+   Product List (grid)
+   ========================================================================== */
+
+.azonmate-product-list--grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 1rem;
+}
+
+.azonmate-product-list__grid-item {
+	background: var(--azonmate-bg);
+	border: 1px solid var(--azonmate-border);
+	border-radius: var(--azonmate-border-radius);
+	padding: 1rem;
+	text-align: center;
+	transition: box-shadow 0.2s ease;
+}
+
+.azonmate-product-list__grid-item:hover {
+	box-shadow: var(--azonmate-shadow);
+}
+
+.azonmate-product-list__grid-image {
+	margin-bottom: 0.75rem;
+}
+
+.azonmate-product-list__grid-image img {
+	max-height: 160px;
+	width: auto;
+	object-fit: contain;
+}
+
+.azonmate-product-list__grid-title {
+	font-size: 0.9rem;
+	line-height: 1.4;
+	margin: 0 0 0.5rem;
+	min-height: 2.8em;
+}
+
+.azonmate-product-list__grid-title a {
+	color: var(--azonmate-text);
+	text-decoration: none;
+}
+
+.azonmate-product-list__grid-title a:hover {
+	color: var(--azonmate-link);
+}
+
+.azonmate-product-list__grid-rating {
+	margin-bottom: 0.5rem;
+}
+
+.azonmate-product-list__grid-price {
+	font-size: 1.1rem;
+	font-weight: 700;
+	margin-bottom: 0.75rem;
+}
+
+/* ==========================================================================
+   Comparison Table
+   ========================================================================== */
+
+.azonmate-comparison-table-wrap {
+	font-family: var(--azonmate-font);
+	color: var(--azonmate-text);
+	margin: 1.5em 0;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.azonmate-comparison-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: var(--azonmate-bg);
+	border: 1px solid var(--azonmate-border);
+	border-radius: var(--azonmate-border-radius);
+	min-width: 500px;
+}
+
+.azonmate-comparison-table th,
+.azonmate-comparison-table td {
+	padding: 0.75rem 1rem;
+	vertical-align: middle;
+	text-align: center;
+	border-bottom: 1px solid var(--azonmate-border);
+}
+
+.azonmate-comparison-table__header {
+	background: var(--azonmate-bg-alt);
+	position: relative;
+}
+
+.azonmate-comparison-table__header--highlight {
+	background: rgba(255, 153, 0, 0.1);
+	border-top: 3px solid var(--azonmate-primary);
+}
+
+.azonmate-comparison-table__badge {
+	display: inline-block;
+	background: var(--azonmate-primary);
+	color: var(--azonmate-button-text);
+	font-size: 0.7rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	padding: 0.2em 0.6em;
+	border-radius: 3px;
+}
+
+.azonmate-comparison-table__image {
+	max-width: 100px;
+	max-height: 120px;
+	object-fit: contain;
+}
+
+.azonmate-comparison-table__price {
+	font-size: 1.1rem;
+	font-weight: 700;
+}
+
+.azonmate-comparison-table__reviews {
+	font-size: 0.75rem;
+	color: var(--azonmate-text-light);
+}
+
+.azonmate-comparison-table__features {
+	list-style: disc;
+	text-align: left;
+	padding-left: 1rem;
+	margin: 0;
+	font-size: 0.8rem;
+	line-height: 1.6;
+}
+
+/* ==========================================================================
+   Bestseller List
+   ========================================================================== */
+
+.azonmate-bestseller {
+	font-family: var(--azonmate-font);
+	color: var(--azonmate-text);
+	margin: 1.5em 0;
+}
+
+.azonmate-bestseller__heading {
+	font-size: 1.3rem;
+	margin: 0 0 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 2px solid var(--azonmate-primary);
+}
+
+.azonmate-bestseller__item {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 0.75rem 1rem;
+	background: var(--azonmate-bg);
+	border: 1px solid var(--azonmate-border);
+	border-radius: var(--azonmate-border-radius);
+	margin-bottom: 0.5rem;
+	transition: box-shadow 0.2s ease;
+}
+
+.azonmate-bestseller__item:hover {
+	box-shadow: var(--azonmate-shadow);
+}
+
+.azonmate-bestseller__rank {
+	flex: 0 0 40px;
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--azonmate-primary);
+	text-align: center;
+}
+
+.azonmate-bestseller__image-wrap {
+	flex: 0 0 70px;
+}
+
+.azonmate-bestseller__image {
+	max-width: 60px;
+	max-height: 80px;
+	object-fit: contain;
+}
+
+.azonmate-bestseller__details {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.azonmate-bestseller__title {
+	font-size: 0.95rem;
+	margin: 0 0 0.25rem;
+	line-height: 1.4;
+}
+
+.azonmate-bestseller__title a {
+	color: var(--azonmate-text);
+	text-decoration: none;
+}
+
+.azonmate-bestseller__title a:hover {
+	color: var(--azonmate-link);
+}
+
+.azonmate-bestseller__price-row {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: 0.25rem;
+}
+
+.azonmate-bestseller__price {
+	font-weight: 700;
+	font-size: 1rem;
+}
+
+.azonmate-bestseller__action {
+	flex: 0 0 auto;
+}
+
+@media (max-width: 600px) {
+	.azonmate-bestseller__item {
+		flex-wrap: wrap;
+	}
+
+	.azonmate-bestseller__action {
+		flex: 0 0 100%;
+		margin-top: 0.5rem;
+	}
+}
+
+/* ==========================================================================
+   Field (inline)
+   ========================================================================== */
+
+.azonmate-field {
+	display: inline;
+}
+
+.azonmate-field--image {
+	display: inline-block;
+	max-width: 200px;
+	height: auto;
+	border-radius: var(--azonmate-border-radius);
+}
+
+/* ==========================================================================
+   Fallback Link
+   ========================================================================== */
+
+.azonmate-fallback-link {
+	display: inline-block;
+	background: var(--azonmate-bg-alt);
+	border: 1px dashed var(--azonmate-border);
+	border-radius: var(--azonmate-border-radius);
+	padding: 0.75em 1.25em;
+	color: var(--azonmate-link);
+	text-decoration: none;
+	font-size: 0.9rem;
+}
+
+.azonmate-fallback-link:hover {
+	background: var(--azonmate-bg);
+	border-color: var(--azonmate-primary);
+}
+
+/* ==========================================================================
+   Utility: Screen Reader Only
+   ========================================================================== */
+
+.azonmate-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}

@@ -1,0 +1,17 @@
+{
+	"name": "azonmate/azonmate",
+	"description": "AzonMate – Amazon Affiliate Product Engine for WordPress",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"require": {
+		"php": ">=7.4"
+	},
+	"autoload": {
+		"psr-4": {
+			"AzonMate\\": "includes/"
+		}
+	},
+	"config": {
+		"optimize-autoloader": true
+	}
+}

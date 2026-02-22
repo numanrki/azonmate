@@ -1,0 +1,54 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "azonmate/product-box",
+	"version": "1.0.0",
+	"title": "AzonMate Product Box",
+	"category": "widgets",
+	"icon": "cart",
+	"description": "Display a single Amazon product with image, price, rating, and buy button.",
+	"keywords": ["amazon", "product", "affiliate"],
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"textdomain": "azonmate",
+	"attributes": {
+		"asin": {
+			"type": "string",
+			"default": ""
+		},
+		"template": {
+			"type": "string",
+			"default": "default"
+		},
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"description": {
+			"type": "boolean",
+			"default": true
+		},
+		"rating": {
+			"type": "boolean",
+			"default": true
+		},
+		"price": {
+			"type": "boolean",
+			"default": true
+		},
+		"buttonText": {
+			"type": "string",
+			"default": ""
+		},
+		"imageSize": {
+			"type": "string",
+			"default": "medium"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"render": "file:./render.php"
+}

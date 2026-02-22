@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "azonmate/product-list",
+	"version": "1.0.0",
+	"title": "AzonMate Product List",
+	"category": "widgets",
+	"icon": "list-view",
+	"description": "Display multiple Amazon products in a list or grid layout.",
+	"keywords": ["amazon", "products", "list"],
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"textdomain": "azonmate",
+	"attributes": {
+		"asins": {
+			"type": "string",
+			"default": ""
+		},
+		"template": {
+			"type": "string",
+			"default": "default"
+		},
+		"max": {
+			"type": "number",
+			"default": 10
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

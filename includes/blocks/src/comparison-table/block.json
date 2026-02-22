@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "azonmate/comparison-table",
+	"version": "1.0.0",
+	"title": "AzonMate Comparison Table",
+	"category": "widgets",
+	"icon": "editor-table",
+	"description": "Compare Amazon products side by side in a table.",
+	"keywords": ["amazon", "comparison", "table"],
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"textdomain": "azonmate",
+	"attributes": {
+		"asins": {
+			"type": "string",
+			"default": ""
+		},
+		"columns": {
+			"type": "string",
+			"default": ""
+		},
+		"highlight": {
+			"type": "string",
+			"default": ""
+		},
+		"max": {
+			"type": "number",
+			"default": 10
+		},
+		"template": {
+			"type": "string",
+			"default": "default"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

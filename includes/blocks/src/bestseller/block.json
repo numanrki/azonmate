@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "azonmate/bestseller",
+	"version": "1.0.0",
+	"title": "AzonMate Bestsellers",
+	"category": "widgets",
+	"icon": "star-filled",
+	"description": "Show top-selling products from an Amazon category.",
+	"keywords": ["amazon", "bestseller", "popular"],
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"textdomain": "azonmate",
+	"attributes": {
+		"keyword": {
+			"type": "string",
+			"default": ""
+		},
+		"items": {
+			"type": "number",
+			"default": 10
+		},
+		"template": {
+			"type": "string",
+			"default": "default"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

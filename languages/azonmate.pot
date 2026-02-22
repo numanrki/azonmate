@@ -1,0 +1,359 @@
+# Copyright (C) 2024 AzonMate
+# This file is distributed under the same license as the AzonMate plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: AzonMate 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: AzonMate\n"
+"X-Domain: azonmate\n"
+
+#. Plugin Name of the plugin
+msgid "AzonMate"
+msgstr ""
+
+#. Description of the plugin
+msgid "Amazon Affiliate Product Engine for WordPress"
+msgstr ""
+
+#: azonmate.php
+msgid "AzonMate requires PHP 7.4 or higher."
+msgstr ""
+
+#: azonmate.php
+msgid "AzonMate requires WordPress 6.0 or higher."
+msgstr ""
+
+#: includes/admin/class-settings.php
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/class-settings.php
+msgid "AzonMate Settings"
+msgstr ""
+
+#: includes/admin/class-settings.php
+msgid "API connection successful!"
+msgstr ""
+
+#: includes/admin/class-settings.php
+msgid "API connection failed."
+msgstr ""
+
+#: includes/admin/class-settings.php
+msgid "Cache cleared successfully."
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "API Settings"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Display Settings"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Cache Settings"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Geo-Targeting"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Tracking"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Advanced"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Access Key"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Secret Key"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Partner Tag"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Marketplace"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Test Connection"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Save Changes"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Button Text"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Buy on Amazon"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "View on Amazon"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Check Price"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Link Target"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Same Window"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "New Tab"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Add nofollow"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Add sponsored"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Default Template"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Default"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Horizontal"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Compact"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Image Size"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Small"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Medium"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Large"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Show Disclaimer"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Disclaimer Text"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Cache Duration (hours)"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Auto Refresh Cache"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Clear Cache"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Enable Geo-Targeting"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Country Partner Tags"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Enable Click Tracking"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Anonymize IP Addresses"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Lazy Load Images"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Async CSS"
+msgstr ""
+
+#: includes/admin/views/settings-page.php
+msgid "Delete Data on Uninstall"
+msgstr ""
+
+#: includes/admin/views/analytics-page.php
+msgid "Analytics"
+msgstr ""
+
+#: includes/admin/views/analytics-page.php
+msgid "Total Clicks"
+msgstr ""
+
+#: includes/admin/views/analytics-page.php
+msgid "Today"
+msgstr ""
+
+#: includes/admin/views/analytics-page.php
+msgid "This Week"
+msgstr ""
+
+#: includes/admin/views/analytics-page.php
+msgid "This Month"
+msgstr ""
+
+#: includes/admin/views/analytics-page.php
+msgid "Top Products"
+msgstr ""
+
+#: includes/admin/views/analytics-page.php
+msgid "Top Posts"
+msgstr ""
+
+#: includes/admin/views/analytics-page.php
+msgid "Export CSV"
+msgstr ""
+
+#: includes/admin/views/search-modal.php
+msgid "Search Amazon Products"
+msgstr ""
+
+#: includes/admin/views/search-modal.php
+msgid "Search..."
+msgstr ""
+
+#: includes/admin/views/search-modal.php
+msgid "Search"
+msgstr ""
+
+#: includes/admin/views/search-modal.php
+msgid "ASIN Lookup"
+msgstr ""
+
+#: includes/admin/views/search-modal.php
+msgid "Insert as Box"
+msgstr ""
+
+#: includes/admin/views/search-modal.php
+msgid "Insert as Link"
+msgstr ""
+
+#: includes/admin/views/search-modal.php
+msgid "Insert as Image"
+msgstr ""
+
+#: includes/admin/class-analytics.php
+msgid "AzonMate Clicks"
+msgstr ""
+
+#: includes/shortcodes/class-product-box.php
+#: includes/shortcodes/class-product-list.php
+#: includes/shortcodes/class-comparison-table.php
+msgid "Product information not available."
+msgstr ""
+
+#: templates/product-box/default.php
+#: templates/product-box/horizontal.php
+#: templates/product-box/compact.php
+msgid "out of 5"
+msgstr ""
+
+#: templates/product-box/default.php
+#: templates/product-box/horizontal.php
+#: templates/comparison-table/default.php
+msgid "Prime"
+msgstr ""
+
+#: templates/comparison-table/default.php
+msgid "Best Pick"
+msgstr ""
+
+#: templates/comparison-table/default.php
+msgid "Image"
+msgstr ""
+
+#: templates/comparison-table/default.php
+msgid "Product"
+msgstr ""
+
+#: templates/comparison-table/default.php
+msgid "Price"
+msgstr ""
+
+#: templates/comparison-table/default.php
+msgid "Rating"
+msgstr ""
+
+#: templates/comparison-table/default.php
+msgid "Features"
+msgstr ""
+
+#: templates/comparison-table/default.php
+msgid "Action"
+msgstr ""
+
+#: templates/bestseller/default.php
+msgid "Bestsellers"
+msgstr ""
+
+#: includes/templates/template-functions.php
+msgid "Save %s"
+msgstr ""
+
+#: includes/templates/template-functions.php
+msgid "%s off"
+msgstr ""
+
+#: includes/blocks/src/product-box/block.json
+msgid "AzonMate Product Box"
+msgstr ""
+
+#: includes/blocks/src/product-list/block.json
+msgid "AzonMate Product List"
+msgstr ""
+
+#: includes/blocks/src/comparison-table/block.json
+msgid "AzonMate Comparison Table"
+msgstr ""
+
+#: includes/blocks/src/bestseller/block.json
+msgid "AzonMate Bestseller"
+msgstr ""
+
+#: includes/blocks/src/text-link/block.json
+msgid "AzonMate Text Link"
+msgstr ""

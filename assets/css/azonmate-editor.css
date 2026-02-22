@@ -1,0 +1,198 @@
+/**
+ * AzonMate – Block Editor Styles
+ *
+ * Styles applied inside the Gutenberg editor.
+ *
+ * @package AzonMate
+ * @since   1.0.0
+ */
+
+/* ==========================================================================
+   Block Placeholder
+   ========================================================================== */
+
+.azonmate-block-placeholder {
+	background: #f9f9f9;
+	border: 2px dashed #c3c4c7;
+	border-radius: 8px;
+	padding: 2rem;
+	text-align: center;
+	color: #666;
+	font-size: 14px;
+}
+
+.azonmate-block-placeholder .dashicons {
+	font-size: 32px;
+	width: 32px;
+	height: 32px;
+	margin-bottom: 0.75rem;
+	color: #ff9900;
+}
+
+/* ==========================================================================
+   Block Controls
+   ========================================================================== */
+
+.azonmate-block-controls {
+	padding: 1rem;
+}
+
+.azonmate-block-controls label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 4px;
+	font-size: 12px;
+	text-transform: uppercase;
+	color: #1e1e1e;
+}
+
+.azonmate-block-controls input[type="text"],
+.azonmate-block-controls input[type="number"],
+.azonmate-block-controls select {
+	width: 100%;
+	margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   Product Preview (inside editor)
+   ========================================================================== */
+
+.azonmate-editor-preview {
+	position: relative;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	overflow: hidden;
+	background: #fff;
+}
+
+.azonmate-editor-preview__toolbar {
+	display: flex;
+	justify-content: flex-end;
+	gap: 4px;
+	padding: 4px 8px;
+	background: #f0f0f1;
+	border-bottom: 1px solid #ddd;
+}
+
+.azonmate-editor-preview__toolbar .components-button {
+	font-size: 12px;
+}
+
+/* Ensure preview content matches frontend sizing */
+.azonmate-editor-preview .azonmate-product-box,
+.azonmate-editor-preview .azonmate-product-list,
+.azonmate-editor-preview .azonmate-comparison-table-wrap,
+.azonmate-editor-preview .azonmate-bestseller {
+	margin: 0;
+	border: none;
+	box-shadow: none;
+}
+
+/* ==========================================================================
+   Search Panel (inside block placeholder)
+   ========================================================================== */
+
+.azonmate-block-search {
+	max-width: 480px;
+	margin: 0 auto;
+}
+
+.azonmate-block-search__input-row {
+	display: flex;
+	gap: 0.5rem;
+	margin-bottom: 0.75rem;
+}
+
+.azonmate-block-search__input-row input {
+	flex: 1;
+}
+
+.azonmate-block-search__results {
+	text-align: left;
+	max-height: 300px;
+	overflow-y: auto;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.azonmate-block-search__result {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem;
+	cursor: pointer;
+	border-bottom: 1px solid #f0f0f1;
+	transition: background 0.1s;
+}
+
+.azonmate-block-search__result:hover {
+	background: #f0f6ff;
+}
+
+.azonmate-block-search__result img {
+	width: 40px;
+	height: 40px;
+	object-fit: contain;
+}
+
+.azonmate-block-search__result-title {
+	flex: 1;
+	font-size: 13px;
+	line-height: 1.3;
+}
+
+.azonmate-block-search__result-price {
+	font-size: 13px;
+	font-weight: 600;
+	color: #ff9900;
+}
+
+/* ==========================================================================
+   Inspector Controls Enhancements
+   ========================================================================== */
+
+.azonmate-inspector-section {
+	padding-bottom: 12px;
+	border-bottom: 1px solid #e0e0e0;
+	margin-bottom: 12px;
+}
+
+.azonmate-inspector-section:last-child {
+	border-bottom: none;
+}
+
+.azonmate-template-select {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 8px;
+	margin-top: 8px;
+}
+
+.azonmate-template-option {
+	border: 2px solid #ddd;
+	border-radius: 6px;
+	padding: 8px;
+	text-align: center;
+	cursor: pointer;
+	transition: border-color 0.15s;
+	font-size: 12px;
+}
+
+.azonmate-template-option:hover {
+	border-color: #007cba;
+}
+
+.azonmate-template-option.selected {
+	border-color: #ff9900;
+	background: rgba(255, 153, 0, 0.05);
+}
+
+/* ==========================================================================
+   TinyMCE Button Highlight
+   ========================================================================== */
+
+.mce-i-azonmate:before {
+	content: "\f174";
+	font-family: dashicons;
+	font-size: 20px;
+}
