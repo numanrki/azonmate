@@ -23,7 +23,7 @@
   <img src="https://img.shields.io/badge/version-1.3.0-ff9900?style=flat-square" alt="Version 1.3.0" />
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=flat-square&logo=wordpress" alt="WordPress 6.0+" />
   <img src="https://img.shields.io/badge/PHP-7.4%2B-777bb4?style=flat-square&logo=php" alt="PHP 7.4+" />
-  <img src="https://img.shields.io/badge/license-GPL--2.0--or--later-green?style=flat-square" alt="License GPL-2.0-or-later" />
+  <img src="https://img.shields.io/badge/license-Personal%20Use-blue?style=flat-square" alt="License: Free for Personal Use" />
 </p>
 
 ---
@@ -248,37 +248,44 @@ See [CHANGELOG.md](CHANGELOG.md) for the full version history.
 
 ---
 
-## Development
+## Download & Install
 
-```bash
-# Install JS dependencies
-npm install
+1. **Download** the latest release ZIP from the [Releases page](https://github.com/numanrki/azonmate/releases) or click **Code → Download ZIP** above.
+2. In your WordPress admin go to **Plugins → Add New → Upload Plugin**.
+3. Upload the ZIP file and click **Install Now**.
+4. Click **Activate** — done!
 
-# Build Gutenberg blocks
-npm run build
+---
 
-# Watch mode for development
-npm run start
-```
+## Author
+
+Created & maintained by **Numan** ([@numanrki](https://github.com/numanrki)).
 
 ---
 
 ## License
 
-AzonMate is licensed under the [GPL v2 or later](https://www.gnu.org/licenses/gpl-2.0.html).
-
 ```
-Copyright (C) 2026 AzonMate
+Copyright (C) 2026 Numan / AzonMate. All rights reserved.
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
+This software is provided FREE for PERSONAL, non-commercial use only.
+
+You MAY:
+  - Download and install AzonMate on your own WordPress site(s)
+  - Modify the code for your own personal use
+
+You MAY NOT:
+  - Redistribute, resell, sublicense, or share this software
+  - Include it in any product, theme, plugin bundle, or SaaS offering
+  - Remove or alter this copyright notice
+
+THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+USE AT YOUR OWN RISK.
 ```
 
 ---
 
 <p align="center">
-  Built with ☕ for the Amazon affiliate community.<br />
+  Built with ☕ by <strong><a href="https://github.com/numanrki">Numan</a></strong> for the Amazon affiliate community.<br />
   <strong><a href="https://azonmate.com">azonmate.com</a></strong>
 </p>

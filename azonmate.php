@@ -3,9 +3,9 @@
  * AzonMate – Amazon Affiliate Product Engine for WordPress
  *
  * @package           AzonMate
- * @author            AzonMate
- * @copyright         2026 AzonMate
- * @license           GPL-2.0-or-later
+ * @author            Numan
+ * @copyright         2026 Numan / AzonMate
+ * @license           Proprietary – Free for personal use
  *
  * @wordpress-plugin
  * Plugin Name:       AzonMate
@@ -14,12 +14,12 @@
  * Version:           1.3.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
- * Author:            AzonMate
- * Author URI:        https://azonmate.com
+ * Author:            Numan
+ * Author URI:        https://github.com/numanrki
  * Text Domain:       azonmate
  * Domain Path:       /languages
- * License:           GPL v2 or later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * License:           Free for personal use
+ * License URI:       https://github.com/numanrki/azonmate#license
  *
  * @since 1.0.0
  */
