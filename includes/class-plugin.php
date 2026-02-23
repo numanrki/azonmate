@@ -263,11 +263,6 @@ class Plugin {
 		// Admin asset loading.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 
-		// Amazon disclaimer in footer.
-		if ( '1' === get_option( 'azon_mate_show_disclaimer', '1' ) ) {
-			add_action( 'wp_footer', array( $this, 'render_disclaimer' ) );
-		}
-
 		// Plugin action links on the plugins page.
 		add_filter( 'plugin_action_links_' . AZON_MATE_PLUGIN_BASENAME, array( $this, 'add_plugin_action_links' ) );
 	}
@@ -444,24 +439,6 @@ class Plugin {
 				true
 			);
 		}
-	}
-
-	/**
-	 * Render the Amazon affiliate disclaimer in the footer.
-	 *
-	 * @since 1.0.0
-	 */
-	public function render_disclaimer() {
-		$text = get_option( 'azon_mate_disclaimer_text', __( 'As an Amazon Associate, I earn from qualifying purchases.', 'azonmate' ) );
-
-		if ( empty( $text ) ) {
-			return;
-		}
-
-		printf(
-			'<div class="azonmate-disclaimer"><p>%s</p></div>',
-			esc_html( $text )
-		);
 	}
 
 	/**

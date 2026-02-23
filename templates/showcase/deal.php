@@ -44,7 +44,13 @@ $link_attrs = function_exists( 'azon_mate_link_attributes' ) ? azon_mate_link_at
 
 $final_btn_text = ! empty( $btn_text ) ? $btn_text : ( ! empty( $button_text ) ? $button_text : get_option( 'azon_mate_buy_button_text', 'Buy on Amazon' ) );
 ?>
-<div class="azonmate-showcase azonmate-showcase--deal">
+<?php
+$size_class = '';
+if ( ! empty( $size ) ) {
+	$size_class = ' azonmate-showcase--size-' . sanitize_html_class( $size );
+}
+?>
+<div class="azonmate-showcase azonmate-showcase--deal<?php echo esc_attr( $size_class ); ?>">
 	<?php if ( ! empty( $heading ) ) : ?>
 		<h2 class="azonmate-showcase__heading"><?php echo esc_html( $heading ); ?></h2>
 	<?php endif; ?>

@@ -163,9 +163,11 @@ function azon_mate_render_savings_badge( $savings_percentage ) {
 /**
  * Render the Amazon affiliate disclosure notice.
  *
- * Outputs once per showcase block when enabled in settings.
+ * Outputs once per showcase block when enabled in Display settings.
+ * Supports custom text, font size, color, and alignment.
  *
  * @since 1.3.1
+ * @since 1.3.4 Added customizable text, font size, color, alignment.
  *
  * @return string HTML output or empty string.
  */
@@ -176,7 +178,28 @@ function azon_mate_render_disclosure() {
 		return '';
 	}
 
-	return '<p class="azonmate-showcase__disclosure">'
-		. esc_html__( 'As an Amazon Associate, I earn from qualifying purchases.', 'azonmate' )
+	$text      = get_option( 'azon_mate_disclosure_text', 'As an Amazon Associate, I earn from qualifying purchases.' );
+	$font_size = get_option( 'azon_mate_disclosure_font_size', '11px' );
+	$color     = get_option( 'azon_mate_disclosure_color', '#888888' );
+	$align     = get_option( 'azon_mate_disclosure_align', 'center' );
+
+	if ( empty( $text ) ) {
+		return '';
+	}
+
+	// Sanitize values for inline style.
+	$font_size = sanitize_text_field( $font_size );
+	$color     = sanitize_text_field( $color );
+	$align     = in_array( $align, array( 'left', 'center', 'right' ), true ) ? $align : 'center';
+
+	$style = sprintf(
+		'font-size:%s;color:%s;text-align:%s;',
+		esc_attr( $font_size ),
+		esc_attr( $color ),
+		esc_attr( $align )
+	);
+
+	return '<p class="azonmate-showcase__disclosure" style="' . esc_attr( $style ) . '">'
+		. esc_html( $text )
 		. '</p>';
 }

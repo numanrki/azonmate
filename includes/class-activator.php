@@ -169,10 +169,12 @@ class Activator {
 			'azon_mate_debug_mode'          => '0',
 			'azon_mate_uninstall_delete'    => '0',
 
-			// Disclaimer.
-			'azon_mate_show_disclaimer'     => '1',
-			'azon_mate_disclaimer_text'     => 'As an Amazon Associate, I earn from qualifying purchases.',
-			'azon_mate_disclaimer_position' => 'footer',
+			// Disclaimer / Disclosure (unified).
+			'azon_mate_show_disclosure'       => '1',
+			'azon_mate_disclosure_text'       => 'As an Amazon Associate, I earn from qualifying purchases.',
+			'azon_mate_disclosure_font_size'  => '11px',
+			'azon_mate_disclosure_color'      => '#888888',
+			'azon_mate_disclosure_align'      => 'center',
 		);
 
 		foreach ( $defaults as $key => $value ) {

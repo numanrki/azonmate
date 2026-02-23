@@ -250,6 +250,7 @@ class TemplateRenderer {
 			'new_tab'     => '1' === get_option( 'azon_mate_open_new_tab', '1' ),
 			'nofollow'    => '1' === get_option( 'azon_mate_nofollow_links', '1' ),
 			'heading'     => '',
+			'size'        => '',
 		);
 
 		$options  = wp_parse_args( $options, $defaults );

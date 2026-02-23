@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-1.3.3-ff9900?style=for-the-badge" alt="v1.3.3" /></a>&nbsp;
+  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-1.3.4-ff9900?style=for-the-badge" alt="v1.3.4" /></a>&nbsp;
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress 6.0+" />&nbsp;
   <img src="https://img.shields.io/badge/PHP-7.4%2B-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 7.4+" />&nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Free_for_Personal_Use-22c55e?style=for-the-badge" alt="Free for Personal Use" /></a>
@@ -210,6 +210,14 @@ azonmate/
 ## 📝 Changelog
 
 > Full history in [CHANGELOG.md](CHANGELOG.md).
+
+### v1.3.4 — 2026-02-23
+- **New:** Unified disclosure system — custom text, font size, color, alignment (Display settings)
+- **New:** Ad-type box sizes: `300x250`, `336x280`, `728x90`, `160x600`, `970x250` via `size` shortcode attribute
+- **New:** Size dropdown in Showcase Builder with live preview
+- **Fixed:** Disclosure no longer duplicated in footer + cards — single system, only shows after showcase when enabled
+- **Fixed:** Hardened showcase CSS with `!important` on all critical properties — themes can no longer break the design
+- **Removed:** Dead footer disclaimer system (3 unused Advanced settings)
 
 ### v1.3.3 — 2026-02-23
 - **New:** AJAX tab switching on Settings page — instant tab transition, no page reload, hash-based URL state

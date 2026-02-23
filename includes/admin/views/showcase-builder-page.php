@@ -171,6 +171,17 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 					<option value="4">4</option>
 				</select>
 			</div>
+			<div class="azm-sb-field">
+				<label for="azm-size"><?php esc_html_e( 'Ad-Type Box Size', 'azonmate' ); ?></label>
+				<select id="azm-size">
+					<option value=""><?php esc_html_e( 'None (Full Width)', 'azonmate' ); ?></option>
+					<option value="300x250"><?php esc_html_e( '300×250 — Medium Rectangle', 'azonmate' ); ?></option>
+					<option value="336x280"><?php esc_html_e( '336×280 — Large Rectangle', 'azonmate' ); ?></option>
+					<option value="728x90"><?php esc_html_e( '728×90 — Leaderboard', 'azonmate' ); ?></option>
+					<option value="160x600"><?php esc_html_e( '160×600 — Wide Skyscraper', 'azonmate' ); ?></option>
+					<option value="970x250"><?php esc_html_e( '970×250 — Billboard', 'azonmate' ); ?></option>
+				</select>
+			</div>
 		</div>
 	</div>
 
@@ -260,7 +271,7 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 .azm-sb-check .dashicons { font-size:22px; }
 
 /* Extras */
-.azm-sb-extras-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+.azm-sb-extras-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 @media (max-width:700px) { .azm-sb-extras-grid { grid-template-columns:1fr; } }
 .azm-sb-field label { display:block; font-weight:600; font-size:13px; margin-bottom:4px; }
 .azm-sb-field input, .azm-sb-field select { width:100%; }
@@ -351,9 +362,11 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 	var headingEl = document.getElementById('azm-heading');
 	var btnTextEl = document.getElementById('azm-btn-text');
 	var columnsEl = document.getElementById('azm-columns');
+	var sizeEl    = document.getElementById('azm-size');
 	if (headingEl) headingEl.addEventListener('input', updateOutput);
 	if (btnTextEl) btnTextEl.addEventListener('input', updateOutput);
 	if (columnsEl) columnsEl.addEventListener('change', updateOutput);
+	if (sizeEl)    sizeEl.addEventListener('change', updateOutput);
 
 	// --- Copy ---
 	var copyBtn = document.getElementById('azm-sb-copy');
@@ -376,9 +389,11 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 		var heading = headingEl ? headingEl.value.trim() : '';
 		var btnText = btnTextEl ? btnTextEl.value.trim() : '';
 		var columns = columnsEl ? columnsEl.value : '';
+		var size    = sizeEl    ? sizeEl.value    : '';
 
 		var sc = '[azonmate showcase="' + selectedAsins.join(',') + '" layout="' + selectedLayout + '"';
 		if (columns && (selectedLayout === 'grid' || selectedLayout === 'masonry')) sc += ' columns="' + columns + '"';
+		if (size)    sc += ' size="' + size + '"';
 		if (heading) sc += ' heading="' + heading + '"';
 		if (btnText) sc += ' button_text="' + btnText + '"';
 		sc += ']';
@@ -402,6 +417,7 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 		var btnText = btnTextEl ? btnTextEl.value.trim() : '';
 		if (!btnText) btnText = 'Buy on Amazon';
 		var columns = columnsEl ? columnsEl.value : '';
+		var size    = sizeEl    ? sizeEl.value    : '';
 
 		var html = '';
 
@@ -415,6 +431,11 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 			case 'compact': html = buildCompact(prods[0], heading, btnText); break;
 			case 'split':   html = buildSplit(prods[0], heading, btnText); break;
 			case 'deal':    html = buildDeal(prods[0], heading, btnText); break;
+		}
+
+		// Inject size class into the outer wrapper if set
+		if (size && html) {
+			html = html.replace('class="azonmate-showcase ', 'class="azonmate-showcase azonmate-showcase--size-' + size + ' ');
 		}
 
 		container.innerHTML = html;

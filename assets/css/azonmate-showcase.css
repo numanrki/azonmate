@@ -1,9 +1,11 @@
 /**
- * AzonMate – Premium Showcase Styles v2
+ * AzonMate – Premium Showcase Styles v3
  *
  * Fully scoped via .azonmate-showcase to prevent theme/plugin CSS collisions.
+ * Uses !important on critical layout properties for rock-solid theme isolation.
  * Consistent breakpoints: 960px (tablet), 600px (mobile).
  * Layouts: grid, list, masonry, table, hero, compact, split, deal.
+ * Ad-type sizes: 300x250, 728x90, 160x600, 336x280, 970x250.
  *
  * @package AzonMate
  * @since   1.3.0
@@ -14,67 +16,95 @@
    ========================================================================== */
 
 .azonmate-showcase {
-	font-family: var(--azonmate-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif);
-	color: var(--azonmate-text, #333);
-	margin: 2em auto;
-	max-width: 1280px;
-	box-sizing: border-box;
-	line-height: 1.6;
+	font-family: var(--azonmate-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif) !important;
+	color: var(--azonmate-text, #333) !important;
+	margin: 2em auto !important;
+	max-width: 1280px !important;
+	box-sizing: border-box !important;
+	line-height: 1.6 !important;
+	float: none !important;
+	position: relative !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+	transform: none !important;
+	-webkit-text-size-adjust: 100% !important;
 }
 
 /* Box-sizing reset for all descendants */
 .azonmate-showcase *,
 .azonmate-showcase *::before,
 .azonmate-showcase *::after {
-	box-sizing: border-box;
+	box-sizing: border-box !important;
 }
 
 /* Reset theme h2/h3/a/ul/table inside showcase */
 .azonmate-showcase h2,
 .azonmate-showcase h3 {
-	margin: 0;
-	padding: 0;
-	border: none;
-	font-family: inherit;
-	color: inherit;
-	letter-spacing: normal;
-	text-transform: none;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none !important;
+	font-family: inherit !important;
+	color: inherit !important;
+	letter-spacing: normal !important;
+	text-transform: none !important;
+	background: none !important;
+	text-shadow: none !important;
+	-webkit-text-fill-color: unset !important;
 }
 
 .azonmate-showcase a {
-	color: inherit;
-	text-decoration: none;
-	background: none;
-	border: none;
-	box-shadow: none;
+	color: inherit !important;
+	text-decoration: none !important;
+	background: none !important;
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
 }
 
 .azonmate-showcase img {
-	max-width: 100%;
-	height: auto;
-	border: none;
-	box-shadow: none;
-	border-radius: 0;
+	max-width: 100% !important;
+	height: auto !important;
+	border: none !important;
+	box-shadow: none !important;
+	border-radius: 0 !important;
+	display: inline-block !important;
+	vertical-align: middle !important;
+	opacity: 1 !important;
 }
 
 .azonmate-showcase ul,
 .azonmate-showcase li {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+	list-style: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
 .azonmate-showcase table {
-	border-collapse: collapse;
-	border-spacing: 0;
-	border: none;
+	border-collapse: collapse !important;
+	border-spacing: 0 !important;
+	border: none !important;
+	table-layout: auto !important;
 }
 
 .azonmate-showcase th,
 .azonmate-showcase td {
-	border: none;
-	padding: 0;
-	text-align: left;
+	border: none !important;
+	padding: 0 !important;
+	text-align: left !important;
+}
+
+/* Reset p and span inside showcase */
+.azonmate-showcase p {
+	margin: 0 !important;
+	padding: 0 !important;
+	font-size: inherit !important;
+	line-height: inherit !important;
+	color: inherit !important;
+}
+
+.azonmate-showcase span {
+	font-size: inherit;
+	line-height: inherit;
 }
 
 /* ---------- Heading ---------- */
@@ -290,32 +320,33 @@
 }
 
 .azonmate-showcase .azonmate-showcase__action .azonmate-buy-btn {
-	display: block;
-	width: 100%;
-	text-align: center;
-	padding: 0.7em 1.2em;
-	font-size: 0.9rem;
-	font-weight: 700;
-	border-radius: 8px;
-	background: var(--azonmate-button-bg, #ff9900);
-	color: var(--azonmate-button-text, #000);
-	text-decoration: none;
-	border: none;
-	cursor: pointer;
-	box-shadow: 0 2px 8px rgba(255, 153, 0, 0.25);
-	transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-	line-height: 1.4;
+	display: block !important;
+	width: 100% !important;
+	text-align: center !important;
+	padding: 0.7em 1.2em !important;
+	font-size: 0.9rem !important;
+	font-weight: 700 !important;
+	border-radius: 8px !important;
+	background: var(--azonmate-button-bg, #ff9900) !important;
+	color: var(--azonmate-button-text, #000) !important;
+	text-decoration: none !important;
+	border: none !important;
+	cursor: pointer !important;
+	box-shadow: 0 2px 8px rgba(255, 153, 0, 0.25) !important;
+	transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease !important;
+	line-height: 1.4 !important;
+	outline: none !important;
 }
 
 .azonmate-showcase .azonmate-showcase__action .azonmate-buy-btn:hover {
-	background: var(--azonmate-button-hover-bg, #e68a00);
-	transform: translateY(-2px);
-	box-shadow: 0 4px 14px rgba(255, 153, 0, 0.35);
-	color: var(--azonmate-button-text, #000);
+	background: var(--azonmate-button-hover-bg, #e68a00) !important;
+	transform: translateY(-2px) !important;
+	box-shadow: 0 4px 14px rgba(255, 153, 0, 0.35) !important;
+	color: var(--azonmate-button-text, #000) !important;
 }
 
 .azonmate-showcase .azonmate-showcase__action .azonmate-buy-btn:active {
-	transform: translateY(0);
+	transform: translateY(0) !important;
 }
 
 /* N/A marker */
@@ -342,12 +373,12 @@
 
 /* Card */
 .azonmate-showcase .azonmate-showcase__card {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	background: var(--azonmate-bg, #fff);
-	border: 1px solid var(--azonmate-border, #e0e0e0);
-	border-radius: 12px;
+	position: relative !important;
+	display: flex !important;
+	flex-direction: column !important;
+	background: var(--azonmate-bg, #fff) !important;
+	border: 1px solid var(--azonmate-border, #e0e0e0) !important;
+	border-radius: 12px !important;
 	overflow: hidden;
 	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 	transition: box-shadow 0.25s ease, transform 0.25s ease;
@@ -1081,14 +1112,148 @@
    ========================================================================== */
 
 .azonmate-showcase .azonmate-showcase__disclosure {
-	margin: 14px 0 0;
-	padding: 8px 12px;
+	margin: 14px 0 0 !important;
+	padding: 8px 12px !important;
 	font-size: 11px;
-	line-height: 1.5;
+	line-height: 1.5 !important;
 	color: #888;
 	text-align: center;
-	border-top: 1px solid var(--azonmate-border, #e0e0e0);
-	font-style: italic;
+	border-top: 1px solid var(--azonmate-border, #e0e0e0) !important;
+	font-style: italic !important;
+}
+
+/* ==========================================================================
+   Showcase – Ad-Type Box Sizes
+   Constrain the showcase to standard ad unit dimensions.
+   Usage: [azonmate showcase="..." layout="compact" size="300x250"]
+   ========================================================================== */
+
+/* --- 300×250 Medium Rectangle --- */
+.azonmate-showcase.azonmate-showcase--size-300x250 {
+	max-width: 300px !important;
+	width: 300px !important;
+	min-height: 250px !important;
+	overflow: hidden !important;
+}
+
+/* --- 336×280 Large Rectangle --- */
+.azonmate-showcase.azonmate-showcase--size-336x280 {
+	max-width: 336px !important;
+	width: 336px !important;
+	min-height: 280px !important;
+	overflow: hidden !important;
+}
+
+/* --- 728×90 Leaderboard --- */
+.azonmate-showcase.azonmate-showcase--size-728x90 {
+	max-width: 728px !important;
+	width: 100% !important;
+	max-height: 90px !important;
+	overflow: hidden !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-728x90 .azonmate-showcase__card,
+.azonmate-showcase.azonmate-showcase--size-728x90 .azonmate-showcase__compact,
+.azonmate-showcase.azonmate-showcase--size-728x90 .azonmate-showcase__row {
+	flex-direction: row !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-728x90 .azonmate-showcase__image-wrap,
+.azonmate-showcase.azonmate-showcase--size-728x90 .azonmate-showcase__compact-image {
+	max-width: 80px !important;
+	min-height: auto !important;
+	padding: 0.5rem !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-728x90 .azonmate-showcase__image {
+	max-height: 70px !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-728x90 .azonmate-showcase__heading,
+.azonmate-showcase.azonmate-showcase--size-728x90 .azonmate-showcase__disclosure {
+	display: none !important;
+}
+
+/* --- 160×600 Wide Skyscraper --- */
+.azonmate-showcase.azonmate-showcase--size-160x600 {
+	max-width: 160px !important;
+	width: 160px !important;
+	min-height: 600px !important;
+	overflow: hidden !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-160x600 .azonmate-showcase__grid {
+	grid-template-columns: 1fr !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-160x600 .azonmate-showcase__card .azonmate-showcase__content {
+	padding: 0.5rem !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-160x600 .azonmate-showcase__title {
+	font-size: 0.75rem !important;
+	line-height: 1.3 !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-160x600 .azonmate-showcase__price {
+	font-size: 0.85rem !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-160x600 .azonmate-showcase__desc,
+.azonmate-showcase.azonmate-showcase--size-160x600 .azonmate-showcase__rating,
+.azonmate-showcase.azonmate-showcase--size-160x600 .azonmate-showcase__brand {
+	display: none !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-160x600 .azonmate-showcase__action .azonmate-buy-btn {
+	font-size: 0.7rem !important;
+	padding: 0.4em 0.6em !important;
+}
+
+/* --- 970×250 Billboard --- */
+.azonmate-showcase.azonmate-showcase--size-970x250 {
+	max-width: 970px !important;
+	width: 100% !important;
+	max-height: 250px !important;
+	overflow: hidden !important;
+}
+
+/* --- Small sizes: compact adjustments --- */
+.azonmate-showcase.azonmate-showcase--size-300x250 .azonmate-showcase__card .azonmate-showcase__image-wrap,
+.azonmate-showcase.azonmate-showcase--size-336x280 .azonmate-showcase__card .azonmate-showcase__image-wrap {
+	min-height: 100px !important;
+	padding: 0.75rem !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-300x250 .azonmate-showcase__image,
+.azonmate-showcase.azonmate-showcase--size-336x280 .azonmate-showcase__image {
+	max-height: 100px !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-300x250 .azonmate-showcase__card .azonmate-showcase__content,
+.azonmate-showcase.azonmate-showcase--size-336x280 .azonmate-showcase__card .azonmate-showcase__content {
+	padding: 0.5rem 0.75rem 0 !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-300x250 .azonmate-showcase__card .azonmate-showcase__action,
+.azonmate-showcase.azonmate-showcase--size-336x280 .azonmate-showcase__card .azonmate-showcase__action {
+	padding: 0 0.75rem 0.75rem !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-300x250 .azonmate-showcase__title,
+.azonmate-showcase.azonmate-showcase--size-336x280 .azonmate-showcase__title {
+	font-size: 0.85rem !important;
+	line-height: 1.3 !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-300x250 .azonmate-showcase__grid,
+.azonmate-showcase.azonmate-showcase--size-336x280 .azonmate-showcase__grid {
+	grid-template-columns: 1fr !important;
+}
+
+.azonmate-showcase.azonmate-showcase--size-300x250 .azonmate-showcase__desc,
+.azonmate-showcase.azonmate-showcase--size-336x280 .azonmate-showcase__desc {
+	font-size: 0.75rem !important;
 }
 
 /* ==========================================================================

@@ -53,6 +53,7 @@ class Showcase extends AbstractShortcode {
 				'show_price'  => 'true',
 				'show_rating' => 'true',
 				'heading'     => '',
+				'size'        => '',
 			),
 			$atts,
 			'azonmate'
@@ -79,6 +80,7 @@ class Showcase extends AbstractShortcode {
 			'show_rating' => filter_var( $atts['show_rating'], FILTER_VALIDATE_BOOLEAN ),
 			'show_button' => true,
 			'heading'     => sanitize_text_field( $atts['heading'] ),
+			'size'        => sanitize_text_field( $atts['size'] ),
 		);
 
 		if ( ! empty( $atts['button_text'] ) ) {

@@ -5,6 +5,28 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.4] - 2026-02-23
+
+### Added
+- **Unified Disclosure System** — merged the old "Disclosure" (per-showcase) and "Disclaimer" (footer) into one clean system under Display settings.
+- **Customizable Disclosure** — custom text, font size (10–14px), text color (hex), and alignment (left/center/right) all configurable from the Display tab.
+- **Ad-Type Box Sizes** — new `size` shortcode attribute for standard ad unit dimensions: `300x250`, `336x280`, `728x90`, `160x600`, `970x250`. Usage: `[azonmate showcase="..." size="300x250"]`.
+- Ad-type size dropdown added to the Showcase Builder "Optional Extras" step.
+- Showcase Builder WYSIWYG preview now reflects the selected ad-type box size.
+
+### Changed
+- Disclosure only renders when the checkbox is enabled — no more duplicate text in footer + cards.
+- Removed old footer disclaimer hook from `class-plugin.php` (`render_disclaimer()` method and `wp_footer` action removed entirely).
+- Removed 3 dead Advanced-tab settings: `azon_mate_show_disclaimer`, `azon_mate_disclaimer_text`, `azon_mate_disclaimer_position`.
+- Showcase CSS v3: all critical layout properties now use `!important` for rock-solid theme isolation (container, card, button, image, link resets).
+- Added `p`, `span` element resets inside `.azonmate-showcase` to prevent theme typography overrides.
+- Version bumped to 1.3.4.
+
+### Fixed
+- Disclosure text was hardcoded in `azon_mate_render_disclosure()` — now reads the customizable `azon_mate_disclosure_text` option.
+- Disclaimer "Position" dropdown was a dead option (only `wp_footer` was hooked, `before_content`/`after_content` never implemented) — removed.
+- Disclosure appearing both after cards AND in footer when both old systems were enabled.
+
 ## [1.3.3] - 2026-02-23
 
 ### Added

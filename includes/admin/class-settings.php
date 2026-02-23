@@ -98,18 +98,22 @@ class Settings {
 
 		// Display Settings.
 		$display_settings = array(
-			'azon_mate_default_template' => 'sanitize_key',
-			'azon_mate_show_prices'      => 'absint',
-			'azon_mate_show_ratings'     => 'absint',
-			'azon_mate_show_prime_badge' => 'absint',
-			'azon_mate_show_description' => 'absint',
-			'azon_mate_show_buy_button'  => 'absint',
-			'azon_mate_buy_button_text'  => 'sanitize_text_field',
-			'azon_mate_buy_button_color' => 'sanitize_hex_color',
-			'azon_mate_open_new_tab'     => 'absint',
-			'azon_mate_nofollow_links'   => 'absint',
-			'azon_mate_show_disclosure'  => 'absint',
-			'azon_mate_custom_css'       => array( $this, 'sanitize_custom_css' ),
+			'azon_mate_default_template'      => 'sanitize_key',
+			'azon_mate_show_prices'           => 'absint',
+			'azon_mate_show_ratings'          => 'absint',
+			'azon_mate_show_prime_badge'      => 'absint',
+			'azon_mate_show_description'      => 'absint',
+			'azon_mate_show_buy_button'       => 'absint',
+			'azon_mate_buy_button_text'       => 'sanitize_text_field',
+			'azon_mate_buy_button_color'      => 'sanitize_hex_color',
+			'azon_mate_open_new_tab'          => 'absint',
+			'azon_mate_nofollow_links'        => 'absint',
+			'azon_mate_show_disclosure'       => 'absint',
+			'azon_mate_disclosure_text'       => 'sanitize_text_field',
+			'azon_mate_disclosure_font_size'  => 'sanitize_text_field',
+			'azon_mate_disclosure_color'      => 'sanitize_text_field',
+			'azon_mate_disclosure_align'      => 'sanitize_key',
+			'azon_mate_custom_css'            => array( $this, 'sanitize_custom_css' ),
 		);
 
 		foreach ( $display_settings as $option => $sanitize ) {
@@ -148,9 +152,6 @@ class Settings {
 			'azon_mate_api_throttle'        => 'absint',
 			'azon_mate_debug_mode'          => 'absint',
 			'azon_mate_uninstall_delete'    => 'absint',
-			'azon_mate_show_disclaimer'     => 'absint',
-			'azon_mate_disclaimer_text'     => 'sanitize_text_field',
-			'azon_mate_disclaimer_position' => 'sanitize_key',
 		);
 
 		foreach ( $advanced_settings as $option => $sanitize ) {

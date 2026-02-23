@@ -26,7 +26,13 @@ if ( empty( $products ) ) {
 	return;
 }
 ?>
-<div class="azonmate-showcase azonmate-showcase--table">
+<?php
+$size_class = '';
+if ( ! empty( $size ) ) {
+	$size_class = ' azonmate-showcase--size-' . sanitize_html_class( $size );
+}
+?>
+<div class="azonmate-showcase azonmate-showcase--table<?php echo esc_attr( $size_class ); ?>">
 	<?php if ( ! empty( $heading ) ) : ?>
 		<h2 class="azonmate-showcase__heading"><?php echo esc_html( $heading ); ?></h2>
 	<?php endif; ?>

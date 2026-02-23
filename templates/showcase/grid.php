@@ -31,8 +31,14 @@ $cols_class = '';
 if ( ! empty( $columns ) && $columns > 0 ) {
 	$cols_class = ' azonmate-showcase-grid--cols-' . absint( $columns );
 }
+
+$size_class = '';
+$size_style = '';
+if ( ! empty( $size ) ) {
+	$size_class = ' azonmate-showcase--size-' . sanitize_html_class( $size );
+}
 ?>
-<div class="azonmate-showcase azonmate-showcase--grid<?php echo esc_attr( $cols_class ); ?>">
+<div class="azonmate-showcase azonmate-showcase--grid<?php echo esc_attr( $cols_class . $size_class ); ?>"<?php if ( $size_style ) echo ' style="' . esc_attr( $size_style ) . '"'; ?>>
 	<?php if ( ! empty( $heading ) ) : ?>
 		<h2 class="azonmate-showcase__heading"><?php echo esc_html( $heading ); ?></h2>
 	<?php endif; ?>

@@ -224,19 +224,94 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 							</fieldset>
 						</td>
 					</tr>
+				</table>
+
+				<h3 style="margin-top:1.5em;"><?php esc_html_e( 'Affiliate Disclosure', 'azonmate' ); ?></h3>
+				<p class="description" style="margin-bottom:1em;"><?php esc_html_e( 'Amazon Associates program requires an affiliate disclosure. When enabled, it displays once per showcase block.', 'azonmate' ); ?></p>
+
+				<table class="form-table" role="presentation">
 					<tr>
-						<th scope="row"><?php esc_html_e( 'Affiliate Disclosure', 'azonmate' ); ?></th>
+						<th scope="row"><?php esc_html_e( 'Show Disclosure', 'azonmate' ); ?></th>
 						<td>
 							<fieldset>
 								<label>
 									<input type="checkbox" name="azon_mate_show_disclosure" value="1"
 										<?php checked( get_option( 'azon_mate_show_disclosure', '1' ), '1' ); ?> />
-									<?php esc_html_e( 'Show "As an Amazon Associate, I earn from qualifying purchases." in showcase blocks', 'azonmate' ); ?>
+									<?php esc_html_e( 'Display affiliate disclosure after showcase blocks', 'azonmate' ); ?>
 								</label>
 							</fieldset>
-							<p class="description"><?php esc_html_e( 'Required by the Amazon Associates program. Displays once per showcase.', 'azonmate' ); ?></p>
 						</td>
 					</tr>
+					<tr>
+						<th scope="row">
+							<label for="azon_mate_disclosure_text"><?php esc_html_e( 'Disclosure Text', 'azonmate' ); ?></label>
+						</th>
+						<td>
+							<textarea id="azon_mate_disclosure_text" name="azon_mate_disclosure_text"
+									  rows="2" class="large-text"><?php echo esc_textarea( get_option( 'azon_mate_disclosure_text', 'As an Amazon Associate, I earn from qualifying purchases.' ) ); ?></textarea>
+							<p class="description"><?php esc_html_e( 'Customize the disclosure text. Leave default for Amazon compliance.', 'azonmate' ); ?></p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							<label for="azon_mate_disclosure_font_size"><?php esc_html_e( 'Font Size', 'azonmate' ); ?></label>
+						</th>
+						<td>
+							<select id="azon_mate_disclosure_font_size" name="azon_mate_disclosure_font_size">
+								<?php
+								$sizes = array(
+									'10px' => '10px — Extra Small',
+									'11px' => '11px — Small (Default)',
+									'12px' => '12px — Medium',
+									'13px' => '13px — Large',
+									'14px' => '14px — Extra Large',
+								);
+								$current_size = get_option( 'azon_mate_disclosure_font_size', '11px' );
+								foreach ( $sizes as $value => $label ) :
+								?>
+									<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $current_size, $value ); ?>>
+										<?php echo esc_html( $label ); ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							<label for="azon_mate_disclosure_color"><?php esc_html_e( 'Text Color', 'azonmate' ); ?></label>
+						</th>
+						<td>
+							<input type="text" id="azon_mate_disclosure_color" name="azon_mate_disclosure_color"
+								   value="<?php echo esc_attr( get_option( 'azon_mate_disclosure_color', '#888888' ) ); ?>"
+								   class="regular-text" placeholder="#888888" />
+							<p class="description"><?php esc_html_e( 'Hex color code (e.g. #888888, #333333).', 'azonmate' ); ?></p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Text Alignment', 'azonmate' ); ?></th>
+						<td>
+							<select name="azon_mate_disclosure_align">
+								<?php
+								$aligns = array(
+									'center' => __( 'Center (Default)', 'azonmate' ),
+									'left'   => __( 'Left', 'azonmate' ),
+									'right'  => __( 'Right', 'azonmate' ),
+								);
+								$current_align = get_option( 'azon_mate_disclosure_align', 'center' );
+								foreach ( $aligns as $value => $label ) :
+								?>
+									<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $current_align, $value ); ?>>
+										<?php echo esc_html( $label ); ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
+						</td>
+					</tr>
+				</table>
+
+				<h3 style="margin-top:1.5em;"><?php esc_html_e( 'Custom Styles', 'azonmate' ); ?></h3>
+
+				<table class="form-table" role="presentation">
 					<tr>
 						<th scope="row">
 							<label for="azon_mate_custom_css"><?php esc_html_e( 'Custom CSS', 'azonmate' ); ?></label>
@@ -468,42 +543,6 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 									<?php checked( get_option( 'azon_mate_debug_mode', '0' ), '1' ); ?> />
 								<?php esc_html_e( 'Log API calls to the error log', 'azonmate' ); ?>
 							</label>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><?php esc_html_e( 'Amazon Disclaimer', 'azonmate' ); ?></th>
-						<td>
-							<label>
-								<input type="checkbox" name="azon_mate_show_disclaimer" value="1"
-									<?php checked( get_option( 'azon_mate_show_disclaimer', '1' ), '1' ); ?> />
-								<?php esc_html_e( 'Show affiliate disclaimer', 'azonmate' ); ?>
-							</label>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">
-							<label for="azon_mate_disclaimer_text"><?php esc_html_e( 'Disclaimer Text', 'azonmate' ); ?></label>
-						</th>
-						<td>
-							<input type="text" id="azon_mate_disclaimer_text" name="azon_mate_disclaimer_text"
-								   value="<?php echo esc_attr( get_option( 'azon_mate_disclaimer_text', __( 'As an Amazon Associate, I earn from qualifying purchases.', 'azonmate' ) ) ); ?>"
-								   class="large-text" />
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><?php esc_html_e( 'Disclaimer Position', 'azonmate' ); ?></th>
-						<td>
-							<select name="azon_mate_disclaimer_position">
-								<option value="footer" <?php selected( get_option( 'azon_mate_disclaimer_position', 'footer' ), 'footer' ); ?>>
-									<?php esc_html_e( 'Footer', 'azonmate' ); ?>
-								</option>
-								<option value="before_content" <?php selected( get_option( 'azon_mate_disclaimer_position', 'footer' ), 'before_content' ); ?>>
-									<?php esc_html_e( 'Before Content', 'azonmate' ); ?>
-								</option>
-								<option value="after_content" <?php selected( get_option( 'azon_mate_disclaimer_position', 'footer' ), 'after_content' ); ?>>
-									<?php esc_html_e( 'After Content', 'azonmate' ); ?>
-								</option>
-							</select>
 						</td>
 					</tr>
 					<tr>
