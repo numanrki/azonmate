@@ -4,7 +4,7 @@ Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.3.5
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,14 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 7. Gutenberg block editor
 
 == Changelog ==
+
+= 1.4.0 =
+* Gutenberg blocks — 6 fully functional blocks: Product Box, Product List, Comparison Table, Bestsellers, Text Link, and Product Search
+* Block Inserter discovery — all blocks searchable by "azonmate", "amazon", "product", "affiliate"
+* In-editor product search — search Amazon products, browse saved/manual products, or paste ASINs directly inside each block
+* Server-side rendering — all blocks render via shortcode engine for consistent front-end output
+* Shared editor CSS with search panel, result cards, selected product tags, and category picker
+* New "AzonMate Product Search" universal block with display type chooser (box/link/image)
 
 = 1.3.5 =
 * Branded admin bar logo — official AzonMate icon replaces generic smiley SVG

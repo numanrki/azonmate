@@ -1,0 +1,217 @@
+/**
+ * AzonMate – Block Editor CSS
+ *
+ * Styles for the Gutenberg block search/selector UI.
+ *
+ * @package AzonMate
+ * @since   1.0.0
+ */
+
+/* ── Search Panel ──────────────────────────────────────── */
+.azonmate-block-search {
+	width: 100%;
+	max-width: 500px;
+}
+
+.azonmate-block-search__input-row {
+	display: flex;
+	gap: 8px;
+	align-items: flex-end;
+	margin-bottom: 12px;
+}
+
+.azonmate-block-search__input-row .components-text-control__input,
+.azonmate-block-search__input-row .components-base-control {
+	flex: 1;
+	margin-bottom: 0;
+}
+
+.azonmate-block-search__input-row .components-base-control__field {
+	margin-bottom: 0;
+}
+
+/* ── Search Results ────────────────────────────────────── */
+.azonmate-block-search__results {
+	max-height: 280px;
+	overflow-y: auto;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	background: #fff;
+	margin-top: 8px;
+}
+
+.azonmate-block-search__result {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 12px;
+	border-bottom: 1px solid #f0f0f0;
+	cursor: pointer;
+	transition: background 0.15s ease;
+}
+
+.azonmate-block-search__result:last-child {
+	border-bottom: none;
+}
+
+.azonmate-block-search__result:hover,
+.azonmate-block-search__result:focus {
+	background: #fff8f0;
+}
+
+.azonmate-block-search__result img {
+	width: 44px;
+	height: 44px;
+	object-fit: contain;
+	border-radius: 4px;
+	background: #fafafa;
+	flex-shrink: 0;
+}
+
+.azonmate-block-search__result-title {
+	flex: 1;
+	font-size: 13px;
+	line-height: 1.3;
+	color: #1e1e1e;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.azonmate-block-search__result-price {
+	font-size: 13px;
+	font-weight: 600;
+	color: #b12704;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+/* ── Selected Tags (multi-product blocks) ──────────────── */
+.azonmate-block-search__selected {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: center;
+	margin-bottom: 12px;
+	padding: 10px;
+	background: #f7f7f7;
+	border-radius: 6px;
+}
+
+.azonmate-block-search__selected strong {
+	font-size: 12px;
+	text-transform: uppercase;
+	color: #757575;
+	letter-spacing: 0.5px;
+}
+
+.azonmate-block-search__tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 3px 8px;
+	background: #ff9900;
+	color: #fff;
+	font-size: 12px;
+	font-weight: 500;
+	border-radius: 12px;
+}
+
+.azonmate-block-search__tag button {
+	background: none;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	font-size: 14px;
+	line-height: 1;
+	padding: 0 2px;
+	opacity: 0.8;
+}
+
+.azonmate-block-search__tag button:hover {
+	opacity: 1;
+}
+
+/* ── Category Buttons (bestseller block) ───────────────── */
+.azonmate-block-search__categories {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin-top: 8px;
+}
+
+/* ── Display Type Selector (search block) ──────────────── */
+.azonmate-block-search__display-type {
+	margin-bottom: 12px;
+	max-width: 220px;
+}
+
+/* ── Editor Preview Wrapper ────────────────────────────── */
+.azonmate-editor-preview {
+	position: relative;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.azonmate-editor-preview__toolbar {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	z-index: 10;
+	background: rgba(255, 255, 255, 0.9);
+	border-radius: 4px;
+	padding: 2px;
+}
+
+/* ── Product Card (editor preview) ─────────────────────── */
+.azonmate-editor-product-card {
+	display: flex;
+	gap: 12px;
+	padding: 12px;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	background: #fff;
+}
+
+.azonmate-editor-product-card__image img {
+	width: 60px;
+	height: 60px;
+	object-fit: contain;
+}
+
+.azonmate-editor-product-card__info {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.azonmate-editor-product-card__price {
+	font-weight: 600;
+	color: #b12704;
+}
+
+.azonmate-editor-product-card__rating {
+	color: #ffa41c;
+	font-size: 13px;
+}
+
+.azonmate-editor-product-card__asin {
+	color: #999;
+	font-size: 11px;
+}
+
+/* ── Block Placeholder ─────────────────────────────────── */
+.azonmate-block-placeholder {
+	padding: 20px;
+	text-align: center;
+	color: #757575;
+	font-style: italic;
+}
+
+/* ── Product Selector Tabs ─────────────────────────────── */
+.azonmate-product-selector {
+	width: 100%;
+}

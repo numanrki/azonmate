@@ -5,6 +5,21 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-02-23
+
+### Added
+- **Gutenberg Blocks** — 6 fully functional blocks: Product Box, Product List, Comparison Table, Bestsellers, Text Link, and Product Search.
+- **Block Inserter Discovery** — all blocks searchable by "azonmate", "amazon", "product", "affiliate" in the block inserter.
+- **In-Editor Product Search** — search Amazon products, browse saved/manual products, or paste ASINs directly inside each block.
+- **Server-Side Rendering** — all blocks render via the shortcode engine for consistent front-end output.
+- **Shared Editor CSS** — search panel, result cards, selected product tags, and category picker styles.
+- **AzonMate Product Search Block** — universal block with display type chooser (box / link / image).
+
+### Changed
+- Webpack config now builds 6 separate per-block JS bundles plus copies block.json, render.php, and editor.css into the `build/` directory.
+- BlockRegistrar refactored to singleton pattern with per-block JS enqueuing and `index.asset.php` dependency loading.
+- Version bumped to 1.4.0.
+
 ## [1.3.5] - 2026-02-23
 
 ### Changed

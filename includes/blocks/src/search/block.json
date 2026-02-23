@@ -1,26 +1,26 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "azonmate/bestseller",
+	"name": "azonmate/search",
 	"version": "1.0.0",
-	"title": "AzonMate Bestsellers",
+	"title": "AzonMate Product Search",
 	"category": "widgets",
-	"icon": "star-filled",
-	"description": "Show top-selling products from an Amazon category.",
-	"keywords": ["amazon", "bestseller", "popular", "azonmate"],
+	"icon": "search",
+	"description": "Search and insert Amazon products directly in the editor.",
+	"keywords": ["amazon", "search", "product", "azonmate", "affiliate"],
 	"supports": {
 		"html": false,
-		"align": ["wide", "full"]
+		"multiple": true
 	},
 	"textdomain": "azonmate",
 	"attributes": {
-		"keyword": {
+		"asin": {
 			"type": "string",
 			"default": ""
 		},
-		"items": {
-			"type": "number",
-			"default": 10
+		"displayType": {
+			"type": "string",
+			"default": "box"
 		},
 		"template": {
 			"type": "string",

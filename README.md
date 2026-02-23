@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-1.3.5-ff9900?style=for-the-badge" alt="v1.3.5" /></a>&nbsp;
+  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-1.4.0-ff9900?style=for-the-badge" alt="v1.4.0" /></a>&nbsp;
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress 6.0+" />&nbsp;
   <img src="https://img.shields.io/badge/PHP-7.4%2B-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 7.4+" />&nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Free_for_Personal_Use-22c55e?style=for-the-badge" alt="Free for Personal Use" /></a>
@@ -210,6 +210,14 @@ azonmate/
 ## 📝 Changelog
 
 > Full history in [CHANGELOG.md](CHANGELOG.md).
+
+### v1.4.0 — 2026-02-23
+- **New:** 6 fully functional Gutenberg blocks — Product Box, Product List, Comparison Table, Bestsellers, Text Link, and Product Search
+- **New:** All blocks searchable in the Block Inserter by "azonmate", "amazon", "product", "affiliate"
+- **New:** In-editor product search — search Amazon products, browse saved/manual products, or paste ASINs directly inside each block
+- **New:** Server-side rendering for all blocks via the shortcode engine
+- **New:** Shared editor CSS with search panel, result cards, selected product tags, and category picker
+- **New:** "AzonMate Product Search" universal block with display type chooser (box / link / image)
 
 ### v1.3.5 — 2026-02-23
 - **Changed:** Admin bar logo now uses the official branded AzonMate icon (orange rounded square, white text, Amazon smile arrow with arrowhead) instead of the generic smiley-face SVG

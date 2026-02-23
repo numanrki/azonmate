@@ -1,8 +1,10 @@
 /**
- * AzonMate Text Link – Block Entry Point
+ * AzonMate Product Search – Block Entry Point
+ *
+ * Universal search block: search Amazon products, pick one, choose display type.
  *
  * @package AzonMate
- * @since   1.0.0
+ * @since   1.4.0
  */
 
 import { registerBlockType } from '@wordpress/blocks';
@@ -11,6 +13,7 @@ import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	TextControl,
+	SelectControl,
 	Placeholder,
 	Button,
 	Spinner,
@@ -18,9 +21,9 @@ import {
 import ServerSideRender from '@wordpress/server-side-render';
 import { useState } from '@wordpress/element';
 
-registerBlockType('azonmate/text-link', {
+registerBlockType('azonmate/search', {
 	edit: function Edit({ attributes, setAttributes }) {
-		const { asin, title, text } = attributes;
+		const { asin, displayType, template } = attributes;
 		const blockProps = useBlockProps();
 		const [searchKeyword, setSearchKeyword] = useState('');
 		const [searchResults, setSearchResults] = useState([]);
@@ -77,14 +80,17 @@ registerBlockType('azonmate/text-link', {
 			return (
 				<div {...blockProps}>
 					<Placeholder
-						icon="admin-links"
-						label={__('AzonMate Text Link', 'azonmate')}
-						instructions={__('Search for a product or enter an ASIN.', 'azonmate')}
+						icon="search"
+						label={__('AzonMate Product Search', 'azonmate')}
+						instructions={__(
+							'Search Amazon or browse your saved products. Select a product and choose how to display it.',
+							'azonmate'
+						)}
 					>
 						<div className="azonmate-block-search">
 							<div className="azonmate-block-search__input-row">
 								<TextControl
-									placeholder={__('Search products or enter ASIN…', 'azonmate')}
+									placeholder={__('Search Amazon products…', 'azonmate')}
 									value={searchKeyword}
 									onChange={setSearchKeyword}
 									onKeyDown={(e) => e.key === 'Enter' && doSearch()}
@@ -108,6 +114,19 @@ registerBlockType('azonmate/text-link', {
 								/>
 							</div>
 
+							<div className="azonmate-block-search__display-type">
+								<SelectControl
+									label={__('Display as', 'azonmate')}
+									value={displayType}
+									options={[
+										{ label: __('Product Box', 'azonmate'), value: 'box' },
+										{ label: __('Text Link', 'azonmate'), value: 'link' },
+										{ label: __('Image Link', 'azonmate'), value: 'image' },
+									]}
+									onChange={(val) => setAttributes({ displayType: val })}
+								/>
+							</div>
+
 							{searchResults.length > 0 && (
 								<div className="azonmate-block-search__results">
 									{searchResults.map((product) => (
@@ -117,12 +136,25 @@ registerBlockType('azonmate/text-link', {
 											onClick={() => selectProduct(product.asin)}
 											role="button"
 											tabIndex={0}
-											onKeyDown={(e) => e.key === 'Enter' && selectProduct(product.asin)}
+											onKeyDown={(e) =>
+												e.key === 'Enter' && selectProduct(product.asin)
+											}
 										>
-											{(product.image_medium || product.image_small || product.image) && (
-												<img src={product.image_medium || product.image_small || product.image} alt="" />
+											{(product.image_medium ||
+												product.image_small ||
+												product.image) && (
+												<img
+													src={
+														product.image_medium ||
+														product.image_small ||
+														product.image
+													}
+													alt=""
+												/>
 											)}
-											<span className="azonmate-block-search__result-title">{product.title}</span>
+											<span className="azonmate-block-search__result-title">
+												{product.title}
+											</span>
 											{(product.price_display || product.price) && (
 												<span className="azonmate-block-search__result-price">
 													{product.price_display || product.price}
@@ -141,7 +173,7 @@ registerBlockType('azonmate/text-link', {
 		return (
 			<div {...blockProps}>
 				<InspectorControls>
-					<PanelBody title={__('Link Settings', 'azonmate')}>
+					<PanelBody title={__('Product Settings', 'azonmate')}>
 						<TextControl
 							label={__('ASIN', 'azonmate')}
 							value={asin}
@@ -155,27 +187,40 @@ registerBlockType('azonmate/text-link', {
 						>
 							{__('Replace Product', 'azonmate')}
 						</Button>
-						<TextControl
-							label={__('Link Text', 'azonmate')}
-							value={text}
-							onChange={(val) => setAttributes({ text: val })}
-							help={__('Custom text for the link.', 'azonmate')}
+						<SelectControl
+							label={__('Display Type', 'azonmate')}
+							value={displayType}
+							options={[
+								{ label: __('Product Box', 'azonmate'), value: 'box' },
+								{ label: __('Text Link', 'azonmate'), value: 'link' },
+								{ label: __('Image Link', 'azonmate'), value: 'image' },
+							]}
+							onChange={(val) => setAttributes({ displayType: val })}
 						/>
-						<TextControl
-							label={__('Title Attribute', 'azonmate')}
-							value={title}
-							onChange={(val) => setAttributes({ title: val })}
+						<SelectControl
+							label={__('Template', 'azonmate')}
+							value={template}
+							options={[
+								{ label: __('Default', 'azonmate'), value: 'default' },
+								{ label: __('Horizontal', 'azonmate'), value: 'horizontal' },
+								{ label: __('Compact', 'azonmate'), value: 'compact' },
+							]}
+							onChange={(val) => setAttributes({ template: val })}
 						/>
 					</PanelBody>
 				</InspectorControls>
 
 				<div className="azonmate-editor-preview">
 					<div className="azonmate-editor-preview__toolbar">
-						<Button variant="tertiary" isSmall onClick={() => setAttributes({ asin: '' })}>
+						<Button
+							variant="tertiary"
+							isSmall
+							onClick={() => setAttributes({ asin: '' })}
+						>
 							{__('Replace', 'azonmate')}
 						</Button>
 					</div>
-					<ServerSideRender block="azonmate/text-link" attributes={attributes} />
+					<ServerSideRender block="azonmate/search" attributes={attributes} />
 				</div>
 			</div>
 		);
