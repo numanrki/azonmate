@@ -28,11 +28,12 @@ function azonmate_render_admin_header() {
 	<div class="azonmate-admin-bar">
 		<div class="azonmate-admin-bar__left">
 			<span class="azonmate-admin-bar__brand">
-				<svg class="azonmate-admin-bar__logo" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M21.5 12c0 5.247-4.253 9.5-9.5 9.5S2.5 17.247 2.5 12 6.753 2.5 12 2.5s9.5 4.253 9.5 9.5z" stroke="#ff9900" stroke-width="1.5"/>
-					<path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="#ff9900" stroke-width="1.5" stroke-linecap="round"/>
-					<circle cx="9" cy="10" r="1" fill="#ff9900"/>
-					<circle cx="15" cy="10" r="1" fill="#ff9900"/>
+				<svg class="azonmate-admin-bar__logo" width="22" height="22" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect width="64" height="64" rx="14" fill="#FF9900"/>
+					<text x="32" y="25" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="central">Azon</text>
+					<text x="32" y="42" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="central">Mate</text>
+					<path d="M14 50 C22 56, 34 56, 44 52" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+					<polygon points="44,49 50,52 44,55" fill="#fff"/>
 				</svg>
 				<strong>AzonMate</strong>
 			</span>

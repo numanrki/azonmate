@@ -1,6 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="12" fill="#FF9900"/>
-  <text x="32" y="26" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000" text-anchor="middle">Azon</text>
-  <text x="32" y="44" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000" text-anchor="middle">Mate</text>
-  <path d="M12 50c8 4 20 4 28 0" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <rect width="64" height="64" rx="14" fill="#FF9900"/>
+  <text x="32" y="25" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="central">Azon</text>
+  <text x="32" y="42" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="central">Mate</text>
+  <!-- Amazon-style smile arrow with arrowhead -->
+  <path d="M14 50 C22 56, 34 56, 44 52" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <polygon points="44,49 50,52 44,55" fill="#fff"/>
 </svg>
