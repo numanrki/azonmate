@@ -20,6 +20,13 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
+const azonIcon = wp.element.createElement(
+	'svg',
+	{ width: 24, height: 24, viewBox: '0 0 24 24', xmlns: 'http://www.w3.org/2000/svg' },
+	wp.element.createElement( 'rect', { x: 1, y: 1, width: 22, height: 22, rx: 4, fill: '#ff9900' } ),
+	wp.element.createElement( 'path', { d: 'M7 8h10M7 12h10M7 16h6', stroke: '#fff', strokeWidth: 2, strokeLinecap: 'round', fill: 'none' } )
+);
+
 export default function Edit({ attributes, setAttributes }) {
 	const { asin, template, title, description, rating, price, buttonText, imageSize } = attributes;
 	const blockProps = useBlockProps();
@@ -60,7 +67,7 @@ export default function Edit({ attributes, setAttributes }) {
 		return (
 			<div {...blockProps}>
 				<Placeholder
-					icon="cart"
+					icon={ azonIcon }
 					label={__('AzonMate Product Box', 'azonmate')}
 					instructions={__('Search for an Amazon product or enter an ASIN.', 'azonmate')}
 				>

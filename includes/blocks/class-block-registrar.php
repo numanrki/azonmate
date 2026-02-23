@@ -157,6 +157,24 @@ class BlockRegistrar {
 					'template'    => array( 'type' => 'string', 'default' => 'default' ),
 				),
 			),
+			'showcase'         => array(
+				'title'       => __( 'AzonMate Showcase', 'azonmate' ),
+				'description' => __( 'Pick a pre-built Showcase layout and add products — renders exactly as designed.', 'azonmate' ),
+				'icon'        => 'grid-view',
+				'category'    => 'widgets',
+				'keywords'    => array( 'amazon', 'showcase', 'product', 'layout', 'azonmate', 'grid', 'template' ),
+				'attributes'  => array(
+					'asins'      => array( 'type' => 'string', 'default' => '' ),
+					'layout'     => array( 'type' => 'string', 'default' => '' ),
+					'columns'    => array( 'type' => 'number', 'default' => 3 ),
+					'max'        => array( 'type' => 'number', 'default' => 12 ),
+					'heading'    => array( 'type' => 'string', 'default' => '' ),
+					'showBadge'  => array( 'type' => 'boolean', 'default' => true ),
+					'showPrice'  => array( 'type' => 'boolean', 'default' => true ),
+					'showRating' => array( 'type' => 'boolean', 'default' => true ),
+					'buttonText' => array( 'type' => 'string', 'default' => '' ),
+				),
+			),
 		);
 	}
 
@@ -463,5 +481,35 @@ class BlockRegistrar {
 				);
 				return $this->shortcode_manager->render_shortcode( $shortcode_atts, null );
 		}
+	}
+
+	/**
+	 * Server-side render: Showcase.
+	 *
+	 * Renders the full Showcase with the chosen layout.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param array $attributes Block attributes.
+	 * @return string HTML.
+	 */
+	public function render_block_showcase( $attributes ) {
+		if ( empty( $attributes['asins'] ) || empty( $attributes['layout'] ) ) {
+			return '<p class="azonmate-block-placeholder">' . esc_html__( 'Choose a layout and add products.', 'azonmate' ) . '</p>';
+		}
+
+		$shortcode_atts = array(
+			'showcase'    => $attributes['asins'],
+			'layout'      => sanitize_key( $attributes['layout'] ),
+			'columns'     => $attributes['columns'] ?? 3,
+			'max'         => $attributes['max'] ?? 12,
+			'heading'     => $attributes['heading'] ?? '',
+			'show_badge'  => ( $attributes['showBadge'] ?? true ) ? 'true' : 'false',
+			'show_price'  => ( $attributes['showPrice'] ?? true ) ? 'true' : 'false',
+			'show_rating' => ( $attributes['showRating'] ?? true ) ? 'true' : 'false',
+			'button_text' => $attributes['buttonText'] ?? '',
+		);
+
+		return $this->shortcode_manager->render_shortcode( $shortcode_atts, null );
 	}
 }

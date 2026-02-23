@@ -1,0 +1,55 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "azonmate/showcase",
+	"version": "1.0.0",
+	"title": "AzonMate Showcase",
+	"category": "widgets",
+	"description": "Pick a pre-built Showcase layout and add products — renders exactly as designed.",
+	"keywords": ["amazon", "showcase", "product", "layout", "azonmate", "grid", "template"],
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"textdomain": "azonmate",
+	"attributes": {
+		"asins": {
+			"type": "string",
+			"default": ""
+		},
+		"layout": {
+			"type": "string",
+			"default": ""
+		},
+		"columns": {
+			"type": "number",
+			"default": 3
+		},
+		"max": {
+			"type": "number",
+			"default": 12
+		},
+		"heading": {
+			"type": "string",
+			"default": ""
+		},
+		"showBadge": {
+			"type": "boolean",
+			"default": true
+		},
+		"showPrice": {
+			"type": "boolean",
+			"default": true
+		},
+		"showRating": {
+			"type": "boolean",
+			"default": true
+		},
+		"buttonText": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

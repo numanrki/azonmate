@@ -45,7 +45,7 @@ function azonmate_render_admin_header() {
 				printf(
 					/* translators: %s = author name */
 					esc_html__( 'by %s', 'azonmate' ),
-					'<a href="https://github.com/numanrki" target="_blank" rel="noopener">Numan</a>'
+					'<a href="https://github.com/numanrki" target="_blank" rel="noopener">Numan Rashed</a>'
 				);
 				?>
 			</span>
@@ -80,7 +80,7 @@ function azonmate_render_admin_footer() {
 			<?php
 			printf(
 				/* translators: %s = author link */
-				esc_html__( 'Built with %s by Numan', 'azonmate' ),
+				esc_html__( 'Built with %s by Numan Rashed', 'azonmate' ),
 				'<span style="color:#e25555;">&#10084;</span>'
 			);
 			?>

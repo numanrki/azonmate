@@ -19,9 +19,18 @@ import {
 	Spinner,
 } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
-import { useState } from '@wordpress/element';
+import { useState, createElement } from '@wordpress/element';
+
+const icon = createElement(
+	'svg',
+	{ width: 24, height: 24, viewBox: '0 0 24 24', xmlns: 'http://www.w3.org/2000/svg' },
+	createElement( 'rect', { x: 1, y: 1, width: 22, height: 22, rx: 4, fill: '#ff9900' } ),
+	createElement( 'circle', { cx: 11, cy: 11, r: 4, stroke: '#fff', strokeWidth: 2, fill: 'none' } ),
+	createElement( 'line', { x1: 14, y1: 14, x2: 18, y2: 18, stroke: '#fff', strokeWidth: 2, strokeLinecap: 'round' } )
+);
 
 registerBlockType('azonmate/search', {
+	icon,
 	edit: function Edit({ attributes, setAttributes }) {
 		const { asin, displayType, template } = attributes;
 		const blockProps = useBlockProps();
@@ -80,7 +89,7 @@ registerBlockType('azonmate/search', {
 			return (
 				<div {...blockProps}>
 					<Placeholder
-						icon="search"
+						icon={ icon }
 						label={__('AzonMate Product Search', 'azonmate')}
 						instructions={__(
 							'Search Amazon or browse your saved products. Select a product and choose how to display it.',

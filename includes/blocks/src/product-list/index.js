@@ -18,9 +18,19 @@ import {
 	Spinner,
 } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
-import { useState } from '@wordpress/element';
+import { useState, createElement } from '@wordpress/element';
+
+const icon = createElement(
+	'svg',
+	{ width: 24, height: 24, viewBox: '0 0 24 24', xmlns: 'http://www.w3.org/2000/svg' },
+	createElement( 'rect', { x: 1, y: 1, width: 22, height: 22, rx: 4, fill: '#ff9900' } ),
+	createElement( 'rect', { x: 4, y: 5, width: 16, height: 4, rx: 1, fill: '#fff' } ),
+	createElement( 'rect', { x: 4, y: 11, width: 16, height: 4, rx: 1, fill: '#fff' } ),
+	createElement( 'rect', { x: 4, y: 17, width: 10, height: 3, rx: 1, fill: '#fff' } )
+);
 
 registerBlockType('azonmate/product-list', {
+	icon,
 	edit: function Edit({ attributes, setAttributes }) {
 		const { asins, template, max } = attributes;
 		const blockProps = useBlockProps();
@@ -89,7 +99,7 @@ registerBlockType('azonmate/product-list', {
 			return (
 				<div {...blockProps}>
 					<Placeholder
-						icon="list-view"
+						icon={ icon }
 						label={__('AzonMate Product List', 'azonmate')}
 						instructions={__(
 							'Search and add products, or enter comma-separated ASINs.',

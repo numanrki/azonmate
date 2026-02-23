@@ -17,7 +17,14 @@ import {
 	Button,
 } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
-import { useState } from '@wordpress/element';
+import { useState, createElement } from '@wordpress/element';
+
+const icon = createElement(
+	'svg',
+	{ width: 24, height: 24, viewBox: '0 0 24 24', xmlns: 'http://www.w3.org/2000/svg' },
+	createElement( 'rect', { x: 1, y: 1, width: 22, height: 22, rx: 4, fill: '#ff9900' } ),
+	createElement( 'path', { d: 'M12 4l2.5 5 5.5.8-4 3.9.9 5.3L12 16.8 7.1 19l.9-5.3-4-3.9 5.5-.8z', fill: '#fff' } )
+);
 
 const POPULAR_CATEGORIES = [
 	'Electronics',
@@ -33,6 +40,7 @@ const POPULAR_CATEGORIES = [
 ];
 
 registerBlockType('azonmate/bestseller', {
+	icon,
 	edit: function Edit({ attributes, setAttributes }) {
 		const { keyword, items, template } = attributes;
 		const blockProps = useBlockProps();
@@ -42,7 +50,7 @@ registerBlockType('azonmate/bestseller', {
 			return (
 				<div {...blockProps}>
 					<Placeholder
-						icon="star-filled"
+						icon={ icon }
 						label={__('AzonMate Bestsellers', 'azonmate')}
 						instructions={__(
 							'Pick a category or enter a custom keyword for bestsellers.',

@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-1.4.0-ff9900?style=for-the-badge" alt="v1.4.0" /></a>&nbsp;
+  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-1.5.0-ff9900?style=for-the-badge" alt="v1.5.0" /></a>&nbsp;
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress 6.0+" />&nbsp;
   <img src="https://img.shields.io/badge/PHP-7.4%2B-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 7.4+" />&nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Free_for_Personal_Use-22c55e?style=for-the-badge" alt="Free for Personal Use" /></a>
@@ -266,7 +266,7 @@ azonmate/
 <table>
 <tr>
 <td>
-  <strong>Numan</strong><br />
+  <strong>Numan Rashed</strong><br />
   <a href="https://github.com/numanrki">GitHub @numanrki</a><br />
   <a href="mailto:numanrki@gmail.com">numanrki@gmail.com</a>
 </td>
@@ -341,7 +341,7 @@ azonmate/
 ---
 
 <p align="center">
-  <sub>Built with ☕ by <a href="https://github.com/numanrki"><strong>Numan</strong></a> — for the Amazon affiliate community.</sub><br />
+  <sub>Built with ☕ by <a href="https://github.com/numanrki"><strong>Numan Rashed</strong></a> — for the Amazon affiliate community.</sub><br />
   <sub>Questions? Reach out at <a href="mailto:numanrki@gmail.com">numanrki@gmail.com</a></sub>
 </p>
 

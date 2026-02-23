@@ -18,6 +18,7 @@ const blocks = [
 	'bestseller',
 	'text-link',
 	'search',
+	'showcase',
 ];
 
 const entry = {};

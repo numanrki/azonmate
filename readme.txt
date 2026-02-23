@@ -4,7 +4,7 @@ Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,11 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 7. Gutenberg block editor
 
 == Changelog ==
+
+= 1.5.0 =
+* Showcase Gutenberg Block — 3-step editor: pick from 8 pre-built layouts, search & select products, live server-side preview
+* Orange brand icons (#ff9900) for all 7 blocks in the inserter and placeholders
+* Author name updated to "Numan Rashed" throughout the plugin
 
 = 1.4.0 =
 * Gutenberg blocks — 6 fully functional blocks: Product Box, Product List, Comparison Table, Bestsellers, Text Link, and Product Search

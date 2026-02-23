@@ -215,3 +215,101 @@
 .azonmate-product-selector {
 	width: 100%;
 }
+
+/* ── Showcase Layout Picker ────────────────────────────── */
+.azonmate-showcase-picker {
+	padding: 24px;
+}
+
+.azonmate-showcase-picker h3 {
+	margin: 0 0 4px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #1e1e1e;
+}
+
+.azonmate-showcase-picker p {
+	margin: 0 0 16px;
+	color: #757575;
+	font-size: 13px;
+}
+
+.azonmate-showcase-picker__grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 12px;
+}
+
+@media (max-width: 782px) {
+	.azonmate-showcase-picker__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.azonmate-showcase-picker__card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 16px 12px;
+	border: 2px solid #e0e0e0;
+	border-radius: 8px;
+	background: #fff;
+	cursor: pointer;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+	text-align: center;
+}
+
+.azonmate-showcase-picker__card:hover {
+	border-color: #ff9900;
+	box-shadow: 0 2px 8px rgba(255, 153, 0, 0.18);
+	transform: translateY(-2px);
+}
+
+.azonmate-showcase-picker__card:focus {
+	outline: 2px solid #ff9900;
+	outline-offset: 2px;
+}
+
+.azonmate-showcase-picker__icon {
+	font-size: 28px;
+	margin-bottom: 8px;
+	line-height: 1;
+}
+
+.azonmate-showcase-picker__label {
+	font-size: 13px;
+	font-weight: 600;
+	color: #1e1e1e;
+	margin-bottom: 4px;
+	text-transform: capitalize;
+}
+
+.azonmate-showcase-picker__desc {
+	font-size: 11px;
+	color: #757575;
+	line-height: 1.3;
+}
+
+.azonmate-showcase-picker__badge {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	font-size: 9px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	padding: 2px 6px;
+	border-radius: 3px;
+	line-height: 1.4;
+}
+
+.azonmate-showcase-picker__badge--multi {
+	background: #fff3e0;
+	color: #e65100;
+}
+
+.azonmate-showcase-picker__badge--single {
+	background: #e3f2fd;
+	color: #0d47a1;
+}

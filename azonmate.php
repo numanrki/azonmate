@@ -3,18 +3,18 @@
  * AzonMate – Amazon Affiliate Product Engine for WordPress
  *
  * @package           AzonMate
- * @author            Numan
- * @copyright         2026 Numan / AzonMate
+ * @author            Numan Rashed
+ * @copyright         2026 Numan Rashed / AzonMate
  * @license           Proprietary – Free for personal use
  *
  * @wordpress-plugin
  * Plugin Name:       AzonMate
  * Plugin URI:        https://github.com/numanrki/azonmate
  * Description:       Search, display, and monetize Amazon products directly from your WordPress posts. Connects to Amazon PA-API 5.0 for live product data, comparison tables, bestseller lists, and more.
- * Version:           1.4.0
+ * Version:           1.5.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
- * Author:            Numan
+ * Author:            Numan Rashed
  * Author URI:        https://github.com/numanrki
  * Text Domain:       azonmate
  * Domain Path:       /languages
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-define( 'AZON_MATE_VERSION', '1.4.0' );
+define( 'AZON_MATE_VERSION', '1.5.0' );
 
 /**
  * Plugin directory path (with trailing slash).

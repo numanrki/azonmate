@@ -16,9 +16,17 @@ import {
 	Spinner,
 } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
-import { useState } from '@wordpress/element';
+import { useState, createElement } from '@wordpress/element';
+
+const icon = createElement(
+	'svg',
+	{ width: 24, height: 24, viewBox: '0 0 24 24', xmlns: 'http://www.w3.org/2000/svg' },
+	createElement( 'rect', { x: 1, y: 1, width: 22, height: 22, rx: 4, fill: '#ff9900' } ),
+	createElement( 'path', { d: 'M10 13a3 3 0 01-3-3 3 3 0 013-3l3 0M14 11a3 3 0 013 3 3 3 0 01-3 3h-3', stroke: '#fff', strokeWidth: 2, strokeLinecap: 'round', fill: 'none' } )
+);
 
 registerBlockType('azonmate/text-link', {
+	icon,
 	edit: function Edit({ attributes, setAttributes }) {
 		const { asin, title, text } = attributes;
 		const blockProps = useBlockProps();
@@ -77,7 +85,7 @@ registerBlockType('azonmate/text-link', {
 			return (
 				<div {...blockProps}>
 					<Placeholder
-						icon="admin-links"
+						icon={ icon }
 						label={__('AzonMate Text Link', 'azonmate')}
 						instructions={__('Search for a product or enter an ASIN.', 'azonmate')}
 					>
