@@ -269,6 +269,37 @@ class TemplateRenderer {
 	}
 
 	/**
+	 * Render a product collage.
+	 *
+	 * @since 1.6.0
+	 *
+	 * @param Product[] $products Array of products.
+	 * @param array     $options  Display options.
+	 * @return string HTML output.
+	 */
+	public function render_collage( $products, $options = array() ) {
+		$defaults = array(
+			'max'         => 12,
+			'show_price'  => '1' === get_option( 'azon_mate_show_prices', '1' ),
+			'show_rating' => '1' === get_option( 'azon_mate_show_ratings', '1' ),
+			'show_badge'  => true,
+			'button_text' => get_option( 'azon_mate_buy_button_text', 'Buy on Amazon' ),
+			'new_tab'     => '1' === get_option( 'azon_mate_open_new_tab', '1' ),
+			'nofollow'    => '1' === get_option( 'azon_mate_nofollow_links', '1' ),
+			'heading'     => '',
+			'gap'         => 12,
+		);
+
+		$options  = wp_parse_args( $options, $defaults );
+		$products = array_slice( $products, 0, absint( $options['max'] ) );
+
+		$data             = $options;
+		$data['products'] = $products;
+
+		return $this->render( 'collage/default', $data );
+	}
+
+	/**
 	 * Locate a template file, checking theme override first.
 	 *
 	 * @since 1.0.0

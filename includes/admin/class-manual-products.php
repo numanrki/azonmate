@@ -51,6 +51,7 @@ class ManualProducts {
 		add_action( 'wp_ajax_azon_mate_save_manual_product', array( $this, 'ajax_save_product' ) );
 		add_action( 'wp_ajax_azon_mate_delete_manual_product', array( $this, 'ajax_delete_product' ) );
 		add_action( 'wp_ajax_azon_mate_get_manual_products', array( $this, 'ajax_get_products' ) );
+		add_action( 'wp_ajax_azon_mate_fetch_product', array( $this, 'ajax_fetch_product' ) );
 	}
 
 	/**
@@ -209,6 +210,58 @@ class ManualProducts {
 		wp_send_json_success( array(
 			'products' => $products_data,
 			'total'    => count( $products_data ),
+		) );
+	}
+
+	/**
+	 * AJAX: Fetch fresh product data from Amazon API.
+	 *
+	 * Pulls real-time data for a single ASIN, bypassing cache,
+	 * and updates the stored product with the latest price, rating, images, etc.
+	 *
+	 * @since 1.6.0
+	 */
+	public function ajax_fetch_product() {
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'azon_mate_admin' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Security check failed.', 'azonmate' ) ), 403 );
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'azonmate' ) ), 403 );
+		}
+
+		$asin = sanitize_text_field( wp_unslash( $_POST['asin'] ?? '' ) );
+
+		if ( empty( $asin ) ) {
+			wp_send_json_error( array( 'message' => __( 'Product ASIN is required.', 'azonmate' ) ) );
+		}
+
+		// Check if API is configured.
+		$access_key = get_option( 'azon_mate_access_key', '' );
+		$secret_key = get_option( 'azon_mate_secret_key', '' );
+
+		if ( empty( $access_key ) || empty( $secret_key ) ) {
+			wp_send_json_error( array( 'message' => __( 'Amazon API is not configured. Set your API keys in Settings.', 'azonmate' ) ) );
+		}
+
+		$api    = new \AzonMate\API\AmazonAPI( $this->cache );
+		$result = $api->get_item( $asin, '', true ); // force_fresh = true
+
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error( array( 'message' => $result->get_error_message() ) );
+		}
+
+		if ( ! $result ) {
+			wp_send_json_error( array( 'message' => __( 'Product not found on Amazon.', 'azonmate' ) ) );
+		}
+
+		wp_send_json_success( array(
+			'message' => sprintf(
+				/* translators: %s: Product ASIN */
+				__( 'Product %s updated with fresh Amazon data.', 'azonmate' ),
+				$asin
+			),
+			'product' => $result->to_array(),
 		) );
 	}
 }

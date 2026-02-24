@@ -1,0 +1,51 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "azonmate/collage",
+	"version": "1.0.0",
+	"title": "AzonMate Collage",
+	"category": "widgets",
+	"description": "Dynamic product collage — auto-adjusting grid with hover-reveal buy buttons.",
+	"keywords": ["amazon", "collage", "product", "grid", "azonmate", "gallery"],
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"textdomain": "azonmate",
+	"attributes": {
+		"asins": {
+			"type": "string",
+			"default": ""
+		},
+		"max": {
+			"type": "number",
+			"default": 12
+		},
+		"heading": {
+			"type": "string",
+			"default": ""
+		},
+		"showBadge": {
+			"type": "boolean",
+			"default": true
+		},
+		"showPrice": {
+			"type": "boolean",
+			"default": true
+		},
+		"showRating": {
+			"type": "boolean",
+			"default": true
+		},
+		"buttonText": {
+			"type": "string",
+			"default": ""
+		},
+		"gap": {
+			"type": "number",
+			"default": 12
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

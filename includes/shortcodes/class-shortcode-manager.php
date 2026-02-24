@@ -90,6 +90,7 @@ class ShortcodeManager {
 			'new_releases' => new Bestseller( $this->api, $this->renderer, $this->cache ),
 			'table'        => new ComparisonTable( $this->api, $this->renderer, $this->cache ),
 			'showcase'     => new Showcase( $this->api, $this->renderer, $this->cache ),
+			'collage'      => new Collage( $this->api, $this->renderer, $this->cache ),
 		);
 	}
 
@@ -109,7 +110,7 @@ class ShortcodeManager {
 		$atts = is_array( $atts ) ? $atts : array();
 
 		// Determine the shortcode type.
-		$type_keys = array( 'box', 'link', 'image', 'field', 'list', 'bestseller', 'new_releases', 'table', 'showcase' );
+		$type_keys = array( 'box', 'link', 'image', 'field', 'list', 'bestseller', 'new_releases', 'table', 'showcase', 'collage' );
 
 		$type = '';
 		foreach ( $type_keys as $key ) {
@@ -121,7 +122,7 @@ class ShortcodeManager {
 
 		if ( empty( $type ) || ! isset( $this->handlers[ $type ] ) ) {
 			if ( current_user_can( 'edit_posts' ) ) {
-				return '<!-- AzonMate: Unknown shortcode type. Use box, link, image, field, list, bestseller, new_releases, table, or showcase. -->';
+				return '<!-- AzonMate: Unknown shortcode type. Use box, link, image, field, list, bestseller, new_releases, table, showcase, or collage. -->';
 			}
 			return '';
 		}

@@ -375,6 +375,32 @@ class CacheManager {
 	}
 
 	/**
+	 * Get all product ASINs grouped by marketplace.
+	 *
+	 * @since 1.6.0
+	 *
+	 * @return array Associative array: marketplace => array of ASINs.
+	 */
+	public function get_all_product_asins() {
+		global $wpdb;
+
+		$rows = $wpdb->get_results(
+			"SELECT asin, marketplace FROM {$this->table} ORDER BY marketplace, asin"
+		);
+
+		$grouped = array();
+		foreach ( $rows as $row ) {
+			$market = $row->marketplace ?: 'US';
+			if ( ! isset( $grouped[ $market ] ) ) {
+				$grouped[ $market ] = array();
+			}
+			$grouped[ $market ][] = $row->asin;
+		}
+
+		return $grouped;
+	}
+
+	/**
 	 * Build the transient key for a product.
 	 *
 	 * @since 1.0.0

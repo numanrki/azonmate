@@ -5,6 +5,23 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-02-24
+
+### Added
+- **Dynamic Product Collage** — new `[azonmate collage="ASIN1,ASIN2,..."]` shortcode with auto-adjusting grid layout (hero, duo, trio, quad, penta, auto) based on product count.
+- **Collage Hover Behavior** — only the hovered product reveals its Buy button and action elements; non-hover state displays title, price, rating, and discount clearly.
+- **Collage Gutenberg Block** — 8th block: search/add products, live server-side preview with InspectorControls for max products, gap, badges, price, rating, and button text.
+- **Per-product Fetch Button** — individually refresh any product from Amazon API with one click from the Products admin page.
+- **Master Fetch Button** — bulk refresh ALL products from Amazon API in Settings → Cache tab; batch fetches with rate limiting, updates pricing, discounts, ratings, availability, and images globally.
+- **`CacheManager::get_all_product_asins()`** — new method returning all stored ASINs grouped by marketplace for batch operations.
+
+### Fixed
+- **Bullet Feature Alignment** — product box feature checkmark icons and text now properly aligned with consistent spacing using CSS `::before` pseudo-elements instead of `list-style: disc`.
+
+### Changed
+- Webpack config now builds 8 per-block JS bundles (added collage).
+- Version bumped to 1.6.0.
+
 ## [1.5.0] - 2026-02-23
 
 ### Added

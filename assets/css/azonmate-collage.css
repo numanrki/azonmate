@@ -1,0 +1,363 @@
+/**
+ * AzonMate – Collage Layout CSS
+ *
+ * Dynamic product collage with hover-reveal buy buttons.
+ * Auto-adjusting grid based on product count.
+ *
+ * @package AzonMate
+ * @since   1.6.0
+ */
+
+/* ==========================================================================
+   Collage Container
+   ========================================================================== */
+
+.azonmate-collage {
+	--azonmate-collage-gap: 12px;
+	--azonmate-collage-radius: 12px;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+	margin: 1.5rem 0;
+}
+
+.azonmate-collage *,
+.azonmate-collage *::before,
+.azonmate-collage *::after {
+	box-sizing: border-box;
+}
+
+.azonmate-collage__heading {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin: 0 0 1rem;
+	color: #1a1a2e;
+}
+
+/* ==========================================================================
+   Grid Layouts
+   ========================================================================== */
+
+.azonmate-collage__grid {
+	display: grid;
+	gap: var(--azonmate-collage-gap);
+}
+
+/* 1 product — full-width hero */
+.azonmate-collage--hero .azonmate-collage__grid {
+	grid-template-columns: 1fr;
+}
+.azonmate-collage--hero .azonmate-collage__card {
+	min-height: 360px;
+}
+
+/* 2 products — side-by-side */
+.azonmate-collage--duo .azonmate-collage__grid {
+	grid-template-columns: 1fr 1fr;
+}
+.azonmate-collage--duo .azonmate-collage__card {
+	min-height: 300px;
+}
+
+/* 3 products — 1 large + 2 stacked */
+.azonmate-collage--trio .azonmate-collage__grid {
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+}
+.azonmate-collage--trio .azonmate-collage__card:first-child {
+	grid-row: 1 / 3;
+	min-height: 360px;
+}
+.azonmate-collage--trio .azonmate-collage__card:nth-child(2),
+.azonmate-collage--trio .azonmate-collage__card:nth-child(3) {
+	min-height: 174px;
+}
+
+/* 4 products — 2×2 grid */
+.azonmate-collage--quad .azonmate-collage__grid {
+	grid-template-columns: 1fr 1fr;
+}
+.azonmate-collage--quad .azonmate-collage__card {
+	min-height: 260px;
+}
+
+/* 5 products — 1 large left + 2×2 right */
+.azonmate-collage--penta .azonmate-collage__grid {
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+}
+.azonmate-collage--penta .azonmate-collage__card:first-child {
+	grid-row: 1 / 3;
+	min-height: 360px;
+}
+
+/* 6+ products — responsive auto-fit */
+.azonmate-collage--auto .azonmate-collage__grid {
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.azonmate-collage--auto .azonmate-collage__card {
+	min-height: 260px;
+}
+
+/* ==========================================================================
+   Card Base
+   ========================================================================== */
+
+.azonmate-collage__card {
+	position: relative;
+	border-radius: var(--azonmate-collage-radius);
+	overflow: hidden;
+	background: #f8f8f8;
+	cursor: pointer;
+	transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.azonmate-collage__card:hover {
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+	transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Image
+   ========================================================================== */
+
+.azonmate-collage__image-wrap {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+	background: #fff;
+}
+
+.azonmate-collage__image-wrap a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.azonmate-collage__image {
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	transition: transform 0.3s ease;
+}
+
+.azonmate-collage__card:hover .azonmate-collage__image {
+	transform: scale(1.05);
+}
+
+/* ==========================================================================
+   Badges (always visible)
+   ========================================================================== */
+
+.azonmate-collage__badge {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 3;
+	background: #ff9900;
+	color: #fff;
+	font-size: 0.7rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	padding: 3px 8px;
+	border-radius: 4px;
+	line-height: 1.4;
+}
+
+.azonmate-collage__savings {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 3;
+	background: #dc2626;
+	color: #fff;
+	font-size: 0.75rem;
+	font-weight: 700;
+	padding: 3px 8px;
+	border-radius: 4px;
+	line-height: 1.4;
+}
+
+/* ==========================================================================
+   Overlay (product info + action)
+   ========================================================================== */
+
+.azonmate-collage__overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	background: linear-gradient(
+		to top,
+		rgba(0, 0, 0, 0.80) 0%,
+		rgba(0, 0, 0, 0.30) 50%,
+		transparent 100%
+	);
+	padding: 16px;
+	transition: background 0.3s ease;
+}
+
+.azonmate-collage__card:hover .azonmate-collage__overlay {
+	background: linear-gradient(
+		to top,
+		rgba(0, 0, 0, 0.88) 0%,
+		rgba(0, 0, 0, 0.50) 60%,
+		rgba(0, 0, 0, 0.15) 100%
+	);
+}
+
+/* ==========================================================================
+   Info Section (always visible)
+   ========================================================================== */
+
+.azonmate-collage__info {
+	color: #fff;
+}
+
+.azonmate-collage__title {
+	font-size: 0.9rem;
+	font-weight: 600;
+	margin: 0 0 6px;
+	line-height: 1.3;
+}
+
+.azonmate-collage__title a {
+	color: #fff !important;
+	text-decoration: none !important;
+}
+
+.azonmate-collage__title a:hover {
+	text-decoration: underline !important;
+}
+
+.azonmate-collage__rating {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	margin-bottom: 4px;
+	font-size: 0.8rem;
+}
+
+.azonmate-collage__rating .azonmate-stars {
+	color: #ff9900;
+}
+
+.azonmate-collage__reviews {
+	color: rgba(255, 255, 255, 0.75);
+	font-size: 0.75rem;
+}
+
+.azonmate-collage__price-wrap {
+	display: flex;
+	align-items: baseline;
+	gap: 6px;
+	flex-wrap: wrap;
+}
+
+.azonmate-collage__price {
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: #fff;
+}
+
+.azonmate-collage__old-price {
+	font-size: 0.8rem;
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.azonmate-collage__old-price del {
+	text-decoration: line-through;
+}
+
+/* ==========================================================================
+   Action (buy button) — only visible on hover
+   ========================================================================== */
+
+.azonmate-collage__action {
+	margin-top: 10px;
+	opacity: 0;
+	transform: translateY(8px);
+	transition: opacity 0.25s ease, transform 0.25s ease;
+	pointer-events: none;
+}
+
+.azonmate-collage__card:hover .azonmate-collage__action {
+	opacity: 1;
+	transform: translateY(0);
+	pointer-events: auto;
+}
+
+.azonmate-collage__action .azonmate-buy-button {
+	width: 100%;
+	text-align: center;
+	font-size: 0.85rem;
+	padding: 8px 16px;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 768px) {
+	/* Duo → stack */
+	.azonmate-collage--duo .azonmate-collage__grid {
+		grid-template-columns: 1fr;
+	}
+
+	/* Trio → stack */
+	.azonmate-collage--trio .azonmate-collage__grid {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto;
+	}
+	.azonmate-collage--trio .azonmate-collage__card:first-child {
+		grid-row: auto;
+		min-height: 260px;
+	}
+
+	/* Quad → 2 col */
+	.azonmate-collage--quad .azonmate-collage__grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	/* Penta → 2 col */
+	.azonmate-collage--penta .azonmate-collage__grid {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto;
+	}
+	.azonmate-collage--penta .azonmate-collage__card:first-child {
+		grid-column: 1 / -1;
+		grid-row: auto;
+	}
+
+	.azonmate-collage__card {
+		min-height: 220px !important;
+	}
+}
+
+@media (max-width: 480px) {
+	.azonmate-collage--quad .azonmate-collage__grid,
+	.azonmate-collage--penta .azonmate-collage__grid,
+	.azonmate-collage--auto .azonmate-collage__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.azonmate-collage__card {
+		min-height: 200px !important;
+	}
+
+	.azonmate-collage__title {
+		font-size: 0.82rem;
+	}
+
+	.azonmate-collage__price {
+		font-size: 1rem;
+	}
+}

@@ -19,6 +19,7 @@ const blocks = [
 	'text-link',
 	'search',
 	'showcase',
+	'collage',
 ];
 
 const entry = {};

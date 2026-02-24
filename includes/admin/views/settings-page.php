@@ -382,6 +382,17 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 			</button>
 			<span id="azonmate-cache-result" class="azonmate-test-result"></span>
 
+			<hr />
+
+			<h3><?php esc_html_e( 'Master Fetch', 'azonmate' ); ?></h3>
+			<p>
+				<?php esc_html_e( 'Re-fetch all products from Amazon API with fresh real-time data — updates pricing, discounts, ratings, availability, and images for every product (manual and API).', 'azonmate' ); ?>
+			</p>
+			<button type="button" id="azonmate-master-fetch" class="button button-primary">
+				<?php esc_html_e( 'Fetch All Products', 'azonmate' ); ?>
+			</button>
+			<span id="azonmate-master-fetch-result" class="azonmate-test-result"></span>
+
 		</div>
 
 		<div id="azonmate-tab-geo" class="azonmate-settings-section">

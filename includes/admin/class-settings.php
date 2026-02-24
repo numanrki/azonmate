@@ -36,6 +36,7 @@ class Settings {
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'wp_ajax_azon_mate_test_connection', array( $this, 'ajax_test_connection' ) );
 		add_action( 'wp_ajax_azon_mate_clear_cache', array( $this, 'ajax_clear_cache' ) );
+		add_action( 'wp_ajax_azon_mate_master_fetch', array( $this, 'ajax_master_fetch' ) );
 	}
 
 	/**
@@ -293,6 +294,76 @@ class Settings {
 				/* translators: %d: Number of cached products cleared */
 				__( 'Cache cleared successfully. %d products removed.', 'azonmate' ),
 				$cleared
+			),
+		) );
+	}
+
+	/**
+	 * AJAX: Master Fetch — refresh all cached products from Amazon API.
+	 *
+	 * Iterates over every stored product, re-fetches from PA-API with force_fresh,
+	 * and updates price, discount, rating, availability, and images.
+	 *
+	 * @since 1.6.0
+	 */
+	public function ajax_master_fetch() {
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'azon_mate_admin' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Security check failed.', 'azonmate' ) ), 403 );
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'azonmate' ) ), 403 );
+		}
+
+		// Check if API is configured.
+		$access_key = get_option( 'azon_mate_access_key', '' );
+		$secret_key = get_option( 'azon_mate_secret_key', '' );
+
+		if ( empty( $access_key ) || empty( $secret_key ) ) {
+			wp_send_json_error( array( 'message' => __( 'Amazon API is not configured. Set your API keys in Settings → API tab.', 'azonmate' ) ) );
+		}
+
+		$cache   = new \AzonMate\Cache\CacheManager();
+		$api     = new \AzonMate\API\AmazonAPI( $cache );
+		$grouped = $cache->get_all_product_asins();
+
+		if ( empty( $grouped ) ) {
+			wp_send_json_error( array( 'message' => __( 'No products found in the database.', 'azonmate' ) ) );
+		}
+
+		$updated = 0;
+		$failed  = 0;
+
+		foreach ( $grouped as $marketplace => $asins ) {
+			// PA-API allows max 10 ASINs per batch.
+			$batches = array_chunk( $asins, 10 );
+
+			foreach ( $batches as $batch ) {
+				$result = $api->get_items( implode( ',', $batch ), $marketplace, true );
+
+				if ( is_wp_error( $result ) ) {
+					$failed += count( $batch );
+					continue;
+				}
+
+				if ( is_array( $result ) ) {
+					$updated += count( $result );
+					$failed  += count( $batch ) - count( $result );
+				}
+
+				// Small delay to respect API rate limits.
+				if ( count( $batches ) > 1 ) {
+					usleep( 500000 ); // 0.5 seconds.
+				}
+			}
+		}
+
+		wp_send_json_success( array(
+			'message' => sprintf(
+				/* translators: 1: number of updated products, 2: number of failed products */
+				__( 'Master Fetch complete. %1$d products updated, %2$d failed.', 'azonmate' ),
+				$updated,
+				$failed
 			),
 		) );
 	}

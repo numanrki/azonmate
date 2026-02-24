@@ -4,7 +4,7 @@ Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.5.0
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,15 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 7. Gutenberg block editor
 
 == Changelog ==
+
+= 1.6.0 =
+* Dynamic Product Collage — new `[azonmate collage="ASIN1,ASIN2,..."]` shortcode with auto-adjusting grid layout (hero, duo, trio, quad, penta, auto) based on product count
+* Collage hover behavior — only the hovered product reveals its Buy button; non-hover state displays title, price, rating, and discount
+* Collage Gutenberg Block — search/add products, live server-side preview with InspectorControls for max products, gap, badges, price, rating, button text
+* Per-product Fetch button — individually refresh any product from Amazon API with one click from the Products page
+* Master Fetch button — bulk refresh ALL products from Amazon API in Settings → Cache tab; updates pricing, discounts, ratings, availability, and images globally
+* Bullet feature alignment fix — product box checkmark icons and text now properly aligned with consistent spacing
+* New collage CSS with responsive breakpoints and smooth hover transitions
 
 = 1.5.0 =
 * Showcase Gutenberg Block — 3-step editor: pick from 8 pre-built layouts, search & select products, live server-side preview

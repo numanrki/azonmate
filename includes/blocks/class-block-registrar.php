@@ -175,6 +175,23 @@ class BlockRegistrar {
 					'buttonText' => array( 'type' => 'string', 'default' => '' ),
 				),
 			),
+			'collage'          => array(
+				'title'       => __( 'AzonMate Collage', 'azonmate' ),
+				'description' => __( 'Dynamic product collage — auto-adjusting grid with hover-reveal buy buttons.', 'azonmate' ),
+				'icon'        => 'images-alt2',
+				'category'    => 'widgets',
+				'keywords'    => array( 'amazon', 'collage', 'product', 'gallery', 'azonmate', 'grid' ),
+				'attributes'  => array(
+					'asins'      => array( 'type' => 'string', 'default' => '' ),
+					'max'        => array( 'type' => 'number', 'default' => 12 ),
+					'heading'    => array( 'type' => 'string', 'default' => '' ),
+					'showBadge'  => array( 'type' => 'boolean', 'default' => true ),
+					'showPrice'  => array( 'type' => 'boolean', 'default' => true ),
+					'showRating' => array( 'type' => 'boolean', 'default' => true ),
+					'buttonText' => array( 'type' => 'string', 'default' => '' ),
+					'gap'        => array( 'type' => 'number', 'default' => 12 ),
+				),
+			),
 		);
 	}
 
@@ -508,6 +525,35 @@ class BlockRegistrar {
 			'show_price'  => ( $attributes['showPrice'] ?? true ) ? 'true' : 'false',
 			'show_rating' => ( $attributes['showRating'] ?? true ) ? 'true' : 'false',
 			'button_text' => $attributes['buttonText'] ?? '',
+		);
+
+		return $this->shortcode_manager->render_shortcode( $shortcode_atts, null );
+	}
+
+	/**
+	 * Server-side render: Collage.
+	 *
+	 * Renders a dynamic product collage with auto-layout.
+	 *
+	 * @since 1.6.0
+	 *
+	 * @param array $attributes Block attributes.
+	 * @return string HTML.
+	 */
+	public function render_block_collage( $attributes ) {
+		if ( empty( $attributes['asins'] ) ) {
+			return '<p class="azonmate-block-placeholder">' . esc_html__( 'Add products for the collage.', 'azonmate' ) . '</p>';
+		}
+
+		$shortcode_atts = array(
+			'collage'     => $attributes['asins'],
+			'max'         => $attributes['max'] ?? 12,
+			'heading'     => $attributes['heading'] ?? '',
+			'show_badge'  => ( $attributes['showBadge'] ?? true ) ? 'true' : 'false',
+			'show_price'  => ( $attributes['showPrice'] ?? true ) ? 'true' : 'false',
+			'show_rating' => ( $attributes['showRating'] ?? true ) ? 'true' : 'false',
+			'button_text' => $attributes['buttonText'] ?? '',
+			'gap'         => $attributes['gap'] ?? 12,
 		);
 
 		return $this->shortcode_manager->render_shortcode( $shortcode_atts, null );

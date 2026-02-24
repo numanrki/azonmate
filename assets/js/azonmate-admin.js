@@ -21,6 +21,7 @@
 		initTabs();
 		initTestConnection();
 		initClearCache();
+		initMasterFetch();
 		initPasswordToggle();
 		initTabFormPreserve();
 	});
@@ -138,6 +139,40 @@
 	/* ======================================================================
 	   Password/Secret Field Toggle
 	   ====================================================================== */
+
+	function initMasterFetch() {
+		$('#azonmate-master-fetch').on('click', function (e) {
+			e.preventDefault();
+
+			if (!confirm(azonMateAdmin.i18n.confirmMasterFetch || 'This will re-fetch ALL products from Amazon API. This may take a while. Continue?')) {
+				return;
+			}
+
+			var $btn = $(this);
+			var $result = $('#azonmate-master-fetch-result');
+
+			$btn.prop('disabled', true).text(azonMateAdmin.i18n.fetching || 'Fetching...');
+			$result.removeClass('success error').text('');
+
+			$.post(ajaxurl, {
+				action: 'azon_mate_master_fetch',
+				nonce: azonMateAdmin.nonce,
+			})
+			.done(function (response) {
+				if (response.success) {
+					$result.addClass('success').text(response.data.message || 'All products refreshed!');
+				} else {
+					$result.addClass('error').text(response.data.message || 'Master fetch failed.');
+				}
+			})
+			.fail(function () {
+				$result.addClass('error').text('Request failed. Please try again.');
+			})
+			.always(function () {
+				$btn.prop('disabled', false).text(azonMateAdmin.i18n.masterFetch || 'Fetch All Products');
+			});
+		});
+	}
 
 	function initPasswordToggle() {
 		$('.azonmate-toggle-secret').on('click', function (e) {

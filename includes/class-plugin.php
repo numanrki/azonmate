@@ -320,6 +320,14 @@ class Plugin {
 			AZON_MATE_VERSION
 		);
 
+		// Collage CSS.
+		wp_enqueue_style(
+			'azonmate-collage',
+			AZON_MATE_PLUGIN_URL . 'assets/css/azonmate-collage.css',
+			array( 'azonmate-public' ),
+			AZON_MATE_VERSION
+		);
+
 		// Frontend JS (geo-targeting, lazy load, click tracking).
 		wp_enqueue_script(
 			'azonmate-public',

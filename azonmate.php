@@ -11,7 +11,7 @@
  * Plugin Name:       AzonMate
  * Plugin URI:        https://github.com/numanrki/azonmate
  * Description:       Search, display, and monetize Amazon products directly from your WordPress posts. Connects to Amazon PA-API 5.0 for live product data, comparison tables, bestseller lists, and more.
- * Version:           1.5.0
+ * Version:           1.6.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Numan Rashed
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-define( 'AZON_MATE_VERSION', '1.5.0' );
+define( 'AZON_MATE_VERSION', '1.6.0' );
 
 /**
  * Plugin directory path (with trailing slash).

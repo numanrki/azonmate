@@ -93,6 +93,11 @@
 			deleteProduct(asin, title);
 		});
 
+		$list.on('click', '.azonmate-fetch-product', function () {
+			var asin = $(this).data('asin');
+			fetchProduct(asin, $(this));
+		});
+
 		$list.on('click', '.azonmate-copy-shortcode', function () {
 			var shortcode = $(this).data('shortcode');
 			copyToClipboard(shortcode);
@@ -148,6 +153,7 @@
 			html += '</div>';
 			html += '<div class="azonmate-product-card-actions">';
 			html += '<button type="button" class="button button-small azonmate-edit-product" data-asin="' + escHtml(p.asin) + '"><span class="dashicons dashicons-edit" style="font-size:14px;vertical-align:text-bottom;"></span> Edit</button>';
+			html += '<button type="button" class="button button-small azonmate-fetch-product" data-asin="' + escHtml(p.asin) + '" title="Fetch fresh data from Amazon API"><span class="dashicons dashicons-update" style="font-size:14px;vertical-align:text-bottom;"></span> Fetch</button>';
 			html += '<button type="button" class="button button-small button-link-delete azonmate-delete-product" data-asin="' + escHtml(p.asin) + '" data-title="' + escHtml(p.title) + '"><span class="dashicons dashicons-trash" style="font-size:14px;vertical-align:text-bottom;"></span> Delete</button>';
 			html += '<button type="button" class="button button-small azonmate-copy-shortcode" data-shortcode="' + escHtml(shortcode) + '" title="Copy shortcode"><span class="dashicons dashicons-clipboard" style="font-size:14px;vertical-align:text-bottom;"></span> Copy Shortcode</button>';
 			html += '</div>';
@@ -314,6 +320,32 @@
 			} else {
 				alert(response.data.message || 'Failed to delete product.');
 			}
+		});
+	}
+
+	/**
+	 * Fetch fresh product data from Amazon API for a single product.
+	 */
+	function fetchProduct(asin, $btn) {
+		var origHtml = $btn.html();
+		$btn.prop('disabled', true).html('<span class="dashicons dashicons-update" style="font-size:14px;vertical-align:text-bottom;animation:rotation 1s infinite linear;"></span> Fetching...');
+
+		$.post(azonMateAdmin.ajaxUrl, {
+			action: 'azon_mate_fetch_product',
+			nonce: azonMateAdmin.nonce,
+			asin: asin,
+		}, function (response) {
+			$btn.prop('disabled', false).html(origHtml);
+
+			if (response.success) {
+				showToast(response.data.message || 'Product updated!');
+				loadProducts();
+			} else {
+				alert(response.data.message || 'Fetch failed.');
+			}
+		}).fail(function () {
+			$btn.prop('disabled', false).html(origHtml);
+			alert('Network error. Please try again.');
 		});
 	}
 
