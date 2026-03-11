@@ -231,18 +231,26 @@ Dynamic multi-product collage shortcode with auto-adjusting grid layout and hove
 azonmate/
 ├── azonmate.php                    → Main plugin bootstrap
 ├── uninstall.php                   → Clean uninstall handler
+├── composer.json                   → Composer config (Creators API SDK)
 ├── assets/
-│   ├── css/                        → Admin, public, editor, showcase styles
-│   ├── js/                         → Admin, public, click tracker, search modal
-│   └── images/                     → Icons & SVG assets
+│   ├── css/                        → Admin, public, editor, showcase, collage styles
+│   ├── js/                         → Admin, public, click tracker, search modal, manual products
+│   └── images/                     → Icons & SVG assets (icon, prime badge, star)
+├── build/                          → Compiled Gutenberg blocks (8 blocks)
 ├── includes/
-│   ├── admin/                      → Settings, analytics, showcase builder, manual products
-│   ├── api/                        → Amazon API client & AWS v4 request signer
-│   ├── blocks/src/                 → Gutenberg block source (JSX)
+│   ├── class-plugin.php            → Core plugin orchestrator
+│   ├── class-autoloader.php        → PSR-4 autoloader
+│   ├── class-activator.php         → Activation hook handler
+│   ├── class-deactivator.php       → Deactivation hook handler
+│   ├── admin/                      → Settings, analytics, showcase builder, manual products, product search
+│   │   └── views/                  → Admin page templates & partials
+│   ├── api/                        → Amazon Creators API client & marketplace config
+│   ├── blocks/                     → Block registrar & Gutenberg source (JSX)
+│   │   └── src/                    → 8 block sources + shared React components
 │   ├── cache/                      → Cache manager & cron refresh
 │   ├── geo/                        → Geo-targeting & link rewriter
 │   ├── models/                     → Product data model
-│   ├── shortcodes/                 → 7 shortcode handlers + abstract base
+│   ├── shortcodes/                 → 9 shortcode handlers + abstract base + manager
 │   ├── templates/                  → Template renderer & helper functions
 │   └── tracking/                   → Click tracker
 ├── templates/                      → Frontend templates (theme-overridable)
@@ -251,8 +259,10 @@ azonmate/
 │   ├── comparison-table/           → Table template
 │   ├── product-list/               → List templates (default, grid)
 │   ├── bestseller/                 → Bestseller template
+│   ├── collage/                    → Collage template
 │   ├── image-link/                 → Image link template
 │   └── text-link/                  → Text link template
+├── vendor/                         → Composer dependencies (Creators API SDK, Guzzle)
 └── languages/                      → Translation .pot file
 ```
 
