@@ -3,8 +3,15 @@
 	"description": "AzonMate – Amazon Affiliate Product Engine for WordPress",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
+	"repositories": [
+		{
+			"type": "path",
+			"url": "lib/creatorsapi-sdk"
+		}
+	],
 	"require": {
-		"php": ">=7.4"
+		"php": ">=8.1",
+		"amazon/creatorsapi-php-sdk": "*"
 	},
 	"autoload": {
 		"psr-4": {

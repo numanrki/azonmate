@@ -5,6 +5,22 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2025-07-15
+
+### Added
+- **Official Amazon Creators API PHP SDK** (v1.2.0) — replaces the custom HTTP/OAuth implementation with Amazon's official typed SDK classes (`DefaultApi`, `Configuration`, typed request/response models).
+- **Composer Dependency Management** — Guzzle HTTP 7.x, PSR-7, PSR-HTTP-Client, and the SDK itself installed via Composer autoloader (`vendor/autoload.php`).
+
+### Changed
+- `Amazon_API` class fully rewritten to use SDK `DefaultApi` client, `SearchItemsRequestContent`, `GetItemsRequestContent`, `GetBrowseNodesRequestContent` typed request models, and `SearchItemsResource`/`GetItemsResource`/`GetBrowseNodesResource` enum constants.
+- Product model `from_api_response()` updated to accept SDK `Item` objects with typed getters (`getAsin()`, `getItemInfo()`, `getImages()`, `getOffersV2()`, etc.) instead of raw associative arrays.
+- Minimum PHP version raised from 7.4 to **8.1** (required by the SDK).
+
+### Removed
+- `RequestSigner` class (`class-request-signer.php`) — deleted entirely; SDK handles OAuth 2.0 token management internally via `OAuth2TokenManager`.
+- `Marketplace::get_token_endpoint()`, `Marketplace::get_endpoint()`, `Marketplace::version_to_region()` — SDK manages API endpoints and token resolution internally.
+- `Marketplace::API_HOST`, `$cognito_endpoints`, `$lwa_endpoints` constants/properties — no longer needed.
+
 ## [2.0.0] - 2026-03-11
 
 ### Breaking

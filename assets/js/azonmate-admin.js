@@ -89,8 +89,19 @@
 					$result.addClass('error').text(response.data.message || 'Connection failed.');
 				}
 			})
-			.fail(function () {
-				$result.addClass('error').text('Request failed. Please try again.');
+			.fail(function (jqXHR) {
+				var msg = 'Request failed.';
+				try {
+					var json = JSON.parse(jqXHR.responseText);
+					if (json && json.data && json.data.message) {
+						msg = json.data.message;
+					}
+				} catch (e) {
+					if (jqXHR.responseText) {
+						msg = 'Server error (' + jqXHR.status + '): ' + jqXHR.responseText.substring(0, 200);
+					}
+				}
+				$result.addClass('error').text(msg);
 			})
 			.always(function () {
 				$btn.prop('disabled', false).text(azonMateAdmin.i18n.testConnection || 'Test Connection');
@@ -165,8 +176,19 @@
 					$result.addClass('error').text(response.data.message || 'Master fetch failed.');
 				}
 			})
-			.fail(function () {
-				$result.addClass('error').text('Request failed. Please try again.');
+			.fail(function (jqXHR) {
+				var msg = 'Request failed.';
+				try {
+					var json = JSON.parse(jqXHR.responseText);
+					if (json && json.data && json.data.message) {
+						msg = json.data.message;
+					}
+				} catch (e) {
+					if (jqXHR.responseText) {
+						msg = 'Server error (' + jqXHR.status + '): ' + jqXHR.responseText.substring(0, 200);
+					}
+				}
+				$result.addClass('error').text(msg);
 			})
 			.always(function () {
 				$btn.prop('disabled', false).text(azonMateAdmin.i18n.masterFetch || 'Fetch All Products');

@@ -3,8 +3,8 @@ Contributors: azonmate
 Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
-Requires PHP: 7.4
-Stable tag: 2.0.0
+Requires PHP: 8.1
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,7 +42,7 @@ Search, display, and monetize Amazon products directly from your WordPress posts
 = Requirements =
 
 * WordPress 6.0 or higher
-* PHP 7.4 or higher
+* PHP 8.1 or higher
 * Amazon Creators API credentials
 * Amazon Associates account
 
@@ -91,6 +91,15 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 7. Gutenberg block editor
 
 == Changelog ==
+
+= 2.1.0 =
+* Integrated official Amazon Creators API PHP SDK (v1.2.0) — replaces custom HTTP/OAuth with typed SDK classes
+* Composer-managed dependencies — Guzzle HTTP 7.x, PSR-7, PSR-HTTP-Client via autoloader
+* Amazon_API class rewritten to use SDK DefaultApi, typed request models, and resource enum constants
+* Product model from_api_response() updated to accept SDK Item objects with typed getters
+* Minimum PHP version raised from 7.4 to 8.1 (SDK requirement)
+* Removed: RequestSigner class — SDK handles OAuth 2.0 token management internally
+* Removed: Marketplace token/endpoint methods — SDK manages endpoints internally
 
 = 2.0.0 =
 * **Breaking:** Migrated from Amazon PA-API 5.0 to the new Amazon Creators API with OAuth 2.0 authentication

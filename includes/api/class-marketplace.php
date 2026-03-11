@@ -17,43 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Marketplace
  *
  * Provides marketplace-specific configuration including regions
- * and endpoints for the Amazon Creators API.
+ * and domains for the Amazon Creators API.
  *
  * @since 1.0.0
  */
 class Marketplace {
-
-	/**
-	 * Single API host for all marketplaces.
-	 *
-	 * @since 2.0.0
-	 * @var string
-	 */
-	const API_HOST = 'creatorsapi.amazon';
-
-	/**
-	 * Regional token endpoints for v2.x (Cognito) credentials.
-	 *
-	 * @since 2.0.0
-	 * @var array
-	 */
-	private static $cognito_endpoints = array(
-		'NA' => 'creatorsapi.auth.us-east-1.amazoncognito.com',
-		'EU' => 'creatorsapi.auth.eu-south-2.amazoncognito.com',
-		'FE' => 'creatorsapi.auth.us-west-2.amazoncognito.com',
-	);
-
-	/**
-	 * Regional token endpoints for v3.x (LwA) credentials.
-	 *
-	 * @since 2.0.0
-	 * @var array
-	 */
-	private static $lwa_endpoints = array(
-		'NA' => 'api.amazon.com',
-		'EU' => 'api.amazon.co.uk',
-		'FE' => 'api.amazon.co.jp',
-	);
 
 	/**
 	 * Supported marketplaces with their configuration.
@@ -260,61 +228,6 @@ class Marketplace {
 	 */
 	public static function get_categories() {
 		return self::$categories;
-	}
-
-	/**
-	 * Build the full API endpoint URL for an operation.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $marketplace Marketplace code (unused — single host for all marketplaces).
-	 * @param string $operation   API operation (searchItems, getItems, getBrowseNodes, getVariations).
-	 * @return string
-	 */
-	public static function get_endpoint( $marketplace, $operation ) {
-		return sprintf( 'https://%s/catalog/v1/%s', self::API_HOST, $operation );
-	}
-
-	/**
-	 * Get the OAuth token endpoint for the given credential version.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @param string $version Credential version (2.1, 2.2, 2.3, 3.1, 3.2, 3.3).
-	 * @return string Full token endpoint URL.
-	 */
-	public static function get_token_endpoint( $version ) {
-		$major  = (int) $version;
-		$region = self::version_to_region( $version );
-
-		if ( 3 === $major ) {
-			$host = isset( self::$lwa_endpoints[ $region ] ) ? self::$lwa_endpoints[ $region ] : self::$lwa_endpoints['NA'];
-			return 'https://' . $host . '/auth/o2/token';
-		}
-
-		// Default to v2.x (Cognito).
-		$host = isset( self::$cognito_endpoints[ $region ] ) ? self::$cognito_endpoints[ $region ] : self::$cognito_endpoints['NA'];
-		return 'https://' . $host . '/oauth2/token';
-	}
-
-	/**
-	 * Map a credential version to its API region.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @param string $version Credential version.
-	 * @return string Region code (NA, EU, FE).
-	 */
-	public static function version_to_region( $version ) {
-		$map = array(
-			'2.1' => 'NA',
-			'2.2' => 'EU',
-			'2.3' => 'FE',
-			'3.1' => 'NA',
-			'3.2' => 'EU',
-			'3.3' => 'FE',
-		);
-		return isset( $map[ $version ] ) ? $map[ $version ] : 'NA';
 	}
 
 	/**

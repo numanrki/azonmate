@@ -229,11 +229,12 @@ class Product {
 	// -------------------------------------------------------------------------
 
 	/**
-	 * Create a Product instance from an Amazon Creators API response item.
+	 * Create a Product instance from an Amazon Creators API SDK Item object.
 	 *
 	 * @since 1.0.0
+	 * @since 2.1.0 Updated to accept SDK Item objects instead of raw arrays.
 	 *
-	 * @param array  $item        A single item from the API response.
+	 * @param \Amazon\CreatorsAPI\v1\com\amazon\creators\model\Item $item SDK Item object.
 	 * @param string $marketplace The marketplace code.
 	 * @param string $partner_tag The affiliate partner tag.
 	 * @return Product
@@ -241,36 +242,57 @@ class Product {
 	public static function from_api_response( $item, $marketplace = 'US', $partner_tag = '' ) {
 		$product = new self();
 
-		$product->asin        = isset( $item['asin'] ) ? sanitize_text_field( $item['asin'] ) : '';
+		$product->asin        = $item->getAsin() ? sanitize_text_field( $item->getAsin() ) : '';
 		$product->marketplace = sanitize_text_field( $marketplace );
-		$product->title       = isset( $item['itemInfo']['title']['displayValue'] ) ? sanitize_text_field( $item['itemInfo']['title']['displayValue'] ) : '';
+
+		// Title.
+		$item_info = $item->getItemInfo();
+		if ( $item_info && $item_info->getTitle() ) {
+			$product->title = sanitize_text_field( $item_info->getTitle()->getDisplayValue() ?? '' );
+		}
 
 		// URL.
-		$product->url = isset( $item['detailPageURL'] ) ? esc_url_raw( $item['detailPageURL'] ) : '';
+		$product->url = $item->getDetailPageURL() ? esc_url_raw( $item->getDetailPageURL() ) : '';
 
 		// Images.
-		if ( isset( $item['images']['primary'] ) ) {
-			$images = $item['images']['primary'];
-			$product->image_small  = isset( $images['small']['url'] ) ? esc_url_raw( $images['small']['url'] ) : '';
-			$product->image_medium = isset( $images['medium']['url'] ) ? esc_url_raw( $images['medium']['url'] ) : '';
-			$product->image_large  = isset( $images['large']['url'] ) ? esc_url_raw( $images['large']['url'] ) : '';
+		$images = $item->getImages();
+		if ( $images && $images->getPrimary() ) {
+			$primary = $images->getPrimary();
+			if ( $primary->getSmall() ) {
+				$product->image_small = esc_url_raw( $primary->getSmall()->getUrl() ?? '' );
+			}
+			if ( $primary->getMedium() ) {
+				$product->image_medium = esc_url_raw( $primary->getMedium()->getUrl() ?? '' );
+			}
+			if ( $primary->getLarge() ) {
+				$product->image_large = esc_url_raw( $primary->getLarge()->getUrl() ?? '' );
+			}
 		}
 
-		// Pricing (OffersV2 — price nested in money).
-		if ( isset( $item['offersV2']['listings'][0]['price']['money'] ) ) {
-			$money = $item['offersV2']['listings'][0]['price']['money'];
-			$product->price_display  = isset( $money['displayAmount'] ) ? sanitize_text_field( $money['displayAmount'] ) : '';
-			$product->price_amount   = isset( $money['amount'] ) ? floatval( $money['amount'] ) : 0.00;
-			$product->price_currency = isset( $money['currency'] ) ? sanitize_text_field( $money['currency'] ) : '';
+		// Pricing (OffersV2).
+		$offers = $item->getOffersV2();
+		$listing = null;
+		if ( $offers && $offers->getListings() ) {
+			$listings = $offers->getListings();
+			$listing  = $listings[0] ?? null;
 		}
 
-		// Savings (nested inside price).
-		if ( isset( $item['offersV2']['listings'][0]['price']['savings'] ) ) {
-			$savings = $item['offersV2']['listings'][0]['price']['savings'];
-			$product->savings_percentage = isset( $savings['percentage'] ) ? absint( $savings['percentage'] ) : 0;
+		if ( $listing && $listing->getPrice() && $listing->getPrice()->getMoney() ) {
+			$money = $listing->getPrice()->getMoney();
+			$product->price_display  = sanitize_text_field( $money->getDisplayAmount() ?? '' );
+			$product->price_amount   = floatval( $money->getAmount() ?? 0 );
+			$product->price_currency = sanitize_text_field( $money->getCurrency() ?? '' );
 		}
-		if ( isset( $item['offersV2']['listings'][0]['price']['savingBasis']['money']['amount'] ) ) {
-			$product->list_price_amount = floatval( $item['offersV2']['listings'][0]['price']['savingBasis']['money']['amount'] );
+
+		// Savings.
+		if ( $listing && $listing->getPrice() ) {
+			$price = $listing->getPrice();
+			if ( $price->getSavings() ) {
+				$product->savings_percentage = absint( $price->getSavings()->getPercentage() ?? 0 );
+			}
+			if ( $price->getSavingBasis() ) {
+				$product->list_price_amount = floatval( $price->getSavingBasis()->getAmount() ?? 0 );
+			}
 		}
 
 		// Rating — not available in Creators API, keep fields at default.
@@ -281,30 +303,32 @@ class Product {
 		$product->is_prime = false;
 
 		// Availability.
-		if ( isset( $item['offersV2']['listings'][0]['availability']['message'] ) ) {
-			$product->availability = sanitize_text_field( $item['offersV2']['listings'][0]['availability']['message'] );
+		if ( $listing && $listing->getAvailability() ) {
+			$product->availability = sanitize_text_field( $listing->getAvailability()->getMessage() ?? '' );
 		}
 
 		// Brand.
-		if ( isset( $item['itemInfo']['byLineInfo']['brand']['displayValue'] ) ) {
-			$product->brand = sanitize_text_field( $item['itemInfo']['byLineInfo']['brand']['displayValue'] );
-		} elseif ( isset( $item['itemInfo']['byLineInfo']['manufacturer']['displayValue'] ) ) {
-			$product->brand = sanitize_text_field( $item['itemInfo']['byLineInfo']['manufacturer']['displayValue'] );
+		if ( $item_info && $item_info->getByLineInfo() ) {
+			$byline = $item_info->getByLineInfo();
+			if ( $byline->getBrand() ) {
+				$product->brand = sanitize_text_field( $byline->getBrand()->getDisplayValue() ?? '' );
+			} elseif ( $byline->getManufacturer() ) {
+				$product->brand = sanitize_text_field( $byline->getManufacturer()->getDisplayValue() ?? '' );
+			}
 		}
 
 		// Features.
-		if ( isset( $item['itemInfo']['features']['displayValues'] ) && is_array( $item['itemInfo']['features']['displayValues'] ) ) {
-			$product->features = array_map( 'sanitize_text_field', $item['itemInfo']['features']['displayValues'] );
-		}
-
-		// Description.
-		if ( isset( $item['itemInfo']['productInfo']['productDescription']['displayValue'] ) ) {
-			$product->description = sanitize_text_field( $item['itemInfo']['productInfo']['productDescription']['displayValue'] );
+		if ( $item_info && $item_info->getFeatures() && $item_info->getFeatures()->getDisplayValues() ) {
+			$product->features = array_map( 'sanitize_text_field', $item_info->getFeatures()->getDisplayValues() );
 		}
 
 		// Browse node.
-		if ( isset( $item['browseNodeInfo']['browseNodes'][0]['displayName'] ) ) {
-			$product->browse_node = sanitize_text_field( $item['browseNodeInfo']['browseNodes'][0]['displayName'] );
+		$browse_info = $item->getBrowseNodeInfo();
+		if ( $browse_info && $browse_info->getBrowseNodes() ) {
+			$nodes = $browse_info->getBrowseNodes();
+			if ( ! empty( $nodes[0] ) && $nodes[0]->getDisplayName() ) {
+				$product->browse_node = sanitize_text_field( $nodes[0]->getDisplayName() );
+			}
 		}
 
 		$product->last_updated = current_time( 'mysql' );
