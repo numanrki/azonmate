@@ -4,7 +4,7 @@ Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,18 +16,18 @@ Search, display, and monetize Amazon products directly from your WordPress posts
 
 = Key Features =
 
-* **Live Product Search** – Search Amazon directly from the WordPress editor (Classic & Gutenberg).
-* **Auto-Updating Prices** – Product data is cached and automatically refreshed via WP-Cron.
-* **Multiple Display Types** – Product boxes, text links, image links, product lists, comparison tables, and bestseller lists.
-* **Gutenberg Blocks** – Native blocks for all display types with live preview.
-* **Shortcodes** – Powerful shortcode system with numerous attributes for customization.
-* **Comparison Tables** – Side-by-side product comparisons with customizable columns.
-* **Bestseller Lists** – Auto-generated lists from Amazon categories.
-* **Geo-Targeting** – Automatically redirect visitors to their local Amazon store.
-* **Click Tracking** – Built-in analytics for affiliate link clicks.
-* **Template System** – Fully customizable templates with theme override support.
-* **Responsive Design** – Mobile-first, dark mode support, BEM CSS architecture.
-* **Privacy Focused** – GDPR-friendly IP hashing, encrypted API key storage.
+* **Instant Amazon Search** – Find and insert Amazon products from within the WordPress editor (Classic & Gutenberg).
+* **Automatic Price Updates** – Product details are cached and refreshed automatically using WP-Cron.
+* **Flexible Display Options** – Choose from product boxes, text links, image links, product lists, comparison tables, bestseller lists, and collages.
+* **Gutenberg Block Support** – Includes native blocks for every display type with real-time previews.
+* **Advanced Shortcodes** – Versatile shortcode system with extensive customization options.
+* **Product Comparison Tables** – Create side-by-side comparisons with configurable columns.
+* **Bestseller & Collage Lists** – Generate bestseller and dynamic collage layouts from Amazon categories.
+* **Marketplace Geo-Targeting** – Direct visitors to their local Amazon store automatically.
+* **Affiliate Click Analytics** – Track and analyze affiliate link clicks with built-in reporting.
+* **Customizable Templates** – Override and personalize templates directly from your theme.
+* **Mobile-Ready & Dark Mode** – Responsive layouts, BEM CSS, and full dark mode compatibility.
+* **Privacy-First Approach** – GDPR-compliant IP hashing and encrypted API credentials.
 
 = Shortcodes =
 
@@ -91,6 +91,11 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 7. Gutenberg block editor
 
 == Changelog ==
+
+= 1.6.1 =
+* Fetch from Amazon button — enter an ASIN in the product form and click "Fetch from Amazon" to auto-populate all fields (title, price, image, rating, features, etc.) directly from Amazon PA-API
+* Manual entry still fully supported — fetched data can be reviewed and overridden before saving
+* Improved readme feature descriptions
 
 = 1.6.0 =
 * Dynamic Product Collage — new `[azonmate collage="ASIN1,ASIN2,..."]` shortcode with auto-adjusting grid layout (hero, duo, trio, quad, penta, auto) based on product count

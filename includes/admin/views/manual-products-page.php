@@ -63,11 +63,17 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 
 							<div class="azonmate-field">
 								<label for="azonmate-product-asin"><?php esc_html_e( 'Product ID / ASIN', 'azonmate' ); ?> <span class="required">*</span></label>
-								<input type="text" id="azonmate-product-asin" name="asin" required
-									   placeholder="<?php esc_attr_e( 'e.g., B09V4K3GZQ or any unique ID', 'azonmate' ); ?>" />
-								<p class="description"><?php esc_html_e( 'Amazon ASIN or a custom unique identifier. This is used in shortcodes.', 'azonmate' ); ?></p>
+								<div class="azonmate-asin-row">
+									<input type="text" id="azonmate-product-asin" name="asin" required
+										   placeholder="<?php esc_attr_e( 'e.g., B09V4K3GZQ or any unique ID', 'azonmate' ); ?>" />
+									<button type="button" id="azonmate-fetch-from-api" class="button button-primary">
+										<span class="dashicons dashicons-download" style="font-size:16px;vertical-align:text-bottom;margin-right:2px;"></span>
+										<?php esc_html_e( 'Fetch from Amazon', 'azonmate' ); ?>
+									</button>
+								</div>
+								<p class="description"><?php esc_html_e( 'Enter an ASIN and click Fetch to auto-fill all fields from Amazon, or fill in manually.', 'azonmate' ); ?></p>
+								<span id="azonmate-fetch-api-result" class="azonmate-save-result"></span>
 							</div>
-
 							<div class="azonmate-field">
 								<label for="azonmate-product-title"><?php esc_html_e( 'Product Title', 'azonmate' ); ?> <span class="required">*</span></label>
 								<input type="text" id="azonmate-product-title" name="title" required
@@ -229,6 +235,33 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 </div>
 
 <style>
+.azonmate-asin-row {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.azonmate-asin-row input[type="text"] {
+	flex: 1;
+}
+
+.azonmate-asin-row .button {
+	white-space: nowrap;
+	height: 30px;
+	line-height: 28px;
+}
+
+#azonmate-fetch-api-result {
+	display: block;
+	margin-top: 4px;
+	font-size: 13px;
+}
+
+@keyframes azonmate-spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
 .azonmate-products-page .azonmate-products-loading {
 	padding: 40px;
 	text-align: center;

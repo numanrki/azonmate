@@ -52,6 +52,11 @@
 		// ASIN field → update usage preview.
 		$form.find('[name="asin"]').on('input', updateUsagePreview);
 
+		// Fetch from Amazon API button inside modal.
+		$('#azonmate-fetch-from-api').on('click', function () {
+			fetchAndPopulateForm();
+		});
+
 		// Image URL → preview.
 		$form.find('[name="image_url"]').on('input', function () {
 			var url = $(this).val().trim();
@@ -299,6 +304,79 @@
 					openModal(product);
 				}
 			}
+		});
+	}
+
+	/**
+	 * Fetch product data from Amazon API and auto-populate the form fields.
+	 */
+	function fetchAndPopulateForm() {
+		var asin = $form.find('[name="asin"]').val().trim();
+		var $btn = $('#azonmate-fetch-from-api');
+		var $result = $('#azonmate-fetch-api-result');
+
+		if (!asin) {
+			$result.removeClass('success').addClass('error').text('Enter an ASIN first.');
+			return;
+		}
+
+		// Validate ASIN format (10-char alphanumeric)
+		if (!/^[A-Z0-9]{10}$/i.test(asin)) {
+			if (!confirm('"' + asin + '" does not look like a standard Amazon ASIN (10 characters). Fetch anyway?')) {
+				return;
+			}
+		}
+
+		var origHtml = $btn.html();
+		$btn.prop('disabled', true).html('<span class="dashicons dashicons-update" style="font-size:16px;vertical-align:text-bottom;animation:azonmate-spin 1s infinite linear;"></span> Fetching...');
+		$result.removeClass('success error').text('');
+
+		$.post(azonMateAdmin.ajaxUrl, {
+			action: 'azon_mate_fetch_product',
+			nonce: azonMateAdmin.nonce,
+			asin: asin,
+		}, function (response) {
+			$btn.prop('disabled', false).html(origHtml);
+
+			if (response.success && response.data.product) {
+				var p = response.data.product;
+
+				// Auto-populate all form fields from API data.
+				$form.find('[name="title"]').val(p.title || '');
+				$form.find('[name="url"]').val(p.url || '');
+				$form.find('[name="image_url"]').val(p.image_medium || p.image_large || p.image_small || '');
+				$form.find('[name="brand"]').val(p.brand || '');
+				$form.find('[name="description"]').val(p.description || '');
+				$form.find('[name="price_display"]').val(p.price_display || '');
+				$form.find('[name="price_amount"]').val(p.price_amount || '');
+				$form.find('[name="price_currency"]').val(p.price_currency || 'USD');
+				$form.find('[name="list_price_amount"]').val(p.list_price_amount || '');
+				$form.find('[name="savings_percentage"]').val(p.savings_percentage || '');
+				$form.find('[name="rating"]').val(p.rating || '');
+				$form.find('[name="review_count"]').val(p.review_count || '');
+				$form.find('[name="is_prime"]').prop('checked', !!p.is_prime);
+				$form.find('[name="availability"]').val(p.availability || 'In Stock');
+				$form.find('[name="browse_node"]').val(p.browse_node || '');
+				$form.find('[name="marketplace"]').val(p.marketplace || '');
+
+				// Features: array → newline-separated
+				if (Array.isArray(p.features) && p.features.length) {
+					$form.find('[name="features"]').val(p.features.join('\n'));
+				}
+
+				// Trigger image preview update.
+				$form.find('[name="image_url"]').trigger('input');
+
+				// Update usage preview.
+				updateUsagePreview();
+
+				$result.removeClass('error').addClass('success').text(response.data.message || 'Product data fetched! Review and save.');
+			} else {
+				$result.removeClass('success').addClass('error').text(response.data.message || 'Could not fetch product from Amazon.');
+			}
+		}).fail(function () {
+			$btn.prop('disabled', false).html(origHtml);
+			$result.removeClass('success').addClass('error').text('Network error. Please try again.');
 		});
 	}
 
