@@ -157,10 +157,10 @@
 			html += '</div>';
 			html += '</div>';
 			html += '<div class="azonmate-product-card-actions">';
-			html += '<button type="button" class="button button-small azonmate-edit-product" data-asin="' + escHtml(p.asin) + '"><span class="dashicons dashicons-edit" style="font-size:14px;vertical-align:text-bottom;"></span> Edit</button>';
-			html += '<button type="button" class="button button-small azonmate-fetch-product" data-asin="' + escHtml(p.asin) + '" title="Fetch fresh data from Amazon API"><span class="dashicons dashicons-update" style="font-size:14px;vertical-align:text-bottom;"></span> Fetch</button>';
-			html += '<button type="button" class="button button-small button-link-delete azonmate-delete-product" data-asin="' + escHtml(p.asin) + '" data-title="' + escHtml(p.title) + '"><span class="dashicons dashicons-trash" style="font-size:14px;vertical-align:text-bottom;"></span> Delete</button>';
-			html += '<button type="button" class="button button-small azonmate-copy-shortcode" data-shortcode="' + escHtml(shortcode) + '" title="Copy shortcode"><span class="dashicons dashicons-clipboard" style="font-size:14px;vertical-align:text-bottom;"></span> Copy Shortcode</button>';
+			html += '<button type="button" class="button button-small azonmate-edit-product" data-asin="' + escHtml(p.asin) + '"><span class="dashicons dashicons-edit"></span> Edit</button>';
+			html += '<button type="button" class="button button-small azonmate-fetch-product" data-asin="' + escHtml(p.asin) + '" title="Fetch fresh data from Amazon API"><span class="dashicons dashicons-update"></span> Fetch</button>';
+			html += '<button type="button" class="button button-small button-link-delete azonmate-delete-product" data-asin="' + escHtml(p.asin) + '" data-title="' + escHtml(p.title) + '"><span class="dashicons dashicons-trash"></span> Delete</button>';
+			html += '<button type="button" class="button button-small azonmate-copy-shortcode" data-shortcode="' + escHtml(shortcode) + '" title="Copy shortcode"><span class="dashicons dashicons-clipboard"></span> Copy Shortcode</button>';
 			html += '</div>';
 			html += '</div>';
 		});

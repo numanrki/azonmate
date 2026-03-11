@@ -370,7 +370,17 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 }
 
 .azonmate-product-card-actions .button {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
 	font-size: 12px;
+}
+
+.azonmate-product-card-actions .button .dashicons {
+	font-size: 14px;
+	width: 14px;
+	height: 14px;
+	line-height: 1;
 }
 
 .azonmate-product-card-actions .azonmate-copy-shortcode {
