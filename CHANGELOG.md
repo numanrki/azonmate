@@ -5,6 +5,18 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2026-03-11
+
+### Added
+- **Fetch from Amazon Button** — new "Fetch from Amazon" button in the product creation/editing form. Enter an ASIN, click Fetch, and all form fields (title, price, image, rating, features, brand, availability, etc.) are auto-populated from Amazon PA-API.
+- **Inline ASIN Row Layout** — ASIN input and Fetch button displayed side-by-side in a flex container with loading spinner feedback.
+- **ASIN Format Validation** — soft validation warns if the entered ID doesn't match the standard 10-character ASIN format, with option to proceed anyway.
+
+### Changed
+- Manual product entry remains fully supported — fetched data can be reviewed and overridden before saving.
+- Readme feature descriptions refreshed for clarity.
+- Version bumped to 1.6.1.
+
 ## [1.6.0] - 2026-02-24
 
 ### Added

@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-1.6.0-ff9900?style=for-the-badge" alt="v1.6.0" /></a>&nbsp;
+  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-1.6.1-ff9900?style=for-the-badge" alt="v1.6.1" /></a>&nbsp;
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress 6.0+" />&nbsp;
   <img src="https://img.shields.io/badge/PHP-7.4%2B-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 7.4+" />&nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Free_for_Personal_Use-22c55e?style=for-the-badge" alt="Free for Personal Use" /></a>
@@ -77,11 +77,11 @@ Theme-proof product displays — admin preview = live post:
 | Masonry | Split |
 | Comparison Table | Deal Card |
 
-### 7 Shortcodes
-`box` · `link` · `image` · `field` · `list` · `table` · `showcase`
+### 8 Shortcodes
+`box` · `link` · `image` · `field` · `list` · `table` · `showcase` · `collage`
 
-### Gutenberg Blocks
-Product Box · Product List · Comparison Table · Bestseller · Text Link
+### 8 Gutenberg Blocks
+Product Box · Product List · Comparison Table · Bestseller · Text Link · Product Search · Showcase · Collage
 
 </td>
 <td width="50%" valign="top">
@@ -105,7 +105,10 @@ AES-256-CBC key encryption · nonce-verified AJAX · capability checks · rate l
 Fully scoped BEM classes · CSS Custom Properties · dark mode · template overrides.
 
 ### Manual Products
-Add products manually without an API key — full CRUD admin interface.
+Add products manually without an API key — full CRUD admin interface. **Fetch from Amazon** button auto-populates all fields from PA-API.
+
+### Product Collage
+Dynamic multi-product collage shortcode with auto-adjusting grid layout and hover-reveal buy buttons.
 
 </td>
 </tr>
@@ -145,6 +148,7 @@ Add products manually without an API key — full CRUD admin interface.
 [azonmate list="ASIN1,ASIN2" layout="grid"]                    → Product list
 [azonmate table="ASIN1,ASIN2" highlight="1"]                   → Comparison table
 [azonmate showcase="ASIN1,ASIN2" layout="grid" columns="3"]    → Showcase (8 layouts)
+[azonmate collage="ASIN1,ASIN2,ASIN3"]                        → Product collage
 ```
 
 > **Tip:** Use the **Showcase Builder** (`AzonMate → Showcase` in the admin) to generate shortcodes visually — no syntax to memorize.
@@ -210,6 +214,23 @@ azonmate/
 ## 📝 Changelog
 
 > Full history in [CHANGELOG.md](CHANGELOG.md).
+
+### v1.6.1 — 2026-03-11
+- **New:** "Fetch from Amazon" button in the product form — enter an ASIN and auto-populate all fields (title, price, image, rating, features, etc.) from Amazon PA-API
+- **New:** Manual entry still fully supported — fetched data can be reviewed and overridden before saving
+- **Improved:** Readme feature descriptions refreshed
+
+### v1.6.0 — 2026-02-24
+- **New:** Dynamic Product Collage — `[azonmate collage="ASIN1,ASIN2,..."]` shortcode with auto-adjusting grid layout
+- **New:** Collage Gutenberg Block — 8th block with live server-side preview
+- **New:** Per-product Fetch button — refresh any product from Amazon API with one click
+- **New:** Master Fetch button — bulk refresh ALL products from Settings → Cache tab
+- **Fixed:** Bullet feature alignment — checkmark icons and text properly aligned
+
+### v1.5.0 — 2026-02-23
+- **New:** Showcase Gutenberg Block — 3-step editor: pick layout, search products, live preview
+- **New:** Orange brand icons (#ff9900) for all 7 blocks in the inserter
+- **Changed:** Author name updated to "Numan Rashed" throughout
 
 ### v1.4.0 — 2026-02-23
 - **New:** 6 fully functional Gutenberg blocks — Product Box, Product List, Comparison Table, Bestsellers, Text Link, and Product Search
