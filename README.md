@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-2.1.2-ff9900?style=for-the-badge" alt="v2.1.2" /></a>&nbsp;
+  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-2.1.3-ff9900?style=for-the-badge" alt="v2.1.3" /></a>&nbsp;
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress 6.0+" />&nbsp;
   <img src="https://img.shields.io/badge/PHP-8.1%2B-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.1+" />&nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Free_for_Personal_Use-22c55e?style=for-the-badge" alt="Free for Personal Use" /></a>
@@ -262,12 +262,8 @@ azonmate/
 
 > Full history in [CHANGELOG.md](CHANGELOG.md).
 
-### v2.1.2 — 2026-03-11
-- **Reduced:** Plugin distribution size cut from ~4 MB to ~2.5 MB (35% smaller)
-- **Removed:** Duplicate SDK source in `lib/creatorsapi-sdk/` — `vendor/` already contains the copied SDK
-- **Removed:** Vendor doc cruft (CHANGELOG, README, UPGRADING files from Guzzle, PSR, etc.)
-- **Removed:** Dev-only root files (`package.json`, `webpack.config.js`, `composer.lock`) from distribution
-- **Cleaned:** `composer.json` path repository reference removed (no longer needed)
+### v2.1.3 — 2026-03-11
+- **Fixed:** Product card button icons (Edit, Fetch, Delete, Copy Shortcode) misaligned with text — now uses flexbox centering for consistent alignment
 
 ---
 

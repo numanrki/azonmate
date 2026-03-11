@@ -4,7 +4,7 @@ Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 8.1
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,9 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 7. Gutenberg block editor
 
 == Changelog ==
+
+= 2.1.3 =
+* Fixed: Product card button icons (Edit, Fetch, Delete, Copy Shortcode) misaligned with text — now uses flexbox centering
 
 = 2.1.2 =
 * Reduced plugin distribution size from ~4 MB to ~2.5 MB (35% smaller)
