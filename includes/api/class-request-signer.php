@@ -1,9 +1,9 @@
 <?php
 /**
- * AWS Signature Version 4 request signer for Amazon PA-API 5.0.
+ * OAuth 2.0 client for Amazon Creators API.
  *
  * @package AzonMate\API
- * @since   1.0.0
+ * @since   2.0.0
  */
 
 namespace AzonMate\API;
@@ -16,134 +16,192 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class RequestSigner
  *
- * Implements AWS Signature Version 4 (HMAC-SHA256) for signing
- * Amazon PA-API 5.0 requests.
+ * Handles OAuth 2.0 token acquisition and authenticated API requests
+ * for the Amazon Creators API.
  *
- * @since 1.0.0
+ * @since 2.0.0
  */
 class RequestSigner {
 
 	/**
-	 * AWS access key.
+	 * Credential ID.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 * @var string
 	 */
-	private $access_key;
+	private $credential_id;
 
 	/**
-	 * AWS secret key.
+	 * Credential Secret.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 * @var string
 	 */
-	private $secret_key;
+	private $credential_secret;
 
 	/**
-	 * AWS region (e.g., us-east-1).
+	 * Credential version (e.g. 2.1, 3.1).
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 * @var string
 	 */
-	private $region;
+	private $version;
 
 	/**
-	 * API host (e.g., webservices.amazon.com).
+	 * Marketplace domain (e.g. www.amazon.com).
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 * @var string
 	 */
-	private $host;
-
-	/**
-	 * The AWS service name.
-	 *
-	 * @since 1.0.0
-	 * @var string
-	 */
-	private $service = 'ProductAdvertisingAPI';
+	private $marketplace_domain;
 
 	/**
 	 * Constructor.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 *
-	 * @param string $access_key AWS access key.
-	 * @param string $secret_key AWS secret key.
-	 * @param string $region     AWS region.
-	 * @param string $host       API host.
+	 * @param string $credential_id     Credential ID.
+	 * @param string $credential_secret Credential Secret.
+	 * @param string $version           Credential version.
+	 * @param string $marketplace_domain Marketplace domain (e.g. www.amazon.com).
 	 */
-	public function __construct( $access_key, $secret_key, $region, $host ) {
-		$this->access_key = $access_key;
-		$this->secret_key = $secret_key;
-		$this->region     = $region;
-		$this->host       = $host;
+	public function __construct( $credential_id, $credential_secret, $version, $marketplace_domain ) {
+		$this->credential_id     = $credential_id;
+		$this->credential_secret = $credential_secret;
+		$this->version           = $version;
+		$this->marketplace_domain = $marketplace_domain;
 	}
 
 	/**
-	 * Sign and send a request to the Amazon PA-API.
+	 * Get a valid OAuth access token, using cache when possible.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 *
-	 * @param string $operation  The API operation (e.g., 'SearchItems', 'GetItems').
+	 * @return string|\WP_Error Access token or WP_Error on failure.
+	 */
+	private function get_access_token() {
+		$transient_key = 'azon_mate_oauth_token_' . md5( $this->credential_id . $this->version );
+		$token         = get_transient( $transient_key );
+
+		if ( ! empty( $token ) ) {
+			return $token;
+		}
+
+		$token_data = $this->fetch_token();
+		if ( is_wp_error( $token_data ) ) {
+			return $token_data;
+		}
+
+		// Cache for 3500 seconds (just under the 3600s expiry).
+		set_transient( $transient_key, $token_data['access_token'], 3500 );
+
+		return $token_data['access_token'];
+	}
+
+	/**
+	 * Fetch a new OAuth token from the token endpoint.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return array|\WP_Error Token data array or WP_Error on failure.
+	 */
+	private function fetch_token() {
+		$token_url = Marketplace::get_token_endpoint( $this->version );
+		$major     = (int) $this->version;
+
+		if ( 3 === $major ) {
+			// v3.x — LwA: JSON body, scope uses ::
+			$body = wp_json_encode( array(
+				'grant_type'    => 'client_credentials',
+				'client_id'     => $this->credential_id,
+				'client_secret' => $this->credential_secret,
+				'scope'         => 'creatorsapi::default',
+			) );
+
+			$response = wp_remote_post( $token_url, array(
+				'headers' => array( 'Content-Type' => 'application/json' ),
+				'body'    => $body,
+				'timeout' => 15,
+			) );
+		} else {
+			// v2.x — Cognito: form-encoded body, scope uses /
+			$body = array(
+				'grant_type'    => 'client_credentials',
+				'client_id'     => $this->credential_id,
+				'client_secret' => $this->credential_secret,
+				'scope'         => 'creatorsapi/default',
+			);
+
+			$response = wp_remote_post( $token_url, array(
+				'headers' => array( 'Content-Type' => 'application/x-www-form-urlencoded' ),
+				'body'    => $body,
+				'timeout' => 15,
+			) );
+		}
+
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		}
+
+		$code = wp_remote_retrieve_response_code( $response );
+		$body = wp_remote_retrieve_body( $response );
+
+		if ( 200 !== $code ) {
+			return new \WP_Error(
+				'azon_mate_token_error',
+				sprintf(
+					/* translators: 1: HTTP status code, 2: Response body */
+					__( 'OAuth token request failed (%1$d): %2$s', 'azonmate' ),
+					$code,
+					$body
+				)
+			);
+		}
+
+		$decoded = json_decode( $body, true );
+
+		if ( empty( $decoded['access_token'] ) ) {
+			return new \WP_Error( 'azon_mate_token_error', __( 'OAuth response did not contain an access token.', 'azonmate' ) );
+		}
+
+		return $decoded;
+	}
+
+	/**
+	 * Send an authenticated request to the Amazon Creators API.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string $operation  The API operation (e.g., 'searchItems', 'getItems').
 	 * @param array  $payload    The request payload (will be JSON-encoded).
-	 * @return array|WP_Error    Decoded response body or WP_Error on failure.
+	 * @return array|\WP_Error   Decoded response body or WP_Error on failure.
 	 */
 	public function send_request( $operation, $payload ) {
-		$path       = '/paapi5/' . strtolower( $operation );
-		$payload_json = wp_json_encode( $payload );
+		$access_token = $this->get_access_token();
+		if ( is_wp_error( $access_token ) ) {
+			return $access_token;
+		}
 
+		$url = Marketplace::get_endpoint( '', $operation );
+
+		$payload_json = wp_json_encode( $payload );
 		if ( false === $payload_json ) {
 			return new \WP_Error( 'azon_mate_json_encode_error', __( 'Failed to encode request payload.', 'azonmate' ) );
 		}
 
-		$amz_target = Marketplace::get_amz_target( $operation );
+		// Build Authorization header.
+		$major = (int) $this->version;
+		if ( 2 === $major ) {
+			$auth_header = sprintf( 'Bearer %s, Version %s', $access_token, $this->version );
+		} else {
+			$auth_header = sprintf( 'Bearer %s', $access_token );
+		}
 
-		// Current timestamp in ISO 8601 format.
-		$timestamp  = gmdate( 'Ymd\THis\Z' );
-		$date_stamp = gmdate( 'Ymd' );
-
-		// Build headers.
-		$headers = array(
-			'content-encoding' => 'amz-1.0',
-			'content-type'     => 'application/json; charset=UTF-8',
-			'host'             => $this->host,
-			'x-amz-date'       => $timestamp,
-			'x-amz-target'     => $amz_target,
-		);
-
-		// Create canonical request.
-		$canonical_request = $this->create_canonical_request( 'POST', $path, $headers, $payload_json );
-
-		// Create string to sign.
-		$credential_scope = $date_stamp . '/' . $this->region . '/' . $this->service . '/aws4_request';
-		$string_to_sign   = $this->create_string_to_sign( $timestamp, $credential_scope, $canonical_request );
-
-		// Calculate signature.
-		$signing_key = $this->get_signing_key( $date_stamp );
-		$signature   = hash_hmac( 'sha256', $string_to_sign, $signing_key );
-
-		// Build authorization header.
-		$signed_headers = $this->get_signed_headers( $headers );
-		$authorization  = sprintf(
-			'AWS4-HMAC-SHA256 Credential=%s/%s, SignedHeaders=%s, Signature=%s',
-			$this->access_key,
-			$credential_scope,
-			$signed_headers,
-			$signature
-		);
-
-		// Prepare WordPress HTTP request args.
 		$request_headers = array(
-			'Content-Type'     => 'application/json; charset=UTF-8',
-			'Content-Encoding' => 'amz-1.0',
-			'X-Amz-Date'       => $timestamp,
-			'X-Amz-Target'     => $amz_target,
-			'Authorization'    => $authorization,
-			'Host'             => $this->host,
+			'Content-Type'  => 'application/json',
+			'Authorization' => $auth_header,
+			'x-marketplace' => $this->marketplace_domain,
 		);
-
-		$url = 'https://' . $this->host . $path;
 
 		// Log request in debug mode.
 		if ( \AzonMate\Plugin::is_debug_enabled() ) {
@@ -187,104 +245,13 @@ class RequestSigner {
 		}
 
 		// Check for API-level errors.
-		if ( isset( $decoded['Errors'] ) ) {
-			$api_error = $decoded['Errors'][0];
-			$error_msg = isset( $api_error['Message'] ) ? $api_error['Message'] : __( 'Unknown API error', 'azonmate' );
+		if ( isset( $decoded['errors'] ) ) {
+			$api_error = $decoded['errors'][0];
+			$error_msg = isset( $api_error['message'] ) ? $api_error['message'] : __( 'Unknown API error', 'azonmate' );
 			return new \WP_Error( 'azon_mate_api_error', $error_msg );
 		}
 
 		return $decoded;
 	}
-
-	/**
-	 * Create the canonical request string.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $method  HTTP method.
-	 * @param string $path    Request path.
-	 * @param array  $headers Request headers.
-	 * @param string $payload Request payload.
-	 * @return string
-	 */
-	private function create_canonical_request( $method, $path, $headers, $payload ) {
-		// Sort headers by lowercase key name.
-		$canonical_headers = '';
-		$sorted_headers    = array();
-
-		foreach ( $headers as $key => $value ) {
-			$sorted_headers[ strtolower( $key ) ] = trim( $value );
-		}
-		ksort( $sorted_headers );
-
-		foreach ( $sorted_headers as $key => $value ) {
-			$canonical_headers .= $key . ':' . $value . "\n";
-		}
-
-		$signed_headers = implode( ';', array_keys( $sorted_headers ) );
-		$payload_hash   = hash( 'sha256', $payload );
-
-		$canonical_request = implode( "\n", array(
-			$method,
-			$path,
-			'', // Empty query string.
-			$canonical_headers,
-			$signed_headers,
-			$payload_hash,
-		) );
-
-		return $canonical_request;
-	}
-
-	/**
-	 * Create the string to sign.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $timestamp        ISO 8601 timestamp.
-	 * @param string $credential_scope Credential scope string.
-	 * @param string $canonical_request The canonical request.
-	 * @return string
-	 */
-	private function create_string_to_sign( $timestamp, $credential_scope, $canonical_request ) {
-		return implode( "\n", array(
-			'AWS4-HMAC-SHA256',
-			$timestamp,
-			$credential_scope,
-			hash( 'sha256', $canonical_request ),
-		) );
-	}
-
-	/**
-	 * Derive the signing key.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $date_stamp Date stamp (Ymd).
-	 * @return string Binary signing key.
-	 */
-	private function get_signing_key( $date_stamp ) {
-		$k_date    = hash_hmac( 'sha256', $date_stamp, 'AWS4' . $this->secret_key, true );
-		$k_region  = hash_hmac( 'sha256', $this->region, $k_date, true );
-		$k_service = hash_hmac( 'sha256', $this->service, $k_region, true );
-		$k_signing = hash_hmac( 'sha256', 'aws4_request', $k_service, true );
-		return $k_signing;
-	}
-
-	/**
-	 * Get the signed headers string.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $headers Request headers.
-	 * @return string Semicolon-delimited list of signed header names.
-	 */
-	private function get_signed_headers( $headers ) {
-		$keys = array();
-		foreach ( array_keys( $headers ) as $key ) {
-			$keys[] = strtolower( $key );
-		}
-		sort( $keys );
-		return implode( ';', $keys );
-	}
+}
 }

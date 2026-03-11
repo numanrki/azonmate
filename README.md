@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-1.6.1-ff9900?style=for-the-badge" alt="v1.6.1" /></a>&nbsp;
+  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-2.0.0-ff9900?style=for-the-badge" alt="v2.0.0" /></a>&nbsp;
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress 6.0+" />&nbsp;
   <img src="https://img.shields.io/badge/PHP-7.4%2B-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 7.4+" />&nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Free_for_Personal_Use-22c55e?style=for-the-badge" alt="Free for Personal Use" /></a>
@@ -32,6 +32,53 @@
 
 <br />
 
+> [!IMPORTANT]
+> **🔴 Amazon PA-API 5.0 is being deprecated on April 30, 2026.**
+>
+> Amazon is retiring the Product Advertising API (PA-API 5.0) and replacing it with the **Creators API**. Starting **v2.0.0**, AzonMate has fully migrated to the new Creators API with OAuth 2.0 authentication.
+>
+> **If you are upgrading from v1.x**, you must generate new **Creators API credentials** (Credential ID, Credential Secret, and Version) from your Amazon Associates account and enter them in **AzonMate → Settings → API**. Your old PA-API Access Key and Secret Key will no longer work after the deprecation date.
+>
+> 🔗 [Learn more about the Creators API migration](https://webservices.amazon.com/paapi5/documentation/)
+
+<br />
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- What's New in v2.0.0 — Amazon Creators API                 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<details>
+<summary><strong>🆕 What's New in v2.0.0 — Amazon Creators API</strong></summary>
+
+<br />
+
+AzonMate v2.0.0 replaces the legacy PA-API 5.0 with Amazon's next-generation **Creators API**. Here's what changed under the hood:
+
+| | PA-API 5.0 (old) | Creators API (v2.0.0) |
+|:---|:---|:---|
+| **Authentication** | AWS Signature v4 (HMAC-SHA256) | OAuth 2.0 Bearer token |
+| **Credentials** | Access Key + Secret Key | Credential ID + Credential Secret + Version |
+| **API Endpoint** | `webservices.amazon.*/paapi5/...` | `creatorsapi.amazon/catalog/v1/...` |
+| **Token Caching** | None (signed per-request) | Auto-cached for 1 hour |
+| **Request Format** | PascalCase params | lowerCamelCase params |
+| **Offers Resource** | `Offers.Listings.*` | `offersV2.listings.*` |
+| **Price Structure** | Flat (`Price.Amount`) | Nested (`price.money.amount`) |
+
+**Key benefits of the Creators API:**
+- **Simpler authentication** — no more complex AWS Signature v4 signing. Just a Bearer token.
+- **Automatic token caching** — OAuth tokens are cached for ~1 hour, reducing overhead.
+- **Single API host** — all marketplaces use `creatorsapi.amazon` (no per-region hosts).
+- **Future-proof** — PA-API 5.0 shuts down April 30, 2026. Creators API is Amazon's long-term replacement.
+
+**What's no longer available** (removed by Amazon):
+- ⚠️ `CustomerReviews` (star rating, review count) — not available in Creators API
+- ⚠️ `DeliveryInfo.IsPrimeEligible` (Prime badge) — not available in Creators API
+- Existing manually-set ratings and Prime badges on your products will remain unchanged.
+
+</details>
+
+<br />
+
 <p align="center">
   <a href="#-quick-start">Quick Start</a>&nbsp;&nbsp;·&nbsp;&nbsp;
   <a href="#-features">Features</a>&nbsp;&nbsp;·&nbsp;&nbsp;
@@ -49,7 +96,7 @@
 1. **Download** the latest `.zip` from the [Releases page](https://github.com/numanrki/azonmate/releases/latest) — or click the green **Code** button above → **Download ZIP**.
 2. In WordPress go to **Plugins → Add New → Upload Plugin** and upload the zip.
 3. Click **Install Now**, then **Activate**.
-4. Head to **AzonMate → Settings**, enter your Amazon PA-API 5.0 credentials, hit **Test Connection** — done.
+4. Head to **AzonMate → Settings**, enter your Amazon Creators API credentials, hit **Test Connection** — done.
 
 That's it. Start dropping shortcodes or using the visual Showcase Builder.
 
@@ -61,8 +108,8 @@ That's it. Start dropping shortcodes or using the visual Showcase Builder.
 <tr>
 <td width="50%" valign="top">
 
-### Amazon PA-API 5.0
-- AWS Signature v4 authentication
+### Amazon Creators API
+- OAuth 2.0 authentication
 - **10 marketplaces** — US, UK, DE, FR, IN, CA, JP, IT, ES, AU
 - Real-time product search inside the editor
 - Live price, rating & availability sync
@@ -105,7 +152,7 @@ AES-256-CBC key encryption · nonce-verified AJAX · capability checks · rate l
 Fully scoped BEM classes · CSS Custom Properties · dark mode · template overrides.
 
 ### Manual Products
-Add products manually without an API key — full CRUD admin interface. **Fetch from Amazon** button auto-populates all fields from PA-API.
+Add products manually without an API key — full CRUD admin interface. **Fetch from Amazon** button auto-populates all fields from the Creators API.
 
 ### Product Collage
 Dynamic multi-product collage shortcode with auto-adjusting grid layout and hover-reveal buy buttons.
@@ -159,7 +206,7 @@ Dynamic multi-product collage shortcode with auto-adjusting grid layout and hove
 
 | Setting | Where |
 |:---|:---|
-| API credentials (Access Key, Secret Key, Partner Tag, Marketplace) | **AzonMate → Settings → API** |
+| API credentials (Credential ID, Credential Secret, Version, Partner Tag, Marketplace) | **AzonMate → Settings → API** |
 | Cache TTL & auto-refresh schedule | **AzonMate → Settings → Cache** |
 | Geo-targeting regions & fallback tags | **AzonMate → Settings → Geo** |
 | Click tracking & analytics options | **AzonMate → Settings → Tracking** |
@@ -174,7 +221,7 @@ Dynamic multi-product collage shortcode with auto-adjusting grid layout and hove
 |:---|:---|
 | WordPress | 6.0 |
 | PHP | 7.4 |
-| Amazon PA-API | 5.0 credentials |
+| Amazon Creators API | Credential ID, Secret & Version |
 
 ---
 
@@ -215,70 +262,18 @@ azonmate/
 
 > Full history in [CHANGELOG.md](CHANGELOG.md).
 
-### v1.6.1 — 2026-03-11
-- **New:** "Fetch from Amazon" button in the product form — enter an ASIN and auto-populate all fields (title, price, image, rating, features, etc.) from Amazon PA-API
-- **New:** Manual entry still fully supported — fetched data can be reviewed and overridden before saving
-- **Improved:** Readme feature descriptions refreshed
-
-### v1.6.0 — 2026-02-24
-- **New:** Dynamic Product Collage — `[azonmate collage="ASIN1,ASIN2,..."]` shortcode with auto-adjusting grid layout
-- **New:** Collage Gutenberg Block — 8th block with live server-side preview
-- **New:** Per-product Fetch button — refresh any product from Amazon API with one click
-- **New:** Master Fetch button — bulk refresh ALL products from Settings → Cache tab
-- **Fixed:** Bullet feature alignment — checkmark icons and text properly aligned
-
-### v1.5.0 — 2026-02-23
-- **New:** Showcase Gutenberg Block — 3-step editor: pick layout, search products, live preview
-- **New:** Orange brand icons (#ff9900) for all 7 blocks in the inserter
-- **Changed:** Author name updated to "Numan Rashed" throughout
-
-### v1.4.0 — 2026-02-23
-- **New:** 6 fully functional Gutenberg blocks — Product Box, Product List, Comparison Table, Bestsellers, Text Link, and Product Search
-- **New:** All blocks searchable in the Block Inserter by "azonmate", "amazon", "product", "affiliate"
-- **New:** In-editor product search — search Amazon products, browse saved/manual products, or paste ASINs directly inside each block
-- **New:** Server-side rendering for all blocks via the shortcode engine
-- **New:** Shared editor CSS with search panel, result cards, selected product tags, and category picker
-- **New:** "AzonMate Product Search" universal block with display type chooser (box / link / image)
-
-### v1.3.5 — 2026-02-23
-- **Changed:** Admin bar logo now uses the official branded AzonMate icon (orange rounded square, white text, Amazon smile arrow with arrowhead) instead of the generic smiley-face SVG
-- **Changed:** `icon.svg` updated — white text/stroke, arrowhead polygon, increased corner radius
-
-### v1.3.4 — 2026-02-23
-- **New:** Unified disclosure system — custom text, font size, color, alignment (Display settings)
-- **New:** Ad-type box sizes: `300x250`, `336x280`, `728x90`, `160x600`, `970x250` via `size` shortcode attribute
-- **New:** Size dropdown in Showcase Builder with live preview
-- **Fixed:** Disclosure no longer duplicated in footer + cards — single system, only shows after showcase when enabled
-- **Fixed:** Hardened showcase CSS with `!important` on all critical properties — themes can no longer break the design
-- **Removed:** Dead footer disclaimer system (3 unused Advanced settings)
-
-### v1.3.3 — 2026-02-23
-- **New:** AJAX tab switching on Settings page — instant tab transition, no page reload, hash-based URL state
-- **New:** Page Hero headers on all 4 admin pages — gradient icon circles, titles, subtitles
-- **New:** Modern pill-style tab navigation with dashicons and gradient active state
-- **New:** Card-wrapped settings forms with improved inputs and branded submit buttons
-- **Fixed:** Tab state lost after saving settings — now preserves active tab across form submissions
-
-### v1.3.2 — 2026-02-23
-- **New:** Branded admin bar on every plugin page — GitHub icon + repo link, author credit, version badge, "Star on GitHub" CTA
-- **New:** Admin footer bar with GitHub, bug report, and releases links
-
-### v1.3.1 — 2026-02-22
-- **New:** Amazon affiliate disclosure integrated into all 8 showcase layouts (once per block)
-- **New:** Display Settings toggle for disclosure visibility
-- **Redesigned:** Analytics dashboard — modern card-based UI with gradient stat cards, visual bar chart, progress bars, rank badges
-- **New:** Daily Average & Peak Day Clicks stats in analytics
-
-### v1.3.0 — 2026-02-22
-- **New:** 4 single-product showcase layouts — Hero, Compact, Split, Deal
-- **New:** Visual Showcase Builder with WYSIWYG preview (admin preview = live post)
-- **New:** Manual products CRUD system
-- **Fixed:** Critical buy-button class mismatch causing unstyled CTA buttons
-- **Improved:** All showcase CSS fully scoped to prevent theme/plugin conflicts
-- **Improved:** Consistent responsive breakpoints (960px / 600px) across all layouts
-
-### v1.0.0 — 2026-01-01
-- Initial release — PA-API 5.0, 7 shortcodes, Gutenberg blocks, caching, geo-targeting, analytics
+### v2.0.0 — 2026-03-11
+- **Breaking:** Migrated from Amazon PA-API 5.0 to the new **Amazon Creators API** — OAuth 2.0 authentication replaces AWS Signature v4
+- **New:** OAuth 2.0 token client — automatic Bearer token acquisition and caching (1-hour TTL) via Amazon Cognito (v2.x) or Login with Amazon (v3.x)
+- **New:** Single API host `creatorsapi.amazon` for all 10 marketplaces — no more per-region endpoint mapping
+- **New:** Credential Version selector in Settings (2.1 NA, 2.2 EU, 2.3 FE, 3.1–3.3 LwA variants)
+- **New:** `x-marketplace` header sent with every API request for marketplace routing
+- **Changed:** All API request parameters and response keys migrated from PascalCase to lowerCamelCase
+- **Changed:** `Offers.Listings.*` resources replaced with `offersV2.listings.*` — price now nested in `price.money.*`
+- **Changed:** Settings fields renamed: Access Key → Credential ID, Secret Key → Credential Secret, plus new Version dropdown
+- **Removed:** `CustomerReviews` resource (star rating, review count) — no longer available in Creators API
+- **Removed:** `DeliveryInfo.IsPrimeEligible` — Prime badge data no longer available
+- **Removed:** AWS Signature v4 request signing (entire class rewritten as OAuth client)
 
 ---
 

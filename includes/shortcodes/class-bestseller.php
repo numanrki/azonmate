@@ -54,7 +54,7 @@ class Bestseller extends AbstractShortcode {
 		}
 
 		$items  = absint( $atts['items'] );
-		$items  = min( max( $items, 1 ), 10 ); // PA-API max 10 per request.
+		$items  = min( max( $items, 1 ), 10 ); // API max 10 per request.
 
 		$sort_by = ( 'newest' === $atts['_sort'] ) ? 'NewestArrivals' : 'Relevance';
 

@@ -104,7 +104,7 @@ abstract class AbstractShortcode {
 		}
 
 		if ( ! empty( $to_fetch ) ) {
-			// PA-API allows max 10 ASINs per GetItems request.
+			// API allows max 10 ASINs per GetItems request.
 			$chunks = array_chunk( $to_fetch, 10 );
 			foreach ( $chunks as $chunk ) {
 				$fetched = $this->api->get_items( $chunk );

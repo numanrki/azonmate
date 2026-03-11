@@ -84,11 +84,14 @@ class Settings {
 	 */
 	public function register_settings() {
 		// API Settings.
-		register_setting( 'azon_mate_api_settings', 'azon_mate_access_key', array(
+		register_setting( 'azon_mate_api_settings', 'azon_mate_credential_id', array(
 			'sanitize_callback' => array( $this, 'sanitize_encrypt_key' ),
 		) );
-		register_setting( 'azon_mate_api_settings', 'azon_mate_secret_key', array(
+		register_setting( 'azon_mate_api_settings', 'azon_mate_credential_secret', array(
 			'sanitize_callback' => array( $this, 'sanitize_encrypt_key' ),
+		) );
+		register_setting( 'azon_mate_api_settings', 'azon_mate_credential_version', array(
+			'sanitize_callback' => 'sanitize_text_field',
 		) );
 		register_setting( 'azon_mate_api_settings', 'azon_mate_partner_tag', array(
 			'sanitize_callback' => 'sanitize_text_field',
@@ -301,7 +304,7 @@ class Settings {
 	/**
 	 * AJAX: Master Fetch — refresh all cached products from Amazon API.
 	 *
-	 * Iterates over every stored product, re-fetches from PA-API with force_fresh,
+	 * Iterates over every stored product, re-fetches from the Creators API with force_fresh,
 	 * and updates price, discount, rating, availability, and images.
 	 *
 	 * @since 1.6.0
@@ -316,11 +319,11 @@ class Settings {
 		}
 
 		// Check if API is configured.
-		$access_key = get_option( 'azon_mate_access_key', '' );
-		$secret_key = get_option( 'azon_mate_secret_key', '' );
+		$credential_id     = get_option( 'azon_mate_credential_id', '' );
+		$credential_secret = get_option( 'azon_mate_credential_secret', '' );
 
-		if ( empty( $access_key ) || empty( $secret_key ) ) {
-			wp_send_json_error( array( 'message' => __( 'Amazon API is not configured. Set your API keys in Settings → API tab.', 'azonmate' ) ) );
+		if ( empty( $credential_id ) || empty( $credential_secret ) ) {
+			wp_send_json_error( array( 'message' => __( 'Amazon API is not configured. Set your API credentials in Settings → API tab.', 'azonmate' ) ) );
 		}
 
 		$cache   = new \AzonMate\Cache\CacheManager();
@@ -335,7 +338,7 @@ class Settings {
 		$failed  = 0;
 
 		foreach ( $grouped as $marketplace => $asins ) {
-			// PA-API allows max 10 ASINs per batch.
+			// API allows max 10 ASINs per batch.
 			$batches = array_chunk( $asins, 10 );
 
 			foreach ( $batches as $batch ) {

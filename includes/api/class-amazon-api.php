@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon PA-API 5.0 client.
+ * Amazon Creators API client.
  *
  * @package AzonMate\API
  * @since   1.0.0
@@ -19,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class AmazonAPI
  *
- * Provides methods to interact with the Amazon Product Advertising API 5.0
- * including SearchItems, GetItems, and GetBrowseNodes operations.
+ * Provides methods to interact with the Amazon Creators API
+ * including searchItems, getItems, and getBrowseNodes operations.
  *
  * @since 1.0.0
  */
@@ -35,7 +35,7 @@ class AmazonAPI {
 	private $cache;
 
 	/**
-	 * Request signer instance (built per-request based on marketplace).
+	 * OAuth client instance (built per-request based on marketplace).
 	 *
 	 * @since 1.0.0
 	 * @var RequestSigner|null
@@ -51,26 +51,25 @@ class AmazonAPI {
 	private static $last_request_time = 0;
 
 	/**
-	 * The resources to request from the PA-API.
+	 * The resources to request from the Creators API.
 	 *
 	 * @since 1.0.0
 	 * @var array
 	 */
 	private $default_resources = array(
-		'Images.Primary.Small',
-		'Images.Primary.Medium',
-		'Images.Primary.Large',
-		'ItemInfo.Title',
-		'ItemInfo.ByLineInfo',
-		'ItemInfo.Features',
-		'ItemInfo.ProductInfo',
-		'Offers.Listings.Price',
-		'Offers.Listings.SavingBasis',
-		'Offers.Listings.DeliveryInfo.IsPrimeEligible',
-		'Offers.Listings.Availability.Message',
-		'CustomerReviews.StarRating',
-		'CustomerReviews.Count',
-		'BrowseNodeInfo.BrowseNodes',
+		'images.primary.small',
+		'images.primary.medium',
+		'images.primary.large',
+		'itemInfo.title',
+		'itemInfo.byLineInfo',
+		'itemInfo.features',
+		'itemInfo.productInfo',
+		'offersV2.listings.price',
+		'offersV2.listings.availability',
+		'offersV2.listings.condition',
+		'offersV2.listings.merchantInfo',
+		'offersV2.listings.isBuyBoxWinner',
+		'browseNodeInfo.browseNodes',
 	);
 
 	/**
@@ -90,21 +89,23 @@ class AmazonAPI {
 	 * @since 1.0.0
 	 *
 	 * @return array {
-	 *     @type string $access_key  Decrypted access key.
-	 *     @type string $secret_key  Decrypted secret key.
-	 *     @type string $partner_tag Partner/affiliate tag.
-	 *     @type string $marketplace Default marketplace code.
+	 *     @type string $credential_id     Decrypted credential ID.
+	 *     @type string $credential_secret Decrypted credential secret.
+	 *     @type string $version           Credential version.
+	 *     @type string $partner_tag       Partner/affiliate tag.
+	 *     @type string $marketplace       Default marketplace code.
 	 * }
 	 */
 	private function get_credentials() {
-		$access_key = $this->decrypt_key( get_option( 'azon_mate_access_key', '' ) );
-		$secret_key = $this->decrypt_key( get_option( 'azon_mate_secret_key', '' ) );
+		$credential_id     = $this->decrypt_key( get_option( 'azon_mate_credential_id', '' ) );
+		$credential_secret = $this->decrypt_key( get_option( 'azon_mate_credential_secret', '' ) );
 
 		return array(
-			'access_key'  => $access_key,
-			'secret_key'  => $secret_key,
-			'partner_tag' => get_option( 'azon_mate_partner_tag', '' ),
-			'marketplace' => get_option( 'azon_mate_marketplace', 'US' ),
+			'credential_id'     => $credential_id,
+			'credential_secret' => $credential_secret,
+			'version'           => get_option( 'azon_mate_credential_version', '2.1' ),
+			'partner_tag'       => get_option( 'azon_mate_partner_tag', '' ),
+			'marketplace'       => get_option( 'azon_mate_marketplace', 'US' ),
 		);
 	}
 
@@ -165,17 +166,17 @@ class AmazonAPI {
 	}
 
 	/**
-	 * Build a RequestSigner for the given marketplace.
+	 * Build an OAuth client for the given marketplace.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $marketplace Marketplace code.
-	 * @return RequestSigner|WP_Error
+	 * @return RequestSigner|\WP_Error
 	 */
 	private function get_signer( $marketplace = '' ) {
 		$creds = $this->get_credentials();
 
-		if ( empty( $creds['access_key'] ) || empty( $creds['secret_key'] ) ) {
+		if ( empty( $creds['credential_id'] ) || empty( $creds['credential_secret'] ) ) {
 			return new \WP_Error( 'azon_mate_no_credentials', __( 'Amazon API credentials are not configured.', 'azonmate' ) );
 		}
 
@@ -183,10 +184,9 @@ class AmazonAPI {
 			$marketplace = $creds['marketplace'];
 		}
 
-		$region = Marketplace::get_region( $marketplace );
-		$host   = Marketplace::get_host( $marketplace );
+		$domain = 'www.' . Marketplace::get_domain( $marketplace );
 
-		return new RequestSigner( $creds['access_key'], $creds['secret_key'], $region, $host );
+		return new RequestSigner( $creds['credential_id'], $creds['credential_secret'], $creds['version'], $domain );
 	}
 
 	/**
@@ -240,18 +240,17 @@ class AmazonAPI {
 
 		// Build payload.
 		$payload = array(
-			'Keywords'    => $keywords,
-			'SearchIndex' => $category,
-			'ItemCount'   => 10,
-			'ItemPage'    => min( max( 1, $page ), 10 ),
-			'PartnerTag'  => $creds['partner_tag'],
-			'PartnerType' => 'Associates',
-			'Marketplace' => 'www.' . Marketplace::get_domain( $marketplace ),
-			'Resources'   => $this->default_resources,
+			'keywords'    => $keywords,
+			'searchIndex' => $category,
+			'itemCount'   => 10,
+			'itemPage'    => min( max( 1, $page ), 10 ),
+			'partnerTag'  => $creds['partner_tag'],
+			'marketplace' => 'www.' . Marketplace::get_domain( $marketplace ),
+			'resources'   => $this->default_resources,
 		);
 
 		if ( 'Relevance' !== $sort_by ) {
-			$payload['SortBy'] = $sort_by;
+			$payload['sortBy'] = $sort_by;
 		}
 
 		/**
@@ -267,7 +266,7 @@ class AmazonAPI {
 
 		$this->throttle();
 
-		$response = $signer->send_request( 'SearchItems', $payload );
+		$response = $signer->send_request( 'searchItems', $payload );
 
 		if ( is_wp_error( $response ) ) {
 			return $response;
@@ -275,8 +274,8 @@ class AmazonAPI {
 
 		// Parse results.
 		$products = array();
-		if ( isset( $response['SearchResult']['Items'] ) ) {
-			foreach ( $response['SearchResult']['Items'] as $item ) {
+		if ( isset( $response['searchResult']['items'] ) ) {
+			foreach ( $response['searchResult']['items'] as $item ) {
 				$product = Product::from_api_response( $item, $marketplace, $creds['partner_tag'] );
 				if ( $product->is_valid() ) {
 					$products[] = $product;
@@ -287,7 +286,7 @@ class AmazonAPI {
 			}
 		}
 
-		$total = isset( $response['SearchResult']['TotalResultCount'] ) ? absint( $response['SearchResult']['TotalResultCount'] ) : count( $products );
+		$total = isset( $response['searchResult']['totalResultCount'] ) ? absint( $response['searchResult']['totalResultCount'] ) : count( $products );
 		$pages = min( 10, (int) ceil( $total / 10 ) );
 
 		return array(
@@ -355,12 +354,11 @@ class AmazonAPI {
 			}
 
 			$payload = array(
-				'ItemIds'     => array_values( $uncached ),
-				'ItemIdType'  => 'ASIN',
-				'PartnerTag'  => $creds['partner_tag'],
-				'PartnerType' => 'Associates',
-				'Marketplace' => 'www.' . Marketplace::get_domain( $marketplace ),
-				'Resources'   => $this->default_resources,
+				'itemIds'     => array_values( $uncached ),
+				'itemIdType'  => 'ASIN',
+				'partnerTag'  => $creds['partner_tag'],
+				'marketplace' => 'www.' . Marketplace::get_domain( $marketplace ),
+				'resources'   => $this->default_resources,
 			);
 
 			/**
@@ -376,10 +374,10 @@ class AmazonAPI {
 
 			$this->throttle();
 
-			$response = $signer->send_request( 'GetItems', $payload );
+			$response = $signer->send_request( 'getItems', $payload );
 
-			if ( ! is_wp_error( $response ) && isset( $response['ItemsResult']['Items'] ) ) {
-				foreach ( $response['ItemsResult']['Items'] as $item ) {
+			if ( ! is_wp_error( $response ) && isset( $response['itemsResult']['items'] ) ) {
+				foreach ( $response['itemsResult']['items'] as $item ) {
 					$product = Product::from_api_response( $item, $marketplace, $creds['partner_tag'] );
 					if ( $product->is_valid() ) {
 						$products[ $product->get_asin() ] = $product;
@@ -447,19 +445,18 @@ class AmazonAPI {
 		}
 
 		$payload = array(
-			'BrowseNodeIds' => $browse_node_ids,
-			'PartnerTag'    => $creds['partner_tag'],
-			'PartnerType'   => 'Associates',
-			'Marketplace'   => 'www.' . Marketplace::get_domain( $marketplace ),
-			'Resources'     => array(
-				'BrowseNodes.Ancestor',
-				'BrowseNodes.Children',
+			'browseNodeIds' => $browse_node_ids,
+			'partnerTag'    => $creds['partner_tag'],
+			'marketplace'   => 'www.' . Marketplace::get_domain( $marketplace ),
+			'resources'     => array(
+				'browseNodes.ancestor',
+				'browseNodes.children',
 			),
 		);
 
 		$this->throttle();
 
-		return $signer->send_request( 'GetBrowseNodes', $payload );
+		return $signer->send_request( 'getBrowseNodes', $payload );
 	}
 
 	/**

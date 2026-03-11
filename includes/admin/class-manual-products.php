@@ -237,11 +237,11 @@ class ManualProducts {
 		}
 
 		// Check if API is configured.
-		$access_key = get_option( 'azon_mate_access_key', '' );
-		$secret_key = get_option( 'azon_mate_secret_key', '' );
+		$credential_id     = get_option( 'azon_mate_credential_id', '' );
+		$credential_secret = get_option( 'azon_mate_credential_secret', '' );
 
-		if ( empty( $access_key ) || empty( $secret_key ) ) {
-			wp_send_json_error( array( 'message' => __( 'Amazon API is not configured. Set your API keys in Settings.', 'azonmate' ) ) );
+		if ( empty( $credential_id ) || empty( $credential_secret ) ) {
+			wp_send_json_error( array( 'message' => __( 'Amazon API is not configured. Set your API credentials in Settings.', 'azonmate' ) ) );
 		}
 
 		$api    = new \AzonMate\API\AmazonAPI( $this->cache );

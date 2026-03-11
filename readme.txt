@@ -4,7 +4,7 @@ Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.6.1
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Search, display, and monetize Amazon products directly from your WordPress posts
 
 == Description ==
 
-**AzonMate** is a full-featured WordPress plugin that connects to the **Amazon Product Advertising API (PA-API 5.0)** to let you search, embed, and beautifully display Amazon affiliate products inside posts, pages, and widgets.
+**AzonMate** is a full-featured WordPress plugin that connects to the **Amazon Creators API** to let you search, embed, and beautifully display Amazon affiliate products inside posts, pages, and widgets.
 
 = Key Features =
 
@@ -43,22 +43,22 @@ Search, display, and monetize Amazon products directly from your WordPress posts
 
 * WordPress 6.0 or higher
 * PHP 7.4 or higher
-* Amazon Product Advertising API credentials
+* Amazon Creators API credentials
 * Amazon Associates account
 
 == Installation ==
 
 1. Upload the `azonmate` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Go to **AzonMate → Settings** and enter your Amazon PA-API credentials.
-4. Click **Test Connection** to verify your API keys.
+3. Go to **AzonMate → Settings** and enter your Amazon Creators API credentials.
+4. Click **Test Connection** to verify your API credentials.
 5. Start using shortcodes or Gutenberg blocks to display products!
 
 == Frequently Asked Questions ==
 
 = Do I need an Amazon Associates account? =
 
-Yes, you need an approved Amazon Associates account and PA-API 5.0 credentials.
+Yes, you need an approved Amazon Associates account and Creators API credentials.
 
 = How often is product data updated? =
 
@@ -92,8 +92,20 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 
 == Changelog ==
 
+= 2.0.0 =
+* **Breaking:** Migrated from Amazon PA-API 5.0 to the new Amazon Creators API with OAuth 2.0 authentication
+* OAuth 2.0 token client — automatic Bearer token acquisition and caching (1-hour TTL) via Amazon Cognito or Login with Amazon
+* Single API host `creatorsapi.amazon` for all 10 marketplaces
+* New Credential Version selector in Settings (2.1 NA, 2.2 EU, 2.3 FE, 3.1–3.3 LwA)
+* All API parameters and response keys migrated from PascalCase to lowerCamelCase
+* Offers resources replaced with offersV2 — price now nested in `price.money.*`
+* Settings fields renamed: Access Key → Credential ID, Secret Key → Credential Secret, plus Version dropdown
+* Removed: CustomerReviews (star rating, review count) — no longer available in Creators API
+* Removed: DeliveryInfo.IsPrimeEligible (Prime badge) — no longer available in Creators API
+* Removed: AWS Signature v4 request signing — replaced by OAuth 2.0 client
+
 = 1.6.1 =
-* Fetch from Amazon button — enter an ASIN in the product form and click "Fetch from Amazon" to auto-populate all fields (title, price, image, rating, features, etc.) directly from Amazon PA-API
+* Fetch from Amazon button — enter an ASIN in the product form and click "Fetch from Amazon" to auto-populate all fields (title, price, image, features, etc.) directly from Amazon Creators API
 * Manual entry still fully supported — fetched data can be reviewed and overridden before saving
 * Improved readme feature descriptions
 
@@ -140,7 +152,7 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 
 = 1.0.0 =
 * Initial release
-* PA-API 5.0 integration with ten marketplaces
+* Creators API integration with ten marketplaces
 * Product Box, Text Link, Image Link shortcodes
 * Product List and Comparison Table shortcodes
 * Bestseller and New Releases shortcodes
@@ -152,6 +164,9 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 * Responsive CSS with dark mode support
 
 == Upgrade Notice ==
+
+= 2.0.0 =
+**Breaking change:** AzonMate now uses the Amazon Creators API instead of PA-API 5.0. You must generate new Creators API credentials (Credential ID, Credential Secret, and Version) from your Amazon Associates account. PA-API 5.0 is being deprecated on April 30, 2026.
 
 = 1.0.0 =
 Initial release of AzonMate.

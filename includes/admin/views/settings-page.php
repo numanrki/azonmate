@@ -63,32 +63,49 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 				<table class="form-table" role="presentation">
 					<tr>
 						<th scope="row">
-							<label for="azon_mate_access_key"><?php esc_html_e( 'Access Key', 'azonmate' ); ?></label>
+							<label for="azon_mate_credential_id"><?php esc_html_e( 'Credential ID', 'azonmate' ); ?></label>
 						</th>
 						<td>
-							<?php $has_access_key = ! empty( get_option( 'azon_mate_access_key', '' ) ); ?>
-							<input type="text" id="azon_mate_access_key" name="azon_mate_access_key"
+							<?php $has_credential_id = ! empty( get_option( 'azon_mate_credential_id', '' ) ); ?>
+							<input type="text" id="azon_mate_credential_id" name="azon_mate_credential_id"
 								   value="" class="regular-text"
-								   placeholder="<?php echo $has_access_key ? esc_attr( '••••••••••••  (saved)' ) : esc_attr__( 'Enter your Amazon PA-API Access Key', 'azonmate' ); ?>"
+								   placeholder="<?php echo $has_credential_id ? esc_attr( '••••••••••••  (saved)' ) : esc_attr__( 'Enter your Creators API Credential ID', 'azonmate' ); ?>"
 								   autocomplete="off" />
-							<?php if ( $has_access_key ) : ?>
-								<p class="description" style="color: #00a32a;">&#10003; <?php esc_html_e( 'Key is stored encrypted. Leave blank to keep current key, or enter a new value to replace it.', 'azonmate' ); ?></p>
+							<?php if ( $has_credential_id ) : ?>
+								<p class="description" style="color: #00a32a;">&#10003; <?php esc_html_e( 'Credential is stored encrypted. Leave blank to keep current value, or enter a new value to replace it.', 'azonmate' ); ?></p>
 							<?php endif; ?>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="azon_mate_secret_key"><?php esc_html_e( 'Secret Key', 'azonmate' ); ?></label>
+							<label for="azon_mate_credential_secret"><?php esc_html_e( 'Credential Secret', 'azonmate' ); ?></label>
 						</th>
 						<td>
-							<?php $has_secret_key = ! empty( get_option( 'azon_mate_secret_key', '' ) ); ?>
-							<input type="password" id="azon_mate_secret_key" name="azon_mate_secret_key"
+							<?php $has_credential_secret = ! empty( get_option( 'azon_mate_credential_secret', '' ) ); ?>
+							<input type="password" id="azon_mate_credential_secret" name="azon_mate_credential_secret"
 								   value="" class="regular-text"
-								   placeholder="<?php echo $has_secret_key ? esc_attr( '••••••••••••  (saved)' ) : esc_attr__( 'Enter your Amazon PA-API Secret Key', 'azonmate' ); ?>"
+								   placeholder="<?php echo $has_credential_secret ? esc_attr( '••••••••••••  (saved)' ) : esc_attr__( 'Enter your Creators API Credential Secret', 'azonmate' ); ?>"
 								   autocomplete="off" />
-							<?php if ( $has_secret_key ) : ?>
-								<p class="description" style="color: #00a32a;">&#10003; <?php esc_html_e( 'Key is stored encrypted. Leave blank to keep current key, or enter a new value to replace it.', 'azonmate' ); ?></p>
+							<?php if ( $has_credential_secret ) : ?>
+								<p class="description" style="color: #00a32a;">&#10003; <?php esc_html_e( 'Credential is stored encrypted. Leave blank to keep current value, or enter a new value to replace it.', 'azonmate' ); ?></p>
 							<?php endif; ?>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							<label for="azon_mate_credential_version"><?php esc_html_e( 'Credential Version', 'azonmate' ); ?></label>
+						</th>
+						<td>
+							<?php $current_version = get_option( 'azon_mate_credential_version', '2.1' ); ?>
+							<select id="azon_mate_credential_version" name="azon_mate_credential_version">
+								<option value="2.1" <?php selected( $current_version, '2.1' ); ?>>2.1 (NA — US, CA, MX, BR)</option>
+								<option value="2.2" <?php selected( $current_version, '2.2' ); ?>>2.2 (EU — UK, DE, FR, IT, ES, IN, etc.)</option>
+								<option value="2.3" <?php selected( $current_version, '2.3' ); ?>>2.3 (FE — JP, SG, AU)</option>
+								<option value="3.1" <?php selected( $current_version, '3.1' ); ?>>3.1 (NA v3)</option>
+								<option value="3.2" <?php selected( $current_version, '3.2' ); ?>>3.2 (EU v3)</option>
+								<option value="3.3" <?php selected( $current_version, '3.3' ); ?>>3.3 (FE v3)</option>
+							</select>
+							<p class="description"><?php esc_html_e( 'Version is assigned when you create credentials. Select the version that matches your credential.', 'azonmate' ); ?></p>
 						</td>
 					</tr>
 					<tr>

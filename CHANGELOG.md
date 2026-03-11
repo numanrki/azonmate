@@ -5,10 +5,38 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-03-11
+
+### Breaking
+- **Amazon Creators API Migration** — AzonMate now uses the Amazon Creators API instead of PA-API 5.0. This is a complete rewrite of the API authentication and communication layer. Users must generate new Creators API credentials (Credential ID, Credential Secret, and Version) from their Amazon Associates account.
+
+### Added
+- **OAuth 2.0 Token Client** — new `RequestSigner` class that acquires Bearer tokens from Amazon Cognito (v2.x credentials) or Login with Amazon (v3.x credentials), with automatic caching in WordPress transients (3500-second TTL).
+- **Single API Endpoint** — all 10 marketplaces now use `creatorsapi.amazon/catalog/v1/` instead of per-region `webservices.amazon.*` hosts.
+- **Credential Version Setting** — new dropdown in Settings → API for selecting credential version (2.1 NA, 2.2 EU, 2.3 FE, 3.1–3.3 LwA variants).
+- **`x-marketplace` Header** — sent with every API request for proper marketplace routing.
+- **Token Endpoint Mapping** — `Marketplace::get_token_endpoint()` and `Marketplace::version_to_region()` methods for resolving OAuth endpoints by credential version.
+
+### Changed
+- All API request parameters migrated from PascalCase to lowerCamelCase (`Keywords` → `keywords`, `SearchIndex` → `searchIndex`, etc.).
+- All API response keys migrated from PascalCase to lowerCamelCase (`SearchResult` → `searchResult`, `ItemsResult` → `itemsResult`, etc.).
+- `Offers.Listings.*` resources replaced with `offersV2.listings.*` — price data now nested inside `price.money.*` with `savingBasis` inside `price`.
+- Settings fields: "Access Key" → "Credential ID", "Secret Key" → "Credential Secret", new "Credential Version" dropdown.
+- Product model `from_api_response()` updated for all new Creators API field paths.
+- Marketplace class: removed per-marketplace `host` entries, replaced AWS regions with API regions (NA/EU/FE).
+- Activator, uninstall, manual products, and all documentation updated for new credential names.
+
+### Removed
+- `CustomerReviews.StarRating` and `CustomerReviews.Count` resources — not available in the Creators API. Rating fields default to 0.
+- `Offers.Listings.DeliveryInfo.IsPrimeEligible` — not available in the Creators API. Prime field defaults to false.
+- `PartnerType` parameter — removed from all API request payloads (not used by Creators API).
+- AWS Signature v4 signing (HMAC-SHA256) — entire implementation replaced by OAuth 2.0 Bearer token authentication.
+- `Marketplace::get_host()` and `Marketplace::get_amz_target()` methods — no longer needed.
+
 ## [1.6.1] - 2026-03-11
 
 ### Added
-- **Fetch from Amazon Button** — new "Fetch from Amazon" button in the product creation/editing form. Enter an ASIN, click Fetch, and all form fields (title, price, image, rating, features, brand, availability, etc.) are auto-populated from Amazon PA-API.
+- **Fetch from Amazon Button** — new "Fetch from Amazon" button in the product creation/editing form. Enter an ASIN, click Fetch, and all form fields (title, price, image, rating, features, brand, availability, etc.) are auto-populated from the Amazon Creators API.
 - **Inline ASIN Row Layout** — ASIN input and Fetch button displayed side-by-side in a flex container with loading spinner feedback.
 - **ASIN Format Validation** — soft validation warns if the entered ID doesn't match the standard 10-character ASIN format, with option to proceed anyway.
 
@@ -150,7 +178,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Initial release of AzonMate – Amazon Affiliate Product Engine.
-- **Amazon PA-API 5.0** integration with AWS Signature v4 authentication.
+- **Amazon Creators API** integration with OAuth 2.0 authentication.
 - Support for **10 Amazon marketplaces**: US, UK, DE, FR, IN, CA, JP, IT, ES, AU.
 - **Product Box** shortcode (`[azonmate box="ASIN"]`) with three templates: default, horizontal, compact.
 - **Text Link** shortcode (`[azonmate link="ASIN"]text[/azonmate]`).

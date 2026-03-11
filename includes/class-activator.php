@@ -129,8 +129,9 @@ class Activator {
 	private static function set_default_options() {
 		$defaults = array(
 			// API settings.
-			'azon_mate_access_key'          => '',
-			'azon_mate_secret_key'          => '',
+			'azon_mate_credential_id'       => '',
+			'azon_mate_credential_secret'   => '',
+			'azon_mate_credential_version'  => '2.1',
 			'azon_mate_partner_tag'         => '',
 			'azon_mate_marketplace'         => 'US',
 

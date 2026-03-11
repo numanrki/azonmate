@@ -42,8 +42,9 @@ foreach ( $tables as $table ) {
    ----------------------------------------------------------------------- */
 
 $options = array(
-	'azon_mate_access_key',
-	'azon_mate_secret_key',
+	'azon_mate_credential_id',
+	'azon_mate_credential_secret',
+	'azon_mate_credential_version',
 	'azon_mate_partner_tag',
 	'azon_mate_marketplace',
 	'azon_mate_button_text',
@@ -84,7 +85,9 @@ foreach ( $options as $option ) {
 $wpdb->query(
 	"DELETE FROM {$wpdb->options}
 	 WHERE option_name LIKE '_transient_azonmate_%'
-	    OR option_name LIKE '_transient_timeout_azonmate_%'"
+	    OR option_name LIKE '_transient_timeout_azonmate_%'
+	    OR option_name LIKE '_transient_azon_mate_oauth_token_%'
+	    OR option_name LIKE '_transient_timeout_azon_mate_oauth_token_%'"
 );
 
 /* -----------------------------------------------------------------------

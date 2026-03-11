@@ -16,12 +16,44 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Marketplace
  *
- * Provides marketplace-specific configuration including hostnames,
- * regions, and endpoints for the Amazon PA-API 5.0.
+ * Provides marketplace-specific configuration including regions
+ * and endpoints for the Amazon Creators API.
  *
  * @since 1.0.0
  */
 class Marketplace {
+
+	/**
+	 * Single API host for all marketplaces.
+	 *
+	 * @since 2.0.0
+	 * @var string
+	 */
+	const API_HOST = 'creatorsapi.amazon';
+
+	/**
+	 * Regional token endpoints for v2.x (Cognito) credentials.
+	 *
+	 * @since 2.0.0
+	 * @var array
+	 */
+	private static $cognito_endpoints = array(
+		'NA' => 'creatorsapi.auth.us-east-1.amazoncognito.com',
+		'EU' => 'creatorsapi.auth.eu-south-2.amazoncognito.com',
+		'FE' => 'creatorsapi.auth.us-west-2.amazoncognito.com',
+	);
+
+	/**
+	 * Regional token endpoints for v3.x (LwA) credentials.
+	 *
+	 * @since 2.0.0
+	 * @var array
+	 */
+	private static $lwa_endpoints = array(
+		'NA' => 'api.amazon.com',
+		'EU' => 'api.amazon.co.uk',
+		'FE' => 'api.amazon.co.jp',
+	);
 
 	/**
 	 * Supported marketplaces with their configuration.
@@ -31,71 +63,61 @@ class Marketplace {
 	 */
 	private static $marketplaces = array(
 		'US' => array(
-			'host'   => 'webservices.amazon.com',
-			'region' => 'us-east-1',
+			'region' => 'NA',
 			'label'  => 'United States',
 			'domain' => 'amazon.com',
 			'tld'    => 'com',
 		),
 		'UK' => array(
-			'host'   => 'webservices.amazon.co.uk',
-			'region' => 'eu-west-1',
+			'region' => 'EU',
 			'label'  => 'United Kingdom',
 			'domain' => 'amazon.co.uk',
 			'tld'    => 'co.uk',
 		),
 		'DE' => array(
-			'host'   => 'webservices.amazon.de',
-			'region' => 'eu-west-1',
+			'region' => 'EU',
 			'label'  => 'Germany',
 			'domain' => 'amazon.de',
 			'tld'    => 'de',
 		),
 		'FR' => array(
-			'host'   => 'webservices.amazon.fr',
-			'region' => 'eu-west-1',
+			'region' => 'EU',
 			'label'  => 'France',
 			'domain' => 'amazon.fr',
 			'tld'    => 'fr',
 		),
 		'IN' => array(
-			'host'   => 'webservices.amazon.in',
-			'region' => 'eu-west-1',
+			'region' => 'EU',
 			'label'  => 'India',
 			'domain' => 'amazon.in',
 			'tld'    => 'in',
 		),
 		'CA' => array(
-			'host'   => 'webservices.amazon.ca',
-			'region' => 'us-east-1',
+			'region' => 'NA',
 			'label'  => 'Canada',
 			'domain' => 'amazon.ca',
 			'tld'    => 'ca',
 		),
 		'JP' => array(
-			'host'   => 'webservices.amazon.co.jp',
-			'region' => 'us-west-2',
+			'region' => 'FE',
 			'label'  => 'Japan',
 			'domain' => 'amazon.co.jp',
 			'tld'    => 'co.jp',
 		),
 		'IT' => array(
-			'host'   => 'webservices.amazon.it',
-			'region' => 'eu-west-1',
+			'region' => 'EU',
 			'label'  => 'Italy',
 			'domain' => 'amazon.it',
 			'tld'    => 'it',
 		),
 		'ES' => array(
-			'host'   => 'webservices.amazon.es',
-			'region' => 'eu-west-1',
+			'region' => 'EU',
 			'label'  => 'Spain',
 			'domain' => 'amazon.es',
 			'tld'    => 'es',
 		),
 		'AU' => array(
-			'host'   => 'webservices.amazon.com.au',
-			'region' => 'us-west-2',
+			'region' => 'FE',
 			'label'  => 'Australia',
 			'domain' => 'amazon.com.au',
 			'tld'    => 'com.au',
@@ -153,20 +175,7 @@ class Marketplace {
 	}
 
 	/**
-	 * Get the API host for a marketplace.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $code Marketplace code.
-	 * @return string
-	 */
-	public static function get_host( $code ) {
-		$marketplace = self::get( $code );
-		return $marketplace ? $marketplace['host'] : 'webservices.amazon.com';
-	}
-
-	/**
-	 * Get the AWS region for a marketplace.
+	 * Get the API region for a marketplace (NA, EU, or FE).
 	 *
 	 * @since 1.0.0
 	 *
@@ -175,7 +184,7 @@ class Marketplace {
 	 */
 	public static function get_region( $code ) {
 		$marketplace = self::get( $code );
-		return $marketplace ? $marketplace['region'] : 'us-east-1';
+		return $marketplace ? $marketplace['region'] : 'NA';
 	}
 
 	/**
@@ -258,25 +267,54 @@ class Marketplace {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $marketplace Marketplace code.
-	 * @param string $operation   API operation (searchitems, getitems, getbrowsenodes).
+	 * @param string $marketplace Marketplace code (unused — single host for all marketplaces).
+	 * @param string $operation   API operation (searchItems, getItems, getBrowseNodes, getVariations).
 	 * @return string
 	 */
 	public static function get_endpoint( $marketplace, $operation ) {
-		$host = self::get_host( $marketplace );
-		return sprintf( 'https://%s/paapi5/%s', $host, strtolower( $operation ) );
+		return sprintf( 'https://%s/catalog/v1/%s', self::API_HOST, $operation );
 	}
 
 	/**
-	 * Get the X-Amz-Target header value for an operation.
+	 * Get the OAuth token endpoint for the given credential version.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 *
-	 * @param string $operation The API operation name.
-	 * @return string
+	 * @param string $version Credential version (2.1, 2.2, 2.3, 3.1, 3.2, 3.3).
+	 * @return string Full token endpoint URL.
 	 */
-	public static function get_amz_target( $operation ) {
-		return 'com.amazon.paapi5.v1.ProductAdvertisingAPIv1.' . $operation;
+	public static function get_token_endpoint( $version ) {
+		$major  = (int) $version;
+		$region = self::version_to_region( $version );
+
+		if ( 3 === $major ) {
+			$host = isset( self::$lwa_endpoints[ $region ] ) ? self::$lwa_endpoints[ $region ] : self::$lwa_endpoints['NA'];
+			return 'https://' . $host . '/auth/o2/token';
+		}
+
+		// Default to v2.x (Cognito).
+		$host = isset( self::$cognito_endpoints[ $region ] ) ? self::$cognito_endpoints[ $region ] : self::$cognito_endpoints['NA'];
+		return 'https://' . $host . '/oauth2/token';
+	}
+
+	/**
+	 * Map a credential version to its API region.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string $version Credential version.
+	 * @return string Region code (NA, EU, FE).
+	 */
+	public static function version_to_region( $version ) {
+		$map = array(
+			'2.1' => 'NA',
+			'2.2' => 'EU',
+			'2.3' => 'FE',
+			'3.1' => 'NA',
+			'3.2' => 'EU',
+			'3.3' => 'FE',
+		);
+		return isset( $map[ $version ] ) ? $map[ $version ] : 'NA';
 	}
 
 	/**
