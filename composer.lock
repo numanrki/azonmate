@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9026f93b892ea494422234c28d15ea3a",
+    "content-hash": "f0809b7e59f91f8971ed374a730f8f64",
     "packages": [
         {
             "name": "amazon/creatorsapi-php-sdk",
@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "lib/creatorsapi-sdk",
-                "reference": "a35a7c6f6b81597d82ee067910087ecf6faff8ab"
+                "reference": "dbf1db7dac13b01369b4289a2720be10e56eaa2c"
             },
             "require": {
                 "ext-curl": "*",
@@ -53,6 +53,7 @@
                 "creatorsapi-php-sdk"
             ],
             "transport-options": {
+                "symlink": false,
                 "relative": true
             }
         },

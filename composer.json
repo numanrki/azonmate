@@ -6,7 +6,10 @@
 	"repositories": [
 		{
 			"type": "path",
-			"url": "lib/creatorsapi-sdk"
+			"url": "lib/creatorsapi-sdk",
+			"options": {
+				"symlink": false
+			}
 		}
 	],
 	"require": {

@@ -4,7 +4,7 @@ Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 8.1
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,10 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 7. Gutenberg block editor
 
 == Changelog ==
+
+= 2.1.1 =
+* Fixed: Critical error on deployment — vendor/ directory (SDK + Guzzle dependencies) was excluded from distribution by .gitignore
+* Fixed: Composer path repository used symlink instead of file copy, breaking SDK autoloading on production servers
 
 = 2.1.0 =
 * Integrated official Amazon Creators API PHP SDK (v1.2.0) — replaces custom HTTP/OAuth with typed SDK classes

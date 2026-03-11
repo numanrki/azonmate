@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-2.1.0-ff9900?style=for-the-badge" alt="v2.1.0" /></a>&nbsp;
+  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-2.1.1-ff9900?style=for-the-badge" alt="v2.1.1" /></a>&nbsp;
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress 6.0+" />&nbsp;
   <img src="https://img.shields.io/badge/PHP-8.1%2B-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.1+" />&nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Free_for_Personal_Use-22c55e?style=for-the-badge" alt="Free for Personal Use" /></a>
@@ -262,14 +262,9 @@ azonmate/
 
 > Full history in [CHANGELOG.md](CHANGELOG.md).
 
-### v2.1.0 — 2025-07-15
-- **New:** Integrated official **Amazon Creators API PHP SDK** (v1.2.0) — replaces custom HTTP/OAuth implementation with Amazon's typed SDK classes
-- **New:** Composer-managed dependencies — Guzzle HTTP 7.x, PSR-7, PSR-HTTP-Client installed via Composer autoloader
-- **Changed:** `Amazon_API` class rewritten to use SDK `DefaultApi`, `Configuration`, typed request models (`SearchItemsRequestContent`, `GetItemsRequestContent`, `GetBrowseNodesRequestContent`), and resource enum constants
-- **Changed:** Product model `from_api_response()` updated to accept SDK `Item` objects with typed getters instead of raw arrays
-- **Changed:** Minimum PHP version raised from 7.4 to **8.1** (SDK requirement)
-- **Removed:** `RequestSigner` class — SDK handles OAuth 2.0 token management internally via `OAuth2TokenManager`
-- **Removed:** `Marketplace::get_token_endpoint()`, `Marketplace::get_endpoint()`, `Marketplace::version_to_region()` — SDK manages endpoints internally
+### v2.1.1 — 2026-03-11
+- **Fixed:** Critical error on deployment — `vendor/` directory (SDK + Guzzle dependencies) was excluded from distribution by `.gitignore`
+- **Fixed:** Composer path repository used symlink instead of file copy, breaking SDK autoloading on production servers
 
 ---
 
