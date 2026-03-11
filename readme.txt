@@ -4,7 +4,7 @@ Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 8.1
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,13 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 7. Gutenberg block editor
 
 == Changelog ==
+
+= 2.1.2 =
+* Reduced plugin distribution size from ~4 MB to ~2.5 MB (35% smaller)
+* Removed duplicate SDK source in lib/ — vendor/ already contains the copied SDK
+* Removed vendor doc cruft (CHANGELOG, README, UPGRADING files from dependencies)
+* Removed dev-only root files (package.json, webpack.config.js, composer.lock) from distribution
+* Cleaned composer.json — removed path repository reference
 
 = 2.1.1 =
 * Fixed: Critical error on deployment — vendor/ directory (SDK + Guzzle dependencies) was excluded from distribution by .gitignore

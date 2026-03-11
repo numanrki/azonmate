@@ -5,6 +5,15 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.2] - 2026-03-11
+
+### Changed
+- Plugin distribution size reduced from ~4 MB to ~2.5 MB (35% smaller).
+- Removed `lib/creatorsapi-sdk/` directory — fully duplicated in `vendor/amazon/creatorsapi-php-sdk/` (saved ~1.2 MB).
+- Stripped vendor documentation files (CHANGELOG.md, README.md, UPGRADING.md, package-lock.json) from all dependency packages (saved ~220 KB).
+- Removed dev-only root files from distribution: `package.json`, `webpack.config.js`, `composer.lock` (saved ~25 KB).
+- Removed Composer path repository reference from `composer.json` (no longer needed since `lib/` is deleted).
+
 ## [2.1.1] - 2026-03-11
 
 ### Fixed
