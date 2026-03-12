@@ -24,6 +24,7 @@
 		initMasterFetch();
 		initPasswordToggle();
 		initTabFormPreserve();
+		initUpdateChecker();
 	});
 
 	/* ======================================================================
@@ -223,6 +224,95 @@
 					$referer.val(url + '#' + tab);
 				}
 			}
+		});
+	}
+
+	/* ======================================================================
+	   Plugin Update Checker (Settings → Updates tab)
+	   ====================================================================== */
+
+	function initUpdateChecker() {
+		var $checkBtn   = $('#azonmate-check-update');
+		var $installBtn = $('#azonmate-install-update');
+		var $releaseLink = $('#azonmate-release-link');
+		var $remoteVer  = $('#azonmate-remote-version');
+		var $status     = $('#azonmate-update-status');
+		var $result     = $('#azonmate-update-result');
+
+		if (!$checkBtn.length) {
+			return;
+		}
+
+		/* ---- Check for Updates ---- */
+		$checkBtn.on('click', function (e) {
+			e.preventDefault();
+			$checkBtn.prop('disabled', true).find('.dashicons').addClass('azonmate-spin');
+			$status.text('Checking for updates\u2026');
+			$result.hide().removeClass('success error').text('');
+			$installBtn.hide();
+			$releaseLink.hide();
+
+			$.post(ajaxurl, {
+				action: 'azon_mate_check_update',
+				nonce: azonMateAdmin.nonce,
+			})
+			.done(function (response) {
+				if (response.success) {
+					var d = response.data;
+					$remoteVer.text(d.remote_version);
+
+					if (d.has_update) {
+						$status.html('<span style="color:#d63638;font-weight:600;">' + d.message + '</span>');
+						$installBtn.show();
+						if (d.release_url) {
+							$releaseLink.attr('href', d.release_url).show();
+						}
+					} else {
+						$status.html('<span style="color:#00a32a;font-weight:600;">' + d.message + '</span>');
+					}
+				} else {
+					$status.html('<span style="color:#d63638;">' + (response.data.message || 'Check failed.') + '</span>');
+				}
+			})
+			.fail(function () {
+				$status.html('<span style="color:#d63638;">Request failed. Check your connection.</span>');
+			})
+			.always(function () {
+				$checkBtn.prop('disabled', false).find('.dashicons').removeClass('azonmate-spin');
+			});
+		});
+
+		/* ---- Install Update ---- */
+		$installBtn.on('click', function (e) {
+			e.preventDefault();
+
+			if (!confirm('Install the latest AzonMate update now?')) {
+				return;
+			}
+
+			$installBtn.prop('disabled', true).text('Installing\u2026');
+			$result.show().removeClass('success error').text('Installing update, please wait\u2026');
+
+			$.post(ajaxurl, {
+				action: 'azon_mate_install_update',
+				nonce: azonMateAdmin.nonce,
+			})
+			.done(function (response) {
+				if (response.success) {
+					$result.addClass('success').text(response.data.message || 'Updated successfully!');
+					setTimeout(function () {
+						window.location.hash = '#updates';
+						window.location.reload();
+					}, 1500);
+				} else {
+					$result.addClass('error').text(response.data.message || 'Update failed.');
+					$installBtn.prop('disabled', false).html('<span class="dashicons dashicons-download" style="margin-top:4px;"></span> Install Update');
+				}
+			})
+			.fail(function () {
+				$result.addClass('error').text('Request failed.');
+				$installBtn.prop('disabled', false).html('<span class="dashicons dashicons-download" style="margin-top:4px;"></span> Install Update');
+			});
 		});
 	}
 

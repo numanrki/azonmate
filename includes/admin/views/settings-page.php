@@ -18,6 +18,7 @@ $tabs = array(
 	'geo'      => array( 'label' => __( 'Geo-Targeting', 'azonmate' ),      'icon' => 'dashicons-admin-site-alt3' ),
 	'tracking' => array( 'label' => __( 'Tracking', 'azonmate' ),           'icon' => 'dashicons-chart-line' ),
 	'advanced' => array( 'label' => __( 'Advanced', 'azonmate' ),           'icon' => 'dashicons-admin-tools' ),
+	'updates'  => array( 'label' => __( 'Updates', 'azonmate' ),            'icon' => 'dashicons-update' ),
 );
 
 $marketplaces = \AzonMate\API\Marketplace::get_all_options();
@@ -588,6 +589,66 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 				<?php submit_button(); ?>
 			</form>
 
+		</div>
+
+		<div id="azonmate-tab-updates" class="azonmate-settings-section">
+			<!-- Updates Tab -->
+			<div class="azonmate-update-card">
+				<div class="azonmate-update-card__header">
+					<span class="dashicons dashicons-update azonmate-update-card__icon"></span>
+					<div>
+						<h3><?php esc_html_e( 'Plugin Updates', 'azonmate' ); ?></h3>
+						<p class="description"><?php esc_html_e( 'Check for new AzonMate releases from GitHub.', 'azonmate' ); ?></p>
+					</div>
+				</div>
+
+				<div class="azonmate-update-card__body">
+					<table class="form-table" role="presentation">
+						<tr>
+							<th scope="row"><?php esc_html_e( 'Installed Version', 'azonmate' ); ?></th>
+							<td><code id="azonmate-current-version"><?php echo esc_html( AZON_MATE_VERSION ); ?></code></td>
+						</tr>
+						<tr>
+							<th scope="row"><?php esc_html_e( 'Latest Version', 'azonmate' ); ?></th>
+							<td><code id="azonmate-remote-version">&mdash;</code></td>
+						</tr>
+						<tr>
+							<th scope="row"><?php esc_html_e( 'Status', 'azonmate' ); ?></th>
+							<td><span id="azonmate-update-status"><?php esc_html_e( 'Click "Check for Updates" to check.', 'azonmate' ); ?></span></td>
+						</tr>
+					</table>
+
+					<div class="azonmate-update-card__actions">
+						<button type="button" id="azonmate-check-update" class="button button-primary">
+							<span class="dashicons dashicons-update" style="margin-top:3px;"></span>
+							<?php esc_html_e( 'Check for Updates', 'azonmate' ); ?>
+						</button>
+
+						<button type="button" id="azonmate-install-update" class="button button-hero azonmate-btn--install" style="display:none;">
+							<span class="dashicons dashicons-download" style="margin-top:4px;"></span>
+							<?php esc_html_e( 'Install Update', 'azonmate' ); ?>
+						</button>
+
+						<a href="" id="azonmate-release-link" target="_blank" rel="noopener" class="button button-secondary" style="display:none;">
+							<?php esc_html_e( 'View Release Notes', 'azonmate' ); ?>
+						</a>
+					</div>
+
+					<div id="azonmate-update-result" class="azonmate-test-result" style="display:none;"></div>
+				</div>
+			</div>
+
+			<div class="azonmate-update-card" style="margin-top:20px;">
+				<div class="azonmate-update-card__header">
+					<span class="dashicons dashicons-info azonmate-update-card__icon"></span>
+					<div>
+						<h3><?php esc_html_e( 'Automatic Update Checks', 'azonmate' ); ?></h3>
+					</div>
+				</div>
+				<div class="azonmate-update-card__body">
+					<p><?php esc_html_e( 'AzonMate automatically checks for updates every 12 hours in the background. When a new version is found, you will see a notification on all AzonMate admin pages and in the WordPress Plugins page.', 'azonmate' ); ?></p>
+				</div>
+			</div>
 		</div>
 
 	</div>

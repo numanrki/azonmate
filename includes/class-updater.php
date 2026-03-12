@@ -6,6 +6,11 @@
  * Releases API for newer versions and inject them into the plugin update
  * transient.  No API key required — the endpoint is public.
  *
+ * Also provides:
+ * - An AJAX "Check for Updates" endpoint for the Settings → Updates tab.
+ * - An AJAX "Install Update" endpoint that triggers WP's Plugin_Upgrader.
+ * - An admin notice on AzonMate pages when an update is available.
+ *
  * @package AzonMate
  * @since   2.2.2
  */
@@ -65,21 +70,31 @@ class Updater {
 		$this->basename = AZON_MATE_PLUGIN_BASENAME;
 		$this->slug     = dirname( $this->basename );
 
+		// Core WP update hooks.
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_for_update' ) );
 		add_filter( 'plugins_api', array( $this, 'plugin_info' ), 10, 3 );
 		add_filter( 'upgrader_post_install', array( $this, 'after_install' ), 10, 3 );
+
+		// AJAX handlers for Settings → Updates tab.
+		add_action( 'wp_ajax_azon_mate_check_update', array( $this, 'ajax_check_update' ) );
+		add_action( 'wp_ajax_azon_mate_install_update', array( $this, 'ajax_install_update' ) );
+
+		// Admin notice when an update is available.
+		add_action( 'admin_notices', array( $this, 'admin_update_notice' ) );
 	}
 
 	/**
 	 * Fetch the latest release data from GitHub (with caching).
 	 *
+	 * @param  bool $force_fresh Skip the transient cache.
 	 * @return array|false Decoded JSON body or false on failure.
 	 */
-	private function fetch_release_data() {
-		$data = get_transient( self::TRANSIENT_KEY );
-
-		if ( false !== $data ) {
-			return $data;
+	private function fetch_release_data( bool $force_fresh = false ) {
+		if ( ! $force_fresh ) {
+			$data = get_transient( self::TRANSIENT_KEY );
+			if ( false !== $data ) {
+				return $data;
+			}
 		}
 
 		$response = wp_remote_get( self::API_URL, array(
@@ -205,6 +220,126 @@ class Updater {
 		// Re-activate plugin after update.
 		activate_plugin( $this->basename );
 
+		// Clear the update cache so the notice disappears.
+		delete_transient( self::TRANSIENT_KEY );
+
 		return $result;
+	}
+
+	/* ==================================================================
+	   AJAX: Check for Updates (Settings → Updates tab)
+	   ================================================================== */
+
+	/**
+	 * AJAX handler: force-check GitHub for a new release.
+	 */
+	public function ajax_check_update() {
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'azon_mate_admin' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Security check failed.', 'azonmate' ) ), 403 );
+		}
+
+		if ( ! current_user_can( 'update_plugins' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'azonmate' ) ), 403 );
+		}
+
+		// Force a fresh fetch (bypass transient cache).
+		$release = $this->fetch_release_data( true );
+
+		if ( ! $release ) {
+			wp_send_json_error( array( 'message' => __( 'Could not reach GitHub. Please try again later.', 'azonmate' ) ) );
+		}
+
+		$remote_version = ltrim( $release['tag_name'], 'v' );
+		$has_update     = version_compare( $remote_version, AZON_MATE_VERSION, '>' );
+
+		wp_send_json_success( array(
+			'current_version' => AZON_MATE_VERSION,
+			'remote_version'  => $remote_version,
+			'has_update'      => $has_update,
+			'download_url'    => $release['zipball_url'] ?? '',
+			'release_url'     => $release['html_url'] ?? '',
+			'release_notes'   => $release['body'] ?? '',
+			'published_at'    => $release['published_at'] ?? '',
+			'message'         => $has_update
+				? sprintf( __( 'A new version (v%s) is available!', 'azonmate' ), $remote_version )
+				: __( 'You are running the latest version.', 'azonmate' ),
+		) );
+	}
+
+	/* ==================================================================
+	   AJAX: Install Update
+	   ================================================================== */
+
+	/**
+	 * AJAX handler: trigger WordPress's built-in plugin upgrader.
+	 */
+	public function ajax_install_update() {
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'azon_mate_admin' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Security check failed.', 'azonmate' ) ), 403 );
+		}
+
+		if ( ! current_user_can( 'update_plugins' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'azonmate' ) ), 403 );
+		}
+
+		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+
+		// Use a quiet skin so the upgrader doesn't print HTML.
+		$skin     = new \WP_Ajax_Upgrader_Skin();
+		$upgrader = new \Plugin_Upgrader( $skin );
+		$result   = $upgrader->upgrade( $this->basename );
+
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error( array( 'message' => $result->get_error_message() ) );
+		}
+
+		if ( is_wp_error( $skin->result ) ) {
+			wp_send_json_error( array( 'message' => $skin->result->get_error_message() ) );
+		}
+
+		if ( false === $result ) {
+			wp_send_json_error( array( 'message' => __( 'Update failed. The download URL may be unavailable.', 'azonmate' ) ) );
+		}
+
+		wp_send_json_success( array(
+			'message' => __( 'AzonMate updated successfully! Reloading…', 'azonmate' ),
+		) );
+	}
+
+	/* ==================================================================
+	   Admin Notice: Update Available
+	   ================================================================== */
+
+	/**
+	 * Show an admin notice on AzonMate pages when a newer version exists.
+	 */
+	public function admin_update_notice() {
+		$screen = get_current_screen();
+		if ( ! $screen || false === strpos( $screen->id, 'azonmate' ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'update_plugins' ) ) {
+			return;
+		}
+
+		$release = $this->fetch_release_data();
+		if ( ! $release ) {
+			return;
+		}
+
+		$remote_version = ltrim( $release['tag_name'], 'v' );
+		if ( ! version_compare( $remote_version, AZON_MATE_VERSION, '>' ) ) {
+			return;
+		}
+
+		$update_url = admin_url( 'admin.php?page=azonmate#updates' );
+		printf(
+			'<div class="notice notice-warning azonmate-update-notice"><p><strong>AzonMate v%s</strong> %s <a href="%s" class="button button-small" style="margin-left:10px;">%s</a></p></div>',
+			esc_html( $remote_version ),
+			esc_html__( 'is available.', 'azonmate' ),
+			esc_url( $update_url ),
+			esc_html__( 'View Update', 'azonmate' )
+		);
 	}
 }

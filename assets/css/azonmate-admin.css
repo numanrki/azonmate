@@ -1204,3 +1204,81 @@
 	color: #0c5460;
 	border: 1px solid #bee5eb;
 }
+
+/* ==========================================================================
+   Updates Tab
+   ========================================================================== */
+
+.azonmate-update-card {
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.azonmate-update-card__header {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 18px 22px;
+	border-bottom: 1px solid #f0f0f1;
+	background: #fafafa;
+}
+
+.azonmate-update-card__header h3 {
+	margin: 0;
+	font-size: 15px;
+}
+
+.azonmate-update-card__header .description {
+	margin: 2px 0 0;
+}
+
+.azonmate-update-card__icon {
+	font-size: 22px;
+	color: var(--azonmate-admin-primary);
+}
+
+.azonmate-update-card__body {
+	padding: 18px 22px;
+}
+
+.azonmate-update-card__actions {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-top: 8px;
+	flex-wrap: wrap;
+}
+
+.azonmate-btn--install {
+	background: var(--azonmate-admin-primary) !important;
+	border-color: var(--azonmate-admin-primary-hover) !important;
+	color: #fff !important;
+	font-weight: 600;
+}
+
+.azonmate-btn--install:hover {
+	background: var(--azonmate-admin-primary-hover) !important;
+}
+
+.azonmate-btn--install:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+@keyframes azonmate-spin {
+	from { transform: rotate(0deg); }
+	to   { transform: rotate(360deg); }
+}
+
+.azonmate-spin {
+	animation: azonmate-spin 1s linear infinite;
+}
+
+.azonmate-update-notice p {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}

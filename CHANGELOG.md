@@ -5,6 +5,14 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-03-12
+
+### Added
+- Updates tab in Settings page — check for new releases and install updates with one click directly from the plugin.
+- Admin notification banner on all AzonMate pages when a newer version is available, with "View Update" link.
+- Live install button — triggers WordPress's built-in Plugin_Upgrader via AJAX, downloads and applies the latest GitHub release without leaving the page.
+- Spinning icon animation on "Check for Updates" button while fetching.
+
 ## [2.2.2] - 2026-03-12
 
 ### Added
