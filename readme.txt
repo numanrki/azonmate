@@ -4,7 +4,7 @@ Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 8.1
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,9 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 7. Gutenberg block editor
 
 == Changelog ==
+
+= 2.2.1 =
+* Added: Buy Me a Coffee donation button in admin header bar alongside Star on GitHub
 
 = 2.2.0 =
 * Added: 12 new Amazon marketplaces — MX, BR, NL, BE, PL, SE, TR, SA, AE, EG, IE, SG (total: 22 across NA, EU, FE)
