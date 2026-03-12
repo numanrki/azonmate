@@ -282,6 +282,36 @@ class Updater {
 			wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'azonmate' ) ), 403 );
 		}
 
+		// Fetch release data so we have the download URL.
+		$release = $this->fetch_release_data( true );
+		if ( ! $release ) {
+			wp_send_json_error( array( 'message' => __( 'Could not fetch release data from GitHub.', 'azonmate' ) ) );
+		}
+
+		$remote_version = ltrim( $release['tag_name'], 'v' );
+		$download_url   = $release['zipball_url'] ?? '';
+
+		if ( ! $download_url ) {
+			wp_send_json_error( array( 'message' => __( 'Download URL not available.', 'azonmate' ) ) );
+		}
+
+		// Inject into WP's update transient so Plugin_Upgrader can find the package URL.
+		$transient = get_site_transient( 'update_plugins' );
+		if ( ! is_object( $transient ) ) {
+			$transient = new \stdClass();
+		}
+		if ( ! isset( $transient->response ) ) {
+			$transient->response = array();
+		}
+		$transient->response[ $this->basename ] = (object) array(
+			'slug'        => $this->slug,
+			'plugin'      => $this->basename,
+			'new_version' => $remote_version,
+			'url'         => 'https://github.com/numanrki/azonmate',
+			'package'     => $download_url,
+		);
+		set_site_transient( 'update_plugins', $transient );
+
 		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 
 		// Use a quiet skin so the upgrader doesn't print HTML.

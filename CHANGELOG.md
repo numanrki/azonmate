@@ -5,6 +5,11 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.2] - 2026-03-12
+
+### Fixed
+- "Install Update" button returned "The download URL may be unavailable" because WordPress's `update_plugins` transient did not contain the package URL. The AJAX install handler now fetches release data from GitHub and injects it into the transient before calling `Plugin_Upgrader::upgrade()`.
+
 ## [2.3.1] - 2026-03-12
 
 ### Improved

@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-2.3.1-ff9900?style=for-the-badge" alt="v2.3.1" /></a>&nbsp;
+  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-2.3.2-ff9900?style=for-the-badge" alt="v2.3.2" /></a>&nbsp;
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress 6.0+" />&nbsp;
   <img src="https://img.shields.io/badge/PHP-8.1%2B-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.1+" />&nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Free_for_Personal_Use-22c55e?style=for-the-badge" alt="Free for Personal Use" /></a>&nbsp;
@@ -276,8 +276,8 @@ azonmate/
 
 > Full history in [CHANGELOG.md](CHANGELOG.md).
 
-### v2.3.1 — 2026-03-12
-- **Improved:** Update notification banner now displays on all WordPress admin pages, not just AzonMate screens
+### v2.3.2 — 2026-03-12
+- **Fixed:** "Install Update" button failed with "download URL may be unavailable" — updater now injects package URL into WP transient before upgrading
 - **Improved:** readme.txt and README.md updated to document one-click updates and dashboard notifications
 
 ---
