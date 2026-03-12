@@ -4,7 +4,7 @@ Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 8.1
-Stable tag: 2.3.3
+Stable tag: 2.3.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,6 +99,10 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 7. Gutenberg block editor
 
 == Changelog ==
+
+= 2.3.4 =
+* Fixed: Critical error after one-click update — old plugin folder was not removed before move, causing rename failure
+* Fixed: Removed activate_plugin() call from upgrader_post_install hook — WordPress handles reactivation automatically
 
 = 2.3.3 =
 * Maintenance: Test release to verify one-click update flow end-to-end

@@ -5,6 +5,12 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.4] - 2026-03-12
+
+### Fixed
+- Critical error after one-click update: the old `azonmate/` plugin folder was not removed before `$wp_filesystem->move()`, causing the rename from the GitHub hash folder to fail. The plugin directory now gets cleaned up before the move.
+- Removed `activate_plugin()` call from `upgrader_post_install` hook — WordPress's Plugin_Upgrader already handles reactivation, and calling it mid-install caused class redeclaration errors.
+
 ## [2.3.3] - 2026-03-12
 
 ### Maintenance

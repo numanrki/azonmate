@@ -212,13 +212,15 @@ class Updater {
 
 		$proper_destination = WP_PLUGIN_DIR . '/' . $this->slug;
 
+		// Remove the old plugin folder first so the move can succeed.
+		if ( $wp_filesystem->is_dir( $proper_destination ) ) {
+			$wp_filesystem->delete( $proper_destination, true );
+		}
+
 		$wp_filesystem->move( $result['destination'], $proper_destination );
 
 		$result['destination']      = $proper_destination;
 		$result['destination_name'] = $this->slug;
-
-		// Re-activate plugin after update.
-		activate_plugin( $this->basename );
 
 		// Clear the update cache so the notice disappears.
 		delete_transient( self::TRANSIENT_KEY );
