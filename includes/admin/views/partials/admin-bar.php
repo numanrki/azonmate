@@ -63,6 +63,9 @@ function azonmate_render_admin_header() {
 				</svg>
 				<?php esc_html_e( 'Star on GitHub', 'azonmate' ); ?>
 			</a>
+			<a href="https://www.buymeacoffee.com/numanrki" target="_blank" rel="noopener" class="azonmate-admin-bar__coffee-btn">
+				<img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=numanrki&button_colour=f49200&font_colour=ffffff&font_family=Comic&outline_colour=000000&coffee_colour=FFDD00" alt="<?php esc_attr_e( 'Buy me a coffee', 'azonmate' ); ?>" />
+			</a>
 		</div>
 	</div>
 	<?php

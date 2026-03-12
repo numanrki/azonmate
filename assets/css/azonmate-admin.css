@@ -147,6 +147,27 @@
 	flex-shrink: 0;
 }
 
+.azonmate-admin-bar__coffee-btn {
+	display: inline-flex;
+	align-items: center;
+	text-decoration: none;
+	border-radius: 6px;
+	overflow: hidden;
+	transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.azonmate-admin-bar__coffee-btn img {
+	height: 28px;
+	width: auto;
+	display: block;
+	border-radius: 6px;
+}
+
+.azonmate-admin-bar__coffee-btn:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(244, 146, 0, 0.4);
+}
+
 /* ---- Footer Bar ---- */
 .azonmate-admin-footer {
 	display: flex;
