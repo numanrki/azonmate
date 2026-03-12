@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-2.3.4-ff9900?style=for-the-badge" alt="v2.3.4" /></a>&nbsp;
+  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-2.3.5-ff9900?style=for-the-badge" alt="v2.3.5" /></a>&nbsp;
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress 6.0+" />&nbsp;
   <img src="https://img.shields.io/badge/PHP-8.1%2B-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.1+" />&nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Free_for_Personal_Use-22c55e?style=for-the-badge" alt="Free for Personal Use" /></a>&nbsp;
@@ -276,8 +276,9 @@ azonmate/
 
 > Full history in [CHANGELOG.md](CHANGELOG.md).
 
-### v2.3.4 — 2026-03-12
-- **Fixed:** Critical error after one-click update — old plugin folder not removed before move, causing rename failure
+### v2.3.5 — 2026-03-12
+- **Fixed:** Critical error on page reload after update — navigates to fresh URL instead of reloading to avoid opcache/autoloader conflicts
+- **Improved:** Redesigned update buttons with gradient styling, spinner animation, and color-coded result messages
 - **Fixed:** Removed premature `activate_plugin()` from upgrader hook — WordPress handles reactivation automatically
 - **Improved:** readme.txt and README.md updated to document one-click updates and dashboard notifications
 

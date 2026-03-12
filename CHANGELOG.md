@@ -5,6 +5,14 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.5] - 2026-03-12
+
+### Fixed
+- Critical error on page reload after installing update. Changed from `location.reload()` to a fresh URL navigation with cache-busting parameter to avoid PHP opcache serving stale autoloader classes.
+
+### Improved
+- Redesigned update tab buttons: custom `.azonmate-btn` system with gradient install button, spinner animation during install, icon-prefixed release notes link, and color-coded success/error result banners.
+
 ## [2.3.4] - 2026-03-12
 
 ### Fixed

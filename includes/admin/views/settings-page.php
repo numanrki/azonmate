@@ -619,22 +619,23 @@ if ( ! function_exists( 'azonmate_render_admin_header' ) ) {
 					</table>
 
 					<div class="azonmate-update-card__actions">
-						<button type="button" id="azonmate-check-update" class="button button-primary">
-							<span class="dashicons dashicons-update" style="margin-top:3px;"></span>
+						<button type="button" id="azonmate-check-update" class="azonmate-btn azonmate-btn--check">
+							<span class="dashicons dashicons-update"></span>
 							<?php esc_html_e( 'Check for Updates', 'azonmate' ); ?>
 						</button>
 
-						<button type="button" id="azonmate-install-update" class="button button-hero azonmate-btn--install" style="display:none;">
-							<span class="dashicons dashicons-download" style="margin-top:4px;"></span>
+						<button type="button" id="azonmate-install-update" class="azonmate-btn azonmate-btn--install" style="display:none;">
+							<span class="dashicons dashicons-download"></span>
 							<?php esc_html_e( 'Install Update', 'azonmate' ); ?>
 						</button>
 
-						<a href="" id="azonmate-release-link" target="_blank" rel="noopener" class="button button-secondary" style="display:none;">
-							<?php esc_html_e( 'View Release Notes', 'azonmate' ); ?>
+						<a href="" id="azonmate-release-link" target="_blank" rel="noopener" class="azonmate-btn azonmate-btn--notes" style="display:none;">
+							<span class="dashicons dashicons-media-text"></span>
+							<?php esc_html_e( 'Release Notes', 'azonmate' ); ?>
 						</a>
 					</div>
 
-					<div id="azonmate-update-result" class="azonmate-test-result" style="display:none;"></div>
+					<div id="azonmate-update-result" class="azonmate-update-result" style="display:none;"></div>
 				</div>
 			</div>
 

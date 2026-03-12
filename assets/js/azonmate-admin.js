@@ -290,8 +290,8 @@
 				return;
 			}
 
-			$installBtn.prop('disabled', true).text('Installing\u2026');
-			$result.show().removeClass('success error').text('Installing update, please wait\u2026');
+			$installBtn.prop('disabled', true).html('<span class="dashicons dashicons-update azonmate-spin"></span> Installing\u2026');
+			$result.show().removeClass('azonmate-update-result--success azonmate-update-result--error').html('<span class="dashicons dashicons-update azonmate-spin" style="margin-right:6px;"></span> Downloading and installing update, please wait\u2026');
 
 			$.post(ajaxurl, {
 				action: 'azon_mate_install_update',
@@ -299,19 +299,20 @@
 			})
 			.done(function (response) {
 				if (response.success) {
-					$result.addClass('success').text(response.data.message || 'Updated successfully!');
+					$result.addClass('azonmate-update-result--success').html('<span class="dashicons dashicons-yes-alt" style="margin-right:6px;"></span> ' + (response.data.message || 'Updated successfully!'));
+					$installBtn.hide();
+					// Navigate to a fresh URL instead of reload to avoid opcache/autoloader conflicts.
 					setTimeout(function () {
-						window.location.hash = '#updates';
-						window.location.reload();
-					}, 1500);
+						window.location.href = azonMateAdmin.adminUrl + 'admin.php?page=azonmate&azonmate_updated=' + Date.now() + '#updates';
+					}, 2500);
 				} else {
-					$result.addClass('error').text(response.data.message || 'Update failed.');
-					$installBtn.prop('disabled', false).html('<span class="dashicons dashicons-download" style="margin-top:4px;"></span> Install Update');
+					$result.addClass('azonmate-update-result--error').html('<span class="dashicons dashicons-warning" style="margin-right:6px;"></span> ' + (response.data.message || 'Update failed.'));
+					$installBtn.prop('disabled', false).html('<span class="dashicons dashicons-download"></span> Retry Install');
 				}
 			})
 			.fail(function () {
-				$result.addClass('error').text('Request failed.');
-				$installBtn.prop('disabled', false).html('<span class="dashicons dashicons-download" style="margin-top:4px;"></span> Install Update');
+				$result.addClass('azonmate-update-result--error').html('<span class="dashicons dashicons-warning" style="margin-right:6px;"></span> Request failed. Check your connection.');
+				$installBtn.prop('disabled', false).html('<span class="dashicons dashicons-download"></span> Retry Install');
 			});
 		});
 	}
