@@ -150,22 +150,26 @@
 .azonmate-admin-bar__coffee-btn {
 	display: inline-flex;
 	align-items: center;
+	gap: 5px;
+	background: linear-gradient(135deg, #f49200, #e08600);
+	color: #fff;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 5px 14px;
+	border-radius: 6px;
 	text-decoration: none;
-	border-radius: 6px;
-	overflow: hidden;
 	transition: transform 0.15s, box-shadow 0.15s;
-}
-
-.azonmate-admin-bar__coffee-btn img {
-	height: 28px;
-	width: auto;
-	display: block;
-	border-radius: 6px;
+	box-shadow: 0 2px 6px rgba(244, 146, 0, 0.25);
 }
 
 .azonmate-admin-bar__coffee-btn:hover {
 	transform: translateY(-1px);
 	box-shadow: 0 4px 12px rgba(244, 146, 0, 0.4);
+	color: #fff;
+}
+
+.azonmate-admin-bar__coffee-btn svg {
+	flex-shrink: 0;
 }
 
 /* ---- Footer Bar ---- */
