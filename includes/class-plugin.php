@@ -249,6 +249,9 @@ class Plugin {
 
 		// Block editor components.
 		$this->block_registrar = new \AzonMate\Blocks\BlockRegistrar( $this->shortcode_manager );
+
+		// GitHub auto-updater.
+		new \AzonMate\Updater();
 	}
 
 	/**
