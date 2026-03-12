@@ -4,7 +4,7 @@ Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 8.1
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,8 @@ Search, display, and monetize Amazon products directly from your WordPress posts
 * **Customizable Templates** – Override and personalize templates directly from your theme.
 * **Mobile-Ready & Dark Mode** – Responsive layouts, BEM CSS, and full dark mode compatibility.
 * **Privacy-First Approach** – GDPR-compliant IP hashing and encrypted API credentials.
+* **One-Click Updates** – Check for new releases and install updates directly from the plugin Settings page.
+* **Dashboard Update Notifications** – Get notified on your WordPress dashboard when a new version is available.
 
 = Shortcodes =
 
@@ -97,6 +99,10 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 7. Gutenberg block editor
 
 == Changelog ==
+
+= 2.3.1 =
+* Improved: Update notification banner now displays on all WordPress admin pages, not just AzonMate screens
+* Improved: readme.txt and README.md updated to document one-click updates and dashboard notifications
 
 = 2.3.0 =
 * Added: Updates tab in Settings — check for new releases and install updates with one click directly from the plugin

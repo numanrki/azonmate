@@ -311,14 +311,9 @@ class Updater {
 	   ================================================================== */
 
 	/**
-	 * Show an admin notice on AzonMate pages when a newer version exists.
+	 * Show an admin notice on all WP admin pages when a newer version exists.
 	 */
 	public function admin_update_notice() {
-		$screen = get_current_screen();
-		if ( ! $screen || false === strpos( $screen->id, 'azonmate' ) ) {
-			return;
-		}
-
 		if ( ! current_user_can( 'update_plugins' ) ) {
 			return;
 		}
