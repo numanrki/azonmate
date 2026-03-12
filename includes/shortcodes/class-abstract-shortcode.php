@@ -156,11 +156,12 @@ abstract class AbstractShortcode {
 			esc_html( $asin )
 		);
 
-		$marketplace = get_option( 'azon_mate_marketplace', 'www' );
+		$marketplace = get_option( 'azon_mate_marketplace', 'US' );
 		$tag         = get_option( 'azon_mate_partner_tag', '' );
+		$domain      = \AzonMate\API\Marketplace::get_domain( $marketplace );
 		$url         = sprintf(
-			'https://%s/dp/%s?tag=%s',
-			esc_attr( $marketplace ),
+			'https://www.%s/dp/%s?tag=%s',
+			esc_attr( $domain ),
 			esc_attr( $asin ),
 			esc_attr( $tag )
 		);

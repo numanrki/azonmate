@@ -30,12 +30,32 @@ class Marketplace {
 	 * @var array
 	 */
 	private static $marketplaces = array(
+		// — NA Region (Credential Version 2.1 / 3.1) —
 		'US' => array(
 			'region' => 'NA',
 			'label'  => 'United States',
 			'domain' => 'amazon.com',
 			'tld'    => 'com',
 		),
+		'CA' => array(
+			'region' => 'NA',
+			'label'  => 'Canada',
+			'domain' => 'amazon.ca',
+			'tld'    => 'ca',
+		),
+		'MX' => array(
+			'region' => 'NA',
+			'label'  => 'Mexico',
+			'domain' => 'amazon.com.mx',
+			'tld'    => 'com.mx',
+		),
+		'BR' => array(
+			'region' => 'NA',
+			'label'  => 'Brazil',
+			'domain' => 'amazon.com.br',
+			'tld'    => 'com.br',
+		),
+		// — EU Region (Credential Version 2.2 / 3.2) —
 		'UK' => array(
 			'region' => 'EU',
 			'label'  => 'United Kingdom',
@@ -54,24 +74,6 @@ class Marketplace {
 			'domain' => 'amazon.fr',
 			'tld'    => 'fr',
 		),
-		'IN' => array(
-			'region' => 'EU',
-			'label'  => 'India',
-			'domain' => 'amazon.in',
-			'tld'    => 'in',
-		),
-		'CA' => array(
-			'region' => 'NA',
-			'label'  => 'Canada',
-			'domain' => 'amazon.ca',
-			'tld'    => 'ca',
-		),
-		'JP' => array(
-			'region' => 'FE',
-			'label'  => 'Japan',
-			'domain' => 'amazon.co.jp',
-			'tld'    => 'co.jp',
-		),
 		'IT' => array(
 			'region' => 'EU',
 			'label'  => 'Italy',
@@ -83,6 +85,79 @@ class Marketplace {
 			'label'  => 'Spain',
 			'domain' => 'amazon.es',
 			'tld'    => 'es',
+		),
+		'NL' => array(
+			'region' => 'EU',
+			'label'  => 'Netherlands',
+			'domain' => 'amazon.nl',
+			'tld'    => 'nl',
+		),
+		'BE' => array(
+			'region' => 'EU',
+			'label'  => 'Belgium',
+			'domain' => 'amazon.com.be',
+			'tld'    => 'com.be',
+		),
+		'PL' => array(
+			'region' => 'EU',
+			'label'  => 'Poland',
+			'domain' => 'amazon.pl',
+			'tld'    => 'pl',
+		),
+		'SE' => array(
+			'region' => 'EU',
+			'label'  => 'Sweden',
+			'domain' => 'amazon.se',
+			'tld'    => 'se',
+		),
+		'TR' => array(
+			'region' => 'EU',
+			'label'  => 'Turkey',
+			'domain' => 'amazon.com.tr',
+			'tld'    => 'com.tr',
+		),
+		'SA' => array(
+			'region' => 'EU',
+			'label'  => 'Saudi Arabia',
+			'domain' => 'amazon.sa',
+			'tld'    => 'sa',
+		),
+		'AE' => array(
+			'region' => 'EU',
+			'label'  => 'United Arab Emirates',
+			'domain' => 'amazon.ae',
+			'tld'    => 'ae',
+		),
+		'EG' => array(
+			'region' => 'EU',
+			'label'  => 'Egypt',
+			'domain' => 'amazon.eg',
+			'tld'    => 'eg',
+		),
+		'IE' => array(
+			'region' => 'EU',
+			'label'  => 'Ireland',
+			'domain' => 'amazon.ie',
+			'tld'    => 'ie',
+		),
+		'IN' => array(
+			'region' => 'EU',
+			'label'  => 'India',
+			'domain' => 'amazon.in',
+			'tld'    => 'in',
+		),
+		// — FE Region (Credential Version 2.3 / 3.3) —
+		'JP' => array(
+			'region' => 'FE',
+			'label'  => 'Japan',
+			'domain' => 'amazon.co.jp',
+			'tld'    => 'co.jp',
+		),
+		'SG' => array(
+			'region' => 'FE',
+			'label'  => 'Singapore',
+			'domain' => 'amazon.sg',
+			'tld'    => 'sg',
 		),
 		'AU' => array(
 			'region' => 'FE',
@@ -240,19 +315,33 @@ class Marketplace {
 	 */
 	public static function country_to_marketplace( $country_code ) {
 		$map = array(
+			// NA
 			'US' => 'US',
+			'CA' => 'CA',
+			'MX' => 'MX',
+			'BR' => 'BR',
+			// EU
 			'GB' => 'UK',
 			'DE' => 'DE',
 			'AT' => 'DE',
 			'CH' => 'DE',
 			'FR' => 'FR',
-			'BE' => 'FR',
-			'IN' => 'IN',
-			'CA' => 'CA',
-			'JP' => 'JP',
 			'IT' => 'IT',
 			'ES' => 'ES',
 			'PT' => 'ES',
+			'NL' => 'NL',
+			'BE' => 'BE',
+			'PL' => 'PL',
+			'SE' => 'SE',
+			'TR' => 'TR',
+			'SA' => 'SA',
+			'AE' => 'AE',
+			'EG' => 'EG',
+			'IE' => 'IE',
+			'IN' => 'IN',
+			// FE
+			'JP' => 'JP',
+			'SG' => 'SG',
 			'AU' => 'AU',
 			'NZ' => 'AU',
 		);

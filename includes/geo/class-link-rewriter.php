@@ -8,6 +8,8 @@
 
 namespace AzonMate\Geo;
 
+use AzonMate\API\Marketplace;
+
 // Abort if this file is called directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -29,25 +31,6 @@ class LinkRewriter {
 	 * @var GeoTargeting
 	 */
 	private $geo;
-
-	/**
-	 * Amazon domain map (marketplace code ⇒ domain).
-	 *
-	 * @since 1.0.0
-	 * @var array
-	 */
-	private $domains = array(
-		'www'    => 'www.amazon.com',
-		'uk'     => 'www.amazon.co.uk',
-		'de'     => 'www.amazon.de',
-		'fr'     => 'www.amazon.fr',
-		'in'     => 'www.amazon.in',
-		'ca'     => 'www.amazon.ca',
-		'jp'     => 'www.amazon.co.jp',
-		'it'     => 'www.amazon.it',
-		'es'     => 'www.amazon.es',
-		'au'     => 'www.amazon.com.au',
-	);
 
 	/**
 	 * Constructor.
@@ -79,7 +62,7 @@ class LinkRewriter {
 			$partner_tag = $this->geo->get_partner_tag();
 		}
 
-		$domain = $this->domains[ $marketplace ] ?? $this->domains['www'];
+		$domain = 'www.' . Marketplace::get_domain( $marketplace );
 
 		return sprintf(
 			'https://%s/dp/%s?tag=%s&linkCode=ogi&th=1&psc=1',

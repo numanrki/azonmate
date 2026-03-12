@@ -5,6 +5,18 @@ All notable changes to AzonMate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2026-03-12
+
+### Added
+- 12 new Amazon marketplaces: MX (Mexico), BR (Brazil), NL (Netherlands), BE (Belgium), PL (Poland), SE (Sweden), TR (Turkey), SA (Saudi Arabia), AE (UAE), EG (Egypt), IE (Ireland), SG (Singapore) — total: 22 marketplaces across NA, EU, and FE regions.
+- Country-to-marketplace mappings for all new locales in geo-targeting.
+
+### Fixed
+- Shortcode `fallback_output()` built broken URLs — used marketplace code (e.g. `US`) as domain instead of resolving via `Marketplace::get_domain()` (e.g. `amazon.com`). Default also changed from invalid `'www'` to `'US'`.
+
+### Changed
+- `LinkRewriter` no longer maintains a hardcoded domain map — now reads from the central `Marketplace` class, so new marketplaces are automatically supported.
+
 ## [2.1.3] - 2026-03-11
 
 ### Fixed
@@ -48,7 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **OAuth 2.0 Token Client** — new `RequestSigner` class that acquires Bearer tokens from Amazon Cognito (v2.x credentials) or Login with Amazon (v3.x credentials), with automatic caching in WordPress transients (3500-second TTL).
-- **Single API Endpoint** — all 10 marketplaces now use `creatorsapi.amazon/catalog/v1/` instead of per-region `webservices.amazon.*` hosts.
+- **Single API Endpoint** — all 22 marketplaces now use `creatorsapi.amazon/catalog/v1/` instead of per-region `webservices.amazon.*` hosts.
 - **Credential Version Setting** — new dropdown in Settings → API for selecting credential version (2.1 NA, 2.2 EU, 2.3 FE, 3.1–3.3 LwA variants).
 - **`x-marketplace` Header** — sent with every API request for proper marketplace routing.
 - **Token Endpoint Mapping** — `Marketplace::get_token_endpoint()` and `Marketplace::version_to_region()` methods for resolving OAuth endpoints by credential version.

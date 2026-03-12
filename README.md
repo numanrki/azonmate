@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-2.1.3-ff9900?style=for-the-badge" alt="v2.1.3" /></a>&nbsp;
+  <a href="https://github.com/numanrki/azonmate/releases/latest"><img src="https://img.shields.io/badge/version-2.2.0-ff9900?style=for-the-badge" alt="v2.2.0" /></a>&nbsp;
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress 6.0+" />&nbsp;
   <img src="https://img.shields.io/badge/PHP-8.1%2B-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.1+" />&nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Free_for_Personal_Use-22c55e?style=for-the-badge" alt="Free for Personal Use" /></a>
@@ -110,7 +110,7 @@ That's it. Start dropping shortcodes or using the visual Showcase Builder.
 
 ### Amazon Creators API
 - OAuth 2.0 authentication
-- **10 marketplaces** — US, UK, DE, FR, IN, CA, JP, IT, ES, AU
+- **22 marketplaces** — US, CA, MX, BR, UK, DE, FR, IT, ES, NL, BE, PL, SE, TR, SA, AE, EG, IE, IN, JP, SG, AU
 - Real-time product search inside the editor
 - Live price, rating & availability sync
 
@@ -272,8 +272,10 @@ azonmate/
 
 > Full history in [CHANGELOG.md](CHANGELOG.md).
 
-### v2.1.3 — 2026-03-11
-- **Fixed:** Product card button icons (Edit, Fetch, Delete, Copy Shortcode) misaligned with text — now uses flexbox centering for consistent alignment
+### v2.2.0 — 2026-03-12
+- **Added:** 12 new Amazon marketplaces — MX, BR, NL, BE, PL, SE, TR, SA, AE, EG, IE, SG (total: 22 marketplaces across NA, EU, FE regions)
+- **Fixed:** Shortcode fallback URL used marketplace code instead of domain — now resolves via `Marketplace::get_domain()`
+- **Refactored:** LinkRewriter no longer maintains a hardcoded domain map — reads from the central Marketplace class
 
 ---
 

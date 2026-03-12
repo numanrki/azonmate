@@ -4,7 +4,7 @@ Tags: amazon, affiliate, product, comparison table, bestseller
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 8.1
-Stable tag: 2.1.3
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,7 +74,13 @@ Yes, copy any template from `plugins/azonmate/templates/` to `your-theme/azonmat
 
 = Does it support multiple Amazon marketplaces? =
 
-Yes, AzonMate supports 10 marketplaces: US, UK, DE, FR, IN, CA, JP, IT, ES, and AU. With geo-targeting enabled, visitors are automatically directed to their local store.
+Yes, AzonMate supports all 22 Amazon Creators API marketplaces across three regions:
+
+* **NA** — US, CA, MX, BR
+* **EU** — UK, DE, FR, IT, ES, NL, BE, PL, SE, TR, SA, AE, EG, IE, IN
+* **FE** — JP, SG, AU
+
+With geo-targeting enabled, visitors are automatically directed to their local store.
 
 = Is it GDPR compliant? =
 
@@ -91,6 +97,11 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 7. Gutenberg block editor
 
 == Changelog ==
+
+= 2.2.0 =
+* Added: 12 new Amazon marketplaces — MX, BR, NL, BE, PL, SE, TR, SA, AE, EG, IE, SG (total: 22 across NA, EU, FE)
+* Fixed: Shortcode fallback URL used marketplace code instead of domain — now resolves via Marketplace class
+* Refactored: LinkRewriter reads domains from central Marketplace class instead of hardcoded map
 
 = 2.1.3 =
 * Fixed: Product card button icons (Edit, Fetch, Delete, Copy Shortcode) misaligned with text — now uses flexbox centering
@@ -118,7 +129,7 @@ AzonMate hashes IP addresses before storage and includes options for anonymizati
 = 2.0.0 =
 * **Breaking:** Migrated from Amazon PA-API 5.0 to the new Amazon Creators API with OAuth 2.0 authentication
 * OAuth 2.0 token client — automatic Bearer token acquisition and caching (1-hour TTL) via Amazon Cognito or Login with Amazon
-* Single API host `creatorsapi.amazon` for all 10 marketplaces
+* Single API host `creatorsapi.amazon` for all 22 marketplaces
 * New Credential Version selector in Settings (2.1 NA, 2.2 EU, 2.3 FE, 3.1–3.3 LwA)
 * All API parameters and response keys migrated from PascalCase to lowerCamelCase
 * Offers resources replaced with offersV2 — price now nested in `price.money.*`
